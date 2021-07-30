@@ -1,0 +1,114 @@
+.nav-bar {
+    position: absolute;
+    width: 1920px;
+    height: 120px;
+    left: 0px;
+    top: 0px;
+    
+    background: rgba(0, 163, 255, 0.02);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.didasko-logo {
+  /* didasko logo */
+
+
+position: absolute;
+width: 160.81px;
+height: 36.05px;
+left: 150px;
+top: 42px;
+
+background: #000000;
+}
+
+.links {
+    position: absolute;
+    width: 1303px;
+    height: 65px;
+    left: 520px;
+    top: 28px;    
+}
+
+.place {
+  /* HOME */
+
+
+    position: absolute;
+    width: 140.12px;
+    height: 34.78px;
+    left: 520px;
+    top: 42.91px;
+
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 29px;
+
+color: #000000;
+}
+
+.all-courses {
+  /* ALL COURSES */
+
+
+position: absolute;
+width: 172.92px;
+height: 34.78px;
+left: 735.9px;
+top: 42.91px;
+
+font-family: Lato;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 29px;
+
+color: #000000;
+}
+
+.about {
+  /* ABOUT */
+
+
+    position: absolute;
+    width: 172.92px;
+    height: 34.78px;
+    left: 1040.27px;
+    top: 42.91px;
+
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+}
+
+.my-account {
+  /* MY ACCOUNT */
+
+
+position: absolute;
+width: 172.92px;
+height: 34.78px;
+left: 1275.99px;
+top: 42.91px;
+
+font-family: Lato;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 29px;
+
+color: #000000;
+}
+
+.loginbutton {
+  height: 65px;
+  margin-left: 153px;
+  width: 219px;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700,600|Roboto:400");
