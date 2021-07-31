@@ -1,5 +1,7 @@
 .nav-bar {
-    position: absolute;
+    position: relative;
+    display: flex;
+    align-items: center;
     width: 1920px;
     height: 120px;
     left: 0px;
