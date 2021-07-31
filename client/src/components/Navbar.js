@@ -13,7 +13,7 @@ export default function Navbar() {
         <DidaskoNav.Navbar bg="light" expand="lg">
             <DidaskoNav.Container>
                 <DidaskoNav.Navbar.Brand href="#home">
-                <Link to="/Home">
+                <Link to="/Home" style={{textDecoration:'none'}}>
                 <img src={didaskologo}
                 width="200"
                 height="100px"
@@ -23,22 +23,22 @@ export default function Navbar() {
                 </DidaskoNav.Navbar.Brand>
                 <DidaskoNav.Navbar.Collapse id="basic-navbar-nav">
                     <DidaskoNav.Nav className="me-auto">
-                        <Link to="/Home">
+                        <Link to="/Home" style={{textDecoration:'none'}}>
                         <DidaskoNav.Nav.Link href="#Home">Home</DidaskoNav.Nav.Link>
                         </Link>
-                        <Link to="/AllCourses">
+                        <Link to="/AllCourses" style={{textDecoration:'none'}}>
                         <DidaskoNav.Nav.Link href="#AllCourses">All Courses</DidaskoNav.Nav.Link>
                         </Link>
-                        <Link to="/About">
+                        <Link to="/About" style={{textDecoration:'none'}}>
                         <DidaskoNav.Nav.Link href="#About">About</DidaskoNav.Nav.Link>
                         </Link>
-                        <Link to="/MyAccount">
+                        <Link to="/MyAccount" style={{textDecoration:'none'}}>
                         <DidaskoNav.Nav.Link href="#MyAccount">My Account</DidaskoNav.Nav.Link>
                         </Link>
                     </DidaskoNav.Nav>
                     <DidaskoNav.Nav className="justify-content-end">
                         <DidaskoNav.Navbar.Text>
-                            <Link to="/Login">
+                            <Link to="/Login" style={{textDecoration:'none'}}>
                             <a href="#login">
                                 <img src={LoginButton}
                                 width="150px"
