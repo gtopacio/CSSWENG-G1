@@ -9,36 +9,21 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.didasko-logo {
+.didaskologo {
   /* didasko logo */
-
-
-position: absolute;
-width: 160.81px;
-height: 36.05px;
-left: 150px;
-top: 42px;
-
-background: #000000;
+  position: absolute;
+  width: 160.81px;
+  height: 36.05px;
+  left: 150px;
+  top: 42px;
 }
 
-.links {
-    position: absolute;
-    width: 1303px;
-    height: 65px;
-    left: 520px;
-    top: 28px;    
-}
 
 .place {
   /* HOME */
 
 
     position: absolute;
-    width: 140.12px;
-    height: 34.78px;
-    left: 520px;
-    top: 42.91px;
 
     font-family: Lato;
     font-style: normal;
@@ -106,9 +91,11 @@ color: #000000;
 }
 
 .loginbutton {
-  height: 65px;
-  margin-left: 153px;
+  position: absolute;
   width: 219px;
+  height: 65px;
+  left: 1604px;
+  top: 28px;
 }
 
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700,600|Roboto:400");
