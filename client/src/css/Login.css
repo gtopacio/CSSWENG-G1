@@ -1,20 +1,12 @@
-.Login{
-  overflow: hidden;
-  box-shadow: 0px 0px 15px -5px;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-}
-
-.Login-Container{
-  height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin: auto;
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
 }
 
 

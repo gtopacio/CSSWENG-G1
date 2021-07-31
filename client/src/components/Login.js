@@ -1,30 +1,36 @@
 import React from 'react'
-import {Card, CardText, CardBody, CardTitle, CardSubtitle, CardImg} from 'react-bootstrap';
+import * as DidaskoLogin from 'react-bootstrap';
 
 
 export default function Login() {
     return (
-        <div className='Login' style={{ width: '628px',height: '277px',left: '646px',top: '402px'}}>
-            <div className='Login-Container' style={{ width: '628px',height: '277px',left: '646px',top: '402px'}}>
-                <div className="mb-3">           
-                    <input
-                    type= "text"
-                    className="form-control p-2"
-                    id= "LoginUsername"
-                    placeholder= "Username"
-                    name= "uName">
-                    </input>
-                </div>
-                <div className="mb-3">         
-                    <input
-                    type= "password"
-                    className="form-control p-2"
-                    id= "LoginPassword"
-                    placeholder= "Password"
-                    name= "uPassword">
-                    </input>
-                </div>
-            </div>
-        </div>
+        <section style={{height:'75vh'}}>
+            <DidaskoLogin.Card className="card shadow top-50 start-50 translate-middle" style={{maxWidth:'30em',borderRadius:'15px'}}>
+                <DidaskoLogin.Card.Header style={{fontSize:"30px"}}>Login</DidaskoLogin.Card.Header>
+                <DidaskoLogin.Card.Body>
+                <DidaskoLogin.InputGroup className="mb-3">
+                    <DidaskoLogin.FormControl
+                    placeholder="Username"
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                    />
+                </DidaskoLogin.InputGroup>
+                <DidaskoLogin.InputGroup className="mb-3">
+                    <DidaskoLogin.FormControl
+                    placeholder="Password"
+                    aria-label="Password"
+                    aria-describedby="basic-addon1"
+                    type="password"
+                    />
+                </DidaskoLogin.InputGroup>
+                    <DidaskoLogin.Button variant="primary">Login</DidaskoLogin.Button>
+                </DidaskoLogin.Card.Body>
+                <DidaskoLogin.Card.Footer className="text-muted">
+                    Don't have an account? 
+                    <DidaskoLogin.Nav.Link href="#Signup">Sign up here!</DidaskoLogin.Nav.Link>
+                    
+                </DidaskoLogin.Card.Footer>
+            </DidaskoLogin.Card>
+        </section>
     )
 }
