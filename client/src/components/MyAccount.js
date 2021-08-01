@@ -1,7 +1,7 @@
-import React from 'react'
-import * as DidaskoDashboard from 'react-bootstrap';
+import React, {useState} from 'react'
 
 export default function MyAccount() {
+  
     return (
         <section style={{height:'83vh'}}>
             <div className="row justify-content-center mt-6 mb-1">
