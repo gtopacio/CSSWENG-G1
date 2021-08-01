@@ -1,10 +1,10 @@
 import React from 'react'
 import * as DidaskoLogin from 'react-bootstrap';
-
+import '../css/Login.css' ;
 
 export default function Login() {
     return (
-        <section style={{height:'75vh'}}>
+        <section className = "bg-container" style={{height:'83vh'}}>
             <DidaskoLogin.Card className="card shadow top-50 start-50 translate-middle" style={{maxWidth:'30em',borderRadius:'15px'}}>
                 <DidaskoLogin.Card.Header style={{fontSize:"30px"}}>Login</DidaskoLogin.Card.Header>
                 <DidaskoLogin.Card.Body>
@@ -27,7 +27,7 @@ export default function Login() {
                 </DidaskoLogin.Card.Body>
                 <DidaskoLogin.Card.Footer className="text-muted">
                     Don't have an account? 
-                    <DidaskoLogin.Nav.Link href="#Signup">Sign up here!</DidaskoLogin.Nav.Link>
+                    <DidaskoLogin.Nav.Link href="/signup">Sign up here!</DidaskoLogin.Nav.Link>
                     
                 </DidaskoLogin.Card.Footer>
             </DidaskoLogin.Card>

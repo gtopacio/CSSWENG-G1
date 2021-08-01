@@ -1,18 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
-import './css/Navbar.css' ;
-import './css/Login.css' ;
-import Navbar from './components/Navbar';
-import Login from './components/Login';
-import About from './components/About';
-import AllCourses from './components/AllCourses';
-import Home from './components/Home';
-import MyAccount from './components/MyAccount';
+import HomePage from "./pages/home_page";
+import CoursesPage from './pages/courses_page';
+import AboutPage from "./pages/about_page";
+import DashboardPage from './pages/dashboard_page';
+import LoginPage from './pages/login_page';
+import SignupPage from './pages/signup_page';
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
-  Link
 } from "react-router-dom";
 
 
@@ -20,29 +15,21 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <Navbar/>
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/Home" component={Home}>
-            <Home />
-          </Route>
-          <Route path="/AllCourses" component={AllCourses}>
-            <AllCourses />
-          </Route>
-          <Route path="/About" component={About}>
-            <About />
-          </Route>
-          <Route path="/MyAccount" component={MyAccount}>
-            <MyAccount />
-          </Route>
-
-          <Route path="/Login" component={Login}>
-          <Login/>
-          </Route>
-        </Switch>
-    </Router>
+        <Route path="/" exact component={HomePage} />
+          <Route path="/courses" exact component={CoursesPage} />
+          <Route path="/about" exact component={AboutPage} />
+          <Route path="/dashboard" exact component={DashboardPage} />
+          <Route path="/login" exact component={LoginPage} /> 
+          <Route path="/signup" exact component={SignupPage} /> 
+        </Router>
     </div>
   );
 }
 export default App;
+
+
+/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */
+        /* <Switch>
+          
+        </Switch> */

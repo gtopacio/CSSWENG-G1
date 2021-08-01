@@ -1,11 +1,9 @@
 import React from 'react'
+import '../css/Navbar.css' ;
 import didaskologo from '../images/didaskologo.png'
 import LoginButton from '../images/LoginButton.png'
 import * as DidaskoNav from 'react-bootstrap';
-import{
-    BrowserRouter as Router,
-    Link
-} from 'react-router-dom'
+import{ Link } from 'react-router-dom'
 
 
 export default function Navbar() {
@@ -13,32 +11,32 @@ export default function Navbar() {
         <DidaskoNav.Navbar bg="light" expand="lg">
             <DidaskoNav.Container>
                 <DidaskoNav.Navbar.Brand href="#home">
-                <Link to="/Home" style={{textDecoration:'none'}}>
+                <Link to="/" style={{textDecoration:'none'}}>
                 <img src={didaskologo}
                 width="200"
-                height="100px"
+                height="15%"
                 Alt="didasko"
                 />
                 </Link>
                 </DidaskoNav.Navbar.Brand>
                 <DidaskoNav.Navbar.Collapse id="basic-navbar-nav">
                     <DidaskoNav.Nav className="me-auto">
-                        <Link to="/Home" style={{textDecoration:'none'}}>
+                        <Link to="/" style={{textDecoration:'none'}}>
                         <DidaskoNav.Nav.Link href="#Home">Home</DidaskoNav.Nav.Link>
                         </Link>
-                        <Link to="/AllCourses" style={{textDecoration:'none'}}>
+                        <Link to="/courses" style={{textDecoration:'none'}}>
                         <DidaskoNav.Nav.Link href="#AllCourses">All Courses</DidaskoNav.Nav.Link>
                         </Link>
-                        <Link to="/About" style={{textDecoration:'none'}}>
+                        <Link to="/about" style={{textDecoration:'none'}}>
                         <DidaskoNav.Nav.Link href="#About">About</DidaskoNav.Nav.Link>
                         </Link>
-                        <Link to="/MyAccount" style={{textDecoration:'none'}}>
+                        <Link to="/dashboard" style={{textDecoration:'none'}}>
                         <DidaskoNav.Nav.Link href="#MyAccount">My Account</DidaskoNav.Nav.Link>
                         </Link>
                     </DidaskoNav.Nav>
                     <DidaskoNav.Nav className="justify-content-end">
                         <DidaskoNav.Navbar.Text>
-                            <Link to="/Login" style={{textDecoration:'none'}}>
+                            <Link to="/login" style={{textDecoration:'none'}}>
                             <a href="#login">
                                 <img src={LoginButton}
                                 width="150px"
