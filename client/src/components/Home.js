@@ -13,10 +13,10 @@ export default function Home() {
                     <p className="home_p">We are an online learning service provider for individuals of all ages in all places at all times.</p>
                     <p className="home_p p_bold">Your first session is on us! Start your free trial now.</p>
                 </div>
-                <img src = {image1}></img>
+                <img src = {image1} alt="xd"></img>
             </section>
             <section className="home_section" id="second_section">
-                <img src = {image2}></img>
+                <img src = {image2} alt="xd"></img>
                 <div className="home_section_text">
                     <h3 className="home_h3">Why Didasko?</h3>
                     <div className="text_section">
@@ -53,7 +53,7 @@ export default function Home() {
                         <p className="home_subject bg_yellow">Science</p>
                     </div>
                 </div>
-                <img src = {image3}></img>
+                <img src = {image3} alt="xd"></img>
             </section>
         </div>
     )
