@@ -1,13 +1,51 @@
 import React from 'react'
 import * as DidaskoLogin from 'react-bootstrap';
 import '../css/Login.css' ;
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { UserContext } from '../contexts/UserContext';
+import { Redirect } from 'react-router';
+import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 
-export default function Login() {
+export default function Login(props) {
+
+    const [user, setUser] = useContext(UserContext);
     const [show, setShow] = useState(false);
+    const [loginInputs, setLoginInputs] = useState({});
+    const [signupInputs, setSignupInputs] = useState({});
+
+    if(user && user.token && user.token.trim() !== ""){
+        return <Redirect to="/dashboard" />
+    }
 
     const signUpClose = () => setShow(false);
     const signUpShow = () => setShow(true);
+
+    const loginHandler = async() => {
+        let { data } = await axios.post("http://localhost:8000/login", loginInputs);
+        if(data.success){
+            let payload = jwt_decode(data.token);
+            payload.token = data.token;
+            setUser(payload);
+            props.history.push("/dashboard");
+        }
+        else{
+            console.log(data.message);
+        }
+    };
+
+    const signupHandler = async() => {
+        let { data } = await axios.post("http://localhost:8000/signup", signupInputs);
+        if(data.success){
+            let payload = jwt_decode(data.token);
+            payload.token = data.token;
+            setUser(payload);
+            props.history.push("/dashboard");
+        }
+        else{
+            console.log(data.message);
+        }
+    };
 
     return (
         <section className = "bg-container" style={{height:'83vh'}}>
@@ -19,6 +57,11 @@ export default function Login() {
                     placeholder="Username"
                     aria-label="Username"
                     aria-describedby="basic-addon1"
+                    onChange={(e) => {
+                        let copy = loginInputs;
+                        copy.userName = e.target.value;
+                        setLoginInputs(copy);
+                    }}
                     />
                 </DidaskoLogin.InputGroup>
                 <DidaskoLogin.InputGroup className="mb-3">
@@ -27,9 +70,14 @@ export default function Login() {
                     aria-label="Password"
                     aria-describedby="basic-addon1"
                     type="password"
+                    onChange={(e) => {
+                        let copy = loginInputs;
+                        copy.password = e.target.value;
+                        setLoginInputs(copy);
+                    }}
                     />
                 </DidaskoLogin.InputGroup>
-                    <DidaskoLogin.Button variant="primary">Login</DidaskoLogin.Button>
+                    <DidaskoLogin.Button variant="primary" onClick={loginHandler}>Login</DidaskoLogin.Button>
                 </DidaskoLogin.Card.Body>
                 <DidaskoLogin.Card.Footer className="text-muted">
                 <div>  
@@ -57,6 +105,11 @@ export default function Login() {
                             placeholder="First Name"
                             aria-label="fName"
                             aria-describedby="basic-addon1"
+                            onChange={(e) => {
+                                let copy = signupInputs;
+                                copy.firstName = e.target.value;
+                                setSignupInputs(copy);
+                            }}
                             />
                         </DidaskoLogin.InputGroup>
                         <DidaskoLogin.InputGroup className="mb-3">
@@ -64,6 +117,11 @@ export default function Login() {
                             placeholder="Last Name"
                             aria-label="lName"
                             aria-describedby="basic-addon1"
+                            onChange={(e) => {
+                                let copy = signupInputs;
+                                copy.lastName = e.target.value;
+                                setSignupInputs(copy);
+                            }}
                             />
                         </DidaskoLogin.InputGroup>                                                
                         <DidaskoLogin.InputGroup className="mb-3">
@@ -71,6 +129,11 @@ export default function Login() {
                             placeholder="Username"
                             aria-label="Username"
                             aria-describedby="basic-addon1"
+                            onChange={(e) => {
+                                let copy = signupInputs;
+                                copy.userName = e.target.value;
+                                setSignupInputs(copy);
+                            }}
                             />
                         </DidaskoLogin.InputGroup>
                         <DidaskoLogin.InputGroup className="mb-3">
@@ -79,6 +142,11 @@ export default function Login() {
                             aria-label="Password"
                             aria-describedby="basic-addon1"
                             type="password"
+                            onChange={(e) => {
+                                let copy = signupInputs;
+                                copy.password = e.target.value;
+                                setSignupInputs(copy);
+                            }}
                             />
                         </DidaskoLogin.InputGroup>
                         <DidaskoLogin.InputGroup className="mb-3">
@@ -87,6 +155,11 @@ export default function Login() {
                             aria-label="Email"
                             aria-describedby="basic-addon1"
                             type="email"
+                            onChange={(e) => {
+                                let copy = signupInputs;
+                                copy.email = e.target.value;
+                                setSignupInputs(copy);
+                            }}
                             />
                         </DidaskoLogin.InputGroup>
                         <DidaskoLogin.InputGroup className="mb-3">
@@ -100,7 +173,7 @@ export default function Login() {
                         </DidaskoLogin.InputGroup>
                     </DidaskoLogin.Modal.Body>
                     <DidaskoLogin.Modal.Footer className="text-muted justify-content-end">
-                        <DidaskoLogin.Button variant="primary">Create Account</DidaskoLogin.Button>
+                        <DidaskoLogin.Button variant="primary" onClick={signupHandler}>Create Account</DidaskoLogin.Button>
                     </DidaskoLogin.Modal.Footer>    
             </DidaskoLogin.Modal>
         </section>
