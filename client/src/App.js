@@ -13,7 +13,7 @@ import {
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" >
       <Router>
         <Route path="/" exact component={HomePage} />
           <Route path="/courses" exact component={CoursesPage} />
@@ -26,10 +26,3 @@ function App() {
   );
 }
 export default App;
-
-
-/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */
-        /* <Switch>
-          
-        </Switch> */
