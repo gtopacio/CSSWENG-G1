@@ -39,7 +39,7 @@ export const SidebarData = [
   },
   {
     title: 'Log Out',
-    path: '/home',
+    path: '/logout',
     icon: <CgIcons.CgLogOut />,
     cName: 'nav-text'
   }

@@ -21,7 +21,8 @@ export default function Login(props) {
     const signUpClose = () => setShow(false);
     const signUpShow = () => setShow(true);
 
-    const loginHandler = async() => {
+    const loginHandler = async(e) => {
+        e.preventDefault();
         let res = await axios.post("/api/login", loginInputs);
         console.log(res);
         let { data } = res
@@ -36,7 +37,8 @@ export default function Login(props) {
         }
     };
 
-    const signupHandler = async() => {
+    const signupHandler = async(e) => {
+        e.preventDefault();
         let { data } = await axios.post("/api/signup", signupInputs);
         if(data.success){
             let payload = jwt_decode(data.token);
