@@ -1,0 +1,11 @@
+.displayPicture{
+    border: 0;
+    padding: 0;
+    border-radius: 200%;
+    height: 20em;
+    width: 20em;
+    object-fit: cover;
+    transition: .2s;
+}
+
+

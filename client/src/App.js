@@ -4,6 +4,7 @@ import CoursesPage from './pages/courses_page';
 import AboutPage from "./pages/about_page";
 import DashboardPage from './pages/dashboard_page';
 import LoginPage from './pages/login_page';
+import ProfilePage from './pages/profile_page';
 import {UserProvider} from "./contexts/UserContext";
 import {
   BrowserRouter as Router,
@@ -21,6 +22,7 @@ function App() {
           <Route path="/about" exact component={AboutPage} />
           <Route path="/dashboard" exact component={DashboardPage} />
           <Route path="/login" exact component={LoginPage} />
+          <Route path="/profile" exact component={ProfilePage} />
         </Router>
       </UserProvider>
     </div>
