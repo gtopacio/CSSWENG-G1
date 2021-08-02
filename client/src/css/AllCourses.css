@@ -1,0 +1,29 @@
+.headers
+{
+    text-align: left !important;
+    font-size: 48px;
+    margin-top: 100px !important;
+    font-family: Roboto;
+}
+.welcomeText
+{
+    font-size: 122px !important;
+}
+.courseButtonElements
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.courseDetails
+{
+    display: flex;
+    flex-direction: row;
+    text-align: left !important;
+}
+.courseButtonGroup
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
