@@ -22,7 +22,9 @@ export default function Login(props) {
     const signUpShow = () => setShow(true);
 
     const loginHandler = async() => {
-        let { data } = await axios.post("http://localhost:8000/login", loginInputs);
+        let res = await axios.post("/api/login", loginInputs);
+        console.log(res);
+        let { data } = res
         if(data.success){
             let payload = jwt_decode(data.token);
             payload.token = data.token;
@@ -35,7 +37,7 @@ export default function Login(props) {
     };
 
     const signupHandler = async() => {
-        let { data } = await axios.post("http://localhost:8000/signup", signupInputs);
+        let { data } = await axios.post("/api/signup", signupInputs);
         if(data.success){
             let payload = jwt_decode(data.token);
             payload.token = data.token;
