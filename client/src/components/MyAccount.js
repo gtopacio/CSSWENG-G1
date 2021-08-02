@@ -2,8 +2,6 @@ import React from 'react'
 
 export default function MyAccount(props) {
 
-    console.log(props);
-  
     return (
         <section style={{height:'83vh'}}>
             <div className="row justify-content-center mt-6 mb-1">

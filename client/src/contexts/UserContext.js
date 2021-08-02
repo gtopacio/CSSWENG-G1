@@ -4,9 +4,10 @@ export const UserContext = createContext();
 
 export const UserProvider = (props) => {
     const [user, setUser] = useState({
+        userName: "",
         email: "",
-        firstname: "",
-        lastname: "",
+        firstName: "",
+        lastName: "",
         admin: false,
         token: ""
     });

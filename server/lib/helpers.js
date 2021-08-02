@@ -46,6 +46,7 @@ function refreshToken(rToken){
         return res;
     }
     catch(e){
+        res.message = e.message;
         return res;
     }
 }
