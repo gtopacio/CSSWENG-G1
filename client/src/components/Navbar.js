@@ -1,6 +1,6 @@
 import React from 'react'
 import '../css/Navbar.css' ;
-import didaskologo from '../images/didaskologo.png'
+import didaskologo from '../images/didaskologotrim.png'
 import LoginButton from '../images/LoginButton.png'
 import * as DidaskoNav from 'react-bootstrap';
 import{ Link } from 'react-router-dom'
