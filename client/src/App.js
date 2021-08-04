@@ -6,6 +6,7 @@ import DashboardPage from './pages/dashboard_page';
 import LoginPage from './pages/login_page';
 import ProfilePage from './pages/profile_page';
 import LogoutPage from './pages/logout_page';
+import TokenHandler from './components/TokenHandler';
 import {UserProvider} from "./contexts/UserContext";
 import {
   BrowserRouter as Router,
@@ -17,6 +18,7 @@ function App() {
   return (
     <div className="App" >
       <UserProvider>
+        <TokenHandler />
         <Router>
           <Route path="/" exact component={HomePage} />
           <Route path="/courses" exact component={CoursesPage} />
