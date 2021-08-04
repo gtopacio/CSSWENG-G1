@@ -39,7 +39,14 @@ export default function Login(props) {
 
     const signupHandler = async(e) => {
         e.preventDefault();
-        let { data } = await axios.post("/api/signup", signupInputs);
+        let formData = new FormData();
+        for(let key in signupInputs){
+            if(signupInputs.hasOwnProperty(key) && key !== "profilePicture"){
+                formData.append(key, signupInputs[key]);
+            }
+        }
+        formData.append("profilePicture", signupInputs.profilePicture[0]);
+        let { data } = await axios.post("/api/signup", formData, {headers: {"Content-Type": "multipart/form-data"}});
         if(data.success){
             let payload = jwt_decode(data.token);
             payload.token = data.token;
@@ -173,6 +180,11 @@ export default function Login(props) {
                             aria-describedby="basic-addon1"
                             type="file"
                             accept=".jpg, .jpeg, .png"
+                            onChange={(e) => {
+                                let copy = signupInputs;
+                                copy.profilePicture = e.target.files;
+                                setSignupInputs(copy);
+                            }}
                             />
                         </DidaskoLogin.InputGroup>
                     </DidaskoLogin.Modal.Body>

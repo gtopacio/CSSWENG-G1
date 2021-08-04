@@ -18,12 +18,13 @@ function authenticateTokens(req, res, next){
 }
 
 function generateTokens(user){
-    let { userName, email, firstName, lastName, admin } = user;
+    let { userName, email, firstName, lastName, admin, profilePicture } = user;
     try{
-        let payload = {firstName, lastName, userName, email, admin};
-        let token = {};
-        token.accessToken = jwt.sign(payload, ACCESS_TOKEN_SECRET, {expiresIn: '15m'});
-        token.refreshToken = jwt.sign(payload, REFRESH_TOKEN_SECRET, {expiresIn: '31d'});
+        let payload = {firstName, lastName, userName, email, admin, profilePicture};
+        let token = {
+            accessToken: jwt.sign(payload, ACCESS_TOKEN_SECRET, {expiresIn: '15m'}),
+            refreshToken: jwt.sign(payload, REFRESH_TOKEN_SECRET, {expiresIn: '31d'})
+        };
         return token;
     }
     catch(e){
@@ -38,10 +39,8 @@ function refreshToken(rToken){
         refreshToken: ""
     };
     try{
-        let {firstName, lastName, userName, email, admin} = jwt.verify(rToken, REFRESH_TOKEN_SECRET);
-        decoded = {firstName, lastName, userName, email, admin};
-        res.accessToken = jwt.sign(decoded, ACCESS_TOKEN_SECRET, {expiresIn: '15m'});
-        res.refreshToken = jwt.sign(decoded, REFRESH_TOKEN_SECRET, {expiresIn: '31d'});
+        let {exp, iat, ...decoded} = jwt.verify(rToken, REFRESH_TOKEN_SECRET);
+        let res = generateTokens(decoded);
         res.success = true;
         return res;
     }
