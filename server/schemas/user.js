@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
     "email": {type: String, required:true},
     "profilePicture": {type: String},
     "admin": {type: Boolean, required:true},
+    "verified": {type: Boolean, required: true, default: false}
 });
 
 module.exports = mongoose.model('users', userSchema);

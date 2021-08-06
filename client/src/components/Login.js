@@ -6,6 +6,7 @@ import { UserContext } from '../contexts/UserContext';
 import { Redirect } from 'react-router';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import Signup_success from './Signup_success';
 
 export default function Login(props) {
 
@@ -13,6 +14,7 @@ export default function Login(props) {
     const [show, setShow] = useState(false);
     const [loginInputs, setLoginInputs] = useState({});
     const [signupInputs, setSignupInputs] = useState({});
+    const [signUpSuccess, setSignUpSuccess] = useState(false);
 
     if(user && user.token && user.token.trim() !== ""){
         return <Redirect to="/dashboard" />
@@ -24,7 +26,6 @@ export default function Login(props) {
     const loginHandler = async(e) => {
         e.preventDefault();
         let res = await axios.post("/api/login", loginInputs);
-        console.log(res);
         let { data } = res
         if(data.success){
             let payload = jwt_decode(data.token);
@@ -33,7 +34,7 @@ export default function Login(props) {
             props.history.push("/dashboard");
         }
         else{
-            console.log(data.message);
+            console.log(data.errors);
         }
     };
 
@@ -46,19 +47,22 @@ export default function Login(props) {
             }
         }
         formData.append("profilePicture", signupInputs.profilePicture[0]);
-        let { data } = await axios.post("/api/signup", formData, {headers: {"Content-Type": "multipart/form-data"}});
-        if(data.success){
-            let payload = jwt_decode(data.token);
-            payload.token = data.token;
-            setUser(payload);
-            props.history.push("/dashboard");
+        try{
+            let { data } = await axios.post("/api/signup", formData, {headers: {"Content-Type": "multipart/form-data"}});
+            if(data.success){
+                setSignUpSuccess(true);
+            }
+            else{
+                console.log(data.errors);
+            }
         }
-        else{
-            console.log(data.message);
+        catch(e){
+            console.log(e);
         }
     };
 
     return (
+        signUpSuccess ? <Signup_success /> :
         <section className = "bg-container" style={{height:'83vh'}}>
             <DidaskoLogin.Card className="card shadow top-50 start-50 translate-middle" style={{maxWidth:'30em',borderRadius:'15px'}}>
                 <DidaskoLogin.Card.Header style={{fontSize:"30px"}}>Login</DidaskoLogin.Card.Header>

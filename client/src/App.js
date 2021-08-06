@@ -7,6 +7,7 @@ import LoginPage from './pages/login_page';
 import ProfilePage from './pages/profile_page';
 import LogoutPage from './pages/logout_page';
 import TokenHandler from './components/TokenHandler';
+import UserVerificationPage from './pages/user_verification_page';
 import {UserProvider} from "./contexts/UserContext";
 import {
   BrowserRouter as Router,
@@ -27,6 +28,7 @@ function App() {
           <Route path="/login" exact component={LoginPage} />
           <Route path="/profile" exact component={ProfilePage} />
           <Route path="/logout" exact component={LogoutPage} />
+          <Route path="/verify/:id" component={UserVerificationPage} />
         </Router>
       </UserProvider>
     </div>

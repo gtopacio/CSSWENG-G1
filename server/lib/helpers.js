@@ -1,8 +1,14 @@
 const jwt = require("jsonwebtoken");
+const mongoose = require('mongoose');
+const Verification = require('../schemas/verification');
+const User = require('../schemas/user');
+const { v4: uuidv4 } = require('uuid');
 
 require("dotenv").config();
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
+const DB_URL = process.env.MONGO_URL;
+mongoose.connect(DB_URL, {useNewUrlParser: true, useUnifiedTopology: true});
 
 function authenticateTokens(req, res, next){
     let {token} = req.body;
@@ -50,4 +56,32 @@ function refreshToken(rToken){
     }
 }
 
-module.exports = {authenticateTokens, generateTokens, refreshToken};
+function generateVerificationURL(user){
+    let date = new Date();
+    let verificationInfo = {
+        uid: uuidv4(),
+        userName: user.userName,
+        email: user.email,
+        issued: date,
+        expires: new Date(date.getFullYear() + 1)
+    };
+    let newVerification = new Verification(verificationInfo);
+    newVerification.save();
+    return `http://localhost:3000/verify/${verificationInfo.uid}`;
+}
+
+async function verifyUser(uid){
+    try{
+        let verificationRecord = await Verification.findOne({uid});
+        if(!verificationRecord){
+            throw new Error("Not valid ID");
+        }
+        await User.updateOne({userName: verificationRecord.userName}, { $set: {verified: true}} );
+        Verification.deleteOne({uid});
+    }
+    catch (e){
+        throw e;
+    }
+}
+
+module.exports = {authenticateTokens, generateTokens, refreshToken, generateVerificationURL, verifyUser};

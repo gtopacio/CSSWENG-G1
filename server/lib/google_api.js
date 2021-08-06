@@ -2,16 +2,30 @@ const { google } = require("googleapis");
 const File = require("../schemas/file");
 const path = require("path");
 const fs = require('fs');
+const readline = require("readline");
+const MailComposer = require('nodemailer/lib/mail-composer');
 require("dotenv").config();
 
 const appDir = path.dirname(require.main.filename);
-const auth = new google.auth.GoogleAuth({
-    keyFile: path.join(appDir, process.env.GOOGLE_PATH),
-    scopes: ['https://www.googleapis.com/auth/drive']
+const SCOPES = ['https://mail.google.com/', 'https://www.googleapis.com/auth/drive'];
+const TOKEN_PATH = process.env.GOOGLE_PATH;
+let oAuth2Client;
+
+fs.readFile('./keys/credentials.json', (err, content) => {
+    if (err) return console.log('Error loading client secret file:', err);
+    let credentials = JSON.parse(content);
+    let {client_id, client_secret, redirect_uris} = credentials.web;
+    oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
+    console.log("Credentials Loaded");
+    fs.readFile(TOKEN_PATH, (err, token) => {
+        if(err) return getNewToken();
+        oAuth2Client.setCredentials(JSON.parse(token));
+        console.log("Google Tokens Loaded");
+    });
 });
 
 async function uploadToDrive(file, options){
-    let drive = new google.drive({version: 'v3', auth});
+    let drive = new google.drive({version: 'v3', auth: oAuth2Client});
     let name = options.userID || 'none';
     let uploadPath = path.join(appDir, "uploads", file.filename);
 
@@ -47,12 +61,54 @@ async function uploadToDrive(file, options){
 }
 
 async function getContentLink(fileId){
-    let drive = new google.drive({version: 'v3', auth});
+    let drive = new google.drive({version: 'v3', auth: oAuth2Client});
     let f = await drive.files.get({ fileId, fields:"webContentLink"});
     console.log(f.data);
     return "";
 }
 
+function getNewToken() {
+    const authUrl = oAuth2Client.generateAuthUrl({
+        access_type: 'offline',
+        scope: SCOPES,
+    });
+    console.log('Authorize this app by visiting this url:', authUrl);
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+    });
+    rl.question('Enter the code from that page here: ', (code) => {
+        rl.close();
+        oAuth2Client.getToken(code, (err, token) => {
+            if (err) return console.error('Error retrieving access token', err);
+            oAuth2Client.setCredentials(token);
+            console.log("Google Tokens Loaded");
+            fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
+                if (err) return console.error(err);
+                console.log('Token stored to', TOKEN_PATH);
+            });
+        });
+    });
+}
+  
+async function sendEmail({to, message = "Default Message", subject = "Default Subject"}){
+    let messageBody = {
+        to,
+        from: "didasko.backend@gmail.com",
+        subject,
+        text: message,
+    };
+    let mail = new MailComposer(messageBody);
+    try{
+        let rawData = await mail.compile().build();
+        let requestBody = { raw: rawData.toString('base64')};
+        const gmail = google.gmail({version: 'v1', auth: oAuth2Client});
+        let { data } = await gmail.users.messages.send({ userId: 'me', requestBody });
+        return data;
+    }
+    catch (e){
+        throw e;
+    }
+};
 
-
-module.exports = {uploadToDrive, getContentLink,};
+module.exports = {uploadToDrive, getContentLink, sendEmail};
