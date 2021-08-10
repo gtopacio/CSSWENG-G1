@@ -10,7 +10,7 @@ const loginValidator = [
 ];
 
 const signupValidator = [
-    body('userName').notEmpty().trim().escape(),
+    body('userName', "Username has an invalid value").notEmpty().trim().escape(),
     body('password', "Password Minimum Length not reached").isLength({ min: 8 }),
     body('firstName', 'First Name should not be empty').trim().notEmpty().escape(),
     body('lastName', 'Last Name should not be empty').trim().notEmpty().escape(),
@@ -32,15 +32,11 @@ const verificationValidator = [
 ]
 
 const signupProfilePicture = (req, res, next) => {
-
-    console.log(req.body);
-
     let err = validationResult(req);
     if(!err.isEmpty()){
         res.status(400).send({
             success: false,
-            errors: err.array().map(e => e.msg),
-            origin: "profile picture middleware"
+            errors: err.array().reduce((acc, e) => {acc[e.param] = e.msg; return acc}, {}),
         });
         if(req.file){
             fs.unlink(path.join(appDir, "uploads", req.file.filename), ()=>{return;});
@@ -50,14 +46,14 @@ const signupProfilePicture = (req, res, next) => {
     if(!req.file){
         return res.status(400).send({
             success: false,
-            errors: ["No Profile Picture uploaded"]
+            errors: {profilePicture: "No Profile Picture uploaded"}
         });
     }
     const validMimeTypes = ['image/jpeg', 'image/png'];
     if(validMimeTypes.indexOf(req.file.mimetype) === -1){
         res.status(400).send({
             success: false,
-            errors: ["Invalid file type"]
+            errors: {profilePicture: "Invalid file type"}
         });
         if(req.file){
             fs.unlink(path.join(appDir, "uploads", req.file.filename), ()=>{return;});

@@ -28,7 +28,7 @@ router.post("/login", validations.loginValidator, async(req, res) => {
     if(!err.isEmpty()){
         return res.status(400).send({
             success: false,
-            errors: err.array().map(e => e.msg)
+            errors: err.array().reduce((acc, e) => {acc[e.param] = e.msg; return acc}, {})
         });  
     }
 
@@ -36,11 +36,14 @@ router.post("/login", validations.loginValidator, async(req, res) => {
         let {userName, password} = req.body;
         let foundUser = await User.findOne({userName});
         if(!foundUser){
-            return res.send({success:false, errors: ["Wrong Username or Password"]});
+            return res.send({success:false, errors: {
+                userName: "Wrong Username or Password",
+                password: "Wrong Username or Password"
+            }});
         }
 
         if(!foundUser.verified){
-            return res.send({success:false, errors: ["Account not yet verified"]});
+            return res.send({success:false, errors: { accountVerification: "Account not yet verified" }});
         }
 
         let same = await bcrypt.compare(password, foundUser.password);
@@ -52,7 +55,10 @@ router.post("/login", validations.loginValidator, async(req, res) => {
                 token:token.accessToken
             });
         }
-        res.send({success:false, errors: ["Wrong Username or Password"]});
+        res.send({success:false, errors: {
+            userName: "Wrong Username or Password",
+            password: "Wrong Username or Password"
+        }});
     }
     catch(e){
         res.send({success:false, errors: [e.message]});
