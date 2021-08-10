@@ -166,6 +166,14 @@ export default function Login(props) {
                         </DidaskoLogin.InputGroup>
                         <DidaskoLogin.InputGroup className="mb-3">
                             <DidaskoLogin.FormControl
+                            placeholder="Re-Enter Password"
+                            aria-label="Password"
+                            aria-describedby="basic-addon1"
+                            type="password"
+                            />
+                        </DidaskoLogin.InputGroup>
+                        <DidaskoLogin.InputGroup className="mb-3">
+                            <DidaskoLogin.FormControl
                             placeholder="Email"
                             aria-label="Email"
                             aria-describedby="basic-addon1"

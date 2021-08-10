@@ -14,8 +14,7 @@ export default function ProfilePage() {
         !user || !user.token || user.token.trim() === "" && !user.refreshSent ? <Redirect to="/login" /> :
         <div>
             <Sidebar/>
-            <Profile user={user}/>
-            <Footer/>               
+            <Profile user={user}/>            
         </div>
     )
 }
