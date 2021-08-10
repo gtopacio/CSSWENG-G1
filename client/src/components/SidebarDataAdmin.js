@@ -13,7 +13,7 @@ export const SidebarData = [
   },
   {
     title: 'Courses',
-    path: '/Assign',
+    path: '/assign',
     icon: <MdIcons.MdAssignmentInd />,
     cName: 'nav-text'
   },
