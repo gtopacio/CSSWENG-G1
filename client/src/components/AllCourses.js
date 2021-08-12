@@ -12,7 +12,7 @@ export default function AllCourses() {
     return (
         <div>
 
-            <DidaskoCard.Container>
+            <DidaskoCard.Container style={{height:'83vh'}}>
                 <DidaskoCard.Row>
                     <h1 className="welcomeText headers">Welcome back, Doug!</h1>
                 </DidaskoCard.Row>
@@ -262,4 +262,4 @@ export default function AllCourses() {
             </div>
         </div>
     )
-}
+ }

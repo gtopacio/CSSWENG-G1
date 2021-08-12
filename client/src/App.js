@@ -5,6 +5,7 @@ import AboutPage from "./pages/about_page";
 import DashboardPage from './pages/dashboard_page';
 import LoginPage from './pages/login_page';
 import ProfilePage from './pages/profile_page';
+import AssignPage from './pages/assign_page';
 import LogoutPage from './pages/logout_page';
 import TokenHandler from './components/TokenHandler';
 import UserVerificationPage from './pages/user_verification_page';
@@ -29,6 +30,7 @@ function App() {
           <Route path="/profile" exact component={ProfilePage} />
           <Route path="/logout" exact component={LogoutPage} />
           <Route path="/verify/:id" component={UserVerificationPage} />
+          <Route path="/assign" exact component={AssignPage} />
         </Router>
       </UserProvider>
     </div>

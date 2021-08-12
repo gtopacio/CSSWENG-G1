@@ -1,5 +1,5 @@
 import React from 'react';
-import * as FaIcons from 'react-icons/fa';
+import * as SiIcons from 'react-icons/si';
 import * as AiIcons from 'react-icons/ai';
 import * as MdIcons from 'react-icons/md';
 import * as CgIcons from 'react-icons/cg';
@@ -15,6 +15,12 @@ export const SidebarData = [
     title: 'Courses',
     path: '/assign',
     icon: <MdIcons.MdAssignmentInd />,
+    cName: 'nav-text'
+  },
+  {
+    title: 'Zoom',
+    path: '/zoom',
+    icon: <SiIcons.SiZoom />,
     cName: 'nav-text'
   },
   {
