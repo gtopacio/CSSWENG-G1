@@ -15,6 +15,10 @@
     margin: 0px
 }
 
+.fieldError
+{
+    color: rgb(255, 47, 110);
+}
 
 
 
