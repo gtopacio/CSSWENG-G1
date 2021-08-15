@@ -11,15 +11,20 @@ const DB_URL = process.env.MONGO_URL;
 mongoose.connect(DB_URL, {useNewUrlParser: true, useUnifiedTopology: true});
 
 function authenticateTokens(req, res, next){
-    let {token} = req.body;
+    let {authorization} = req.headers;
+
+    if(!authorization){
+        return res.sendStatus(400);
+    }
+
+    let token = authorization.split(" ")[1];
     try{
         let decoded = jwt.verify(token, ACCESS_TOKEN_SECRET);
-        req.payload = decoded;
+        req.user = decoded;
         next();
     }
     catch(e){
         res.sendStatus(403);
-        console.error(e);
     }
 }
 
@@ -28,7 +33,7 @@ function generateTokens(user){
     try{
         let payload = {firstName, lastName, userName, email, admin, profilePicture};
         let token = {
-            accessToken: jwt.sign(payload, ACCESS_TOKEN_SECRET, {expiresIn: '15m'}),
+            accessToken: jwt.sign(payload, ACCESS_TOKEN_SECRET, {expiresIn: '3h'}),
             refreshToken: jwt.sign(payload, REFRESH_TOKEN_SECRET, {expiresIn: '31d'})
         };
         return token;

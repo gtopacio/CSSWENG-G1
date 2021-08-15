@@ -20,5 +20,11 @@
     color: rgb(255, 47, 110);
 }
 
-
-
+.was-validated .custom-select:valid {
+    background-image: none;
+  }
+  
+  
+  .was-validated .custom-select:invalid {
+    background-image: none;
+  }

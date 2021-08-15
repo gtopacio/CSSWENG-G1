@@ -11,6 +11,8 @@ import ZoomPage from './pages/zoom_page';
 import TokenHandler from './components/TokenHandler';
 import UserVerificationPage from './pages/user_verification_page';
 import {UserProvider} from "./contexts/UserContext";
+import {ErrorProvider} from "./contexts/ErrorContext";
+import ErrorPopup from "./components/ErrorPopup";
 import {
   BrowserRouter as Router,
   Route,
@@ -20,6 +22,8 @@ import {
 function App() {
   return (
     <div className="App" >
+      <ErrorProvider>
+        <ErrorPopup />
       <UserProvider>
         <TokenHandler />
         <Router>
@@ -35,6 +39,7 @@ function App() {
           <Route path="/zoom" exact component={ZoomPage} />
         </Router>
       </UserProvider>
+      </ErrorProvider>
     </div>
   );
 }

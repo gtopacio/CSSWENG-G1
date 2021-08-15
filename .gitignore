@@ -25,7 +25,7 @@
 # Server
 
 /server/node_modules
-/server/keys
+/server/keys/token.json
 /server/.env
 /server/.env.local
 /server/.env
