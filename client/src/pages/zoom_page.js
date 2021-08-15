@@ -1,12 +1,12 @@
 import React from 'react'
-import Assign from '../components/Assign'
+import Zoom from '../components/Zoom'
 import Sidebar from '../components/SidebarAdmin'
 
-export default function AssignPage() {
+export default function ZoomPage() {
     return (
         <div>
             <Sidebar />
-            <Assign />
+            <Zoom />
         </div>
     )
 }
