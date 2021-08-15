@@ -8,6 +8,7 @@ import ProfilePage from './pages/profile_page';
 import AssignPage from './pages/assign_page';
 import LogoutPage from './pages/logout_page';
 import ZoomPage from './pages/zoom_page';
+import ZoomStuPage from './pages/zoom_student_page';
 import TokenHandler from './components/TokenHandler';
 import UserVerificationPage from './pages/user_verification_page';
 import {UserProvider} from "./contexts/UserContext";
@@ -37,6 +38,7 @@ function App() {
           <Route path="/verify/:id" component={UserVerificationPage} />
           <Route path="/assign" exact component={AssignPage} />
           <Route path="/zoom" exact component={ZoomPage} />
+          <Route path="/zoomStu" exact component={ZoomStuPage} />
         </Router>
       </UserProvider>
       </ErrorProvider>

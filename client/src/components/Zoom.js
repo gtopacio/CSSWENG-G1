@@ -25,12 +25,13 @@ export default function Zoom() {
                 <div className="row">
                     <div className="card mb-3 mx-auto" style={{paddingRight:'0'}}>
                         <div className="row g-2" style={{minHeight:'inherit',display:'flex'}}>
-                            <div className="col-12 custom" style={{minHeight:'inherit',display:'flex'}}>
+                            <div className="row g-3" style={{minHeight:'inherit',display:'flex'}}>
                                 <h4>Webinar: Testing 123 </h4>
                             </div>
                             <p>Professor: Professor Ballsack</p>
                             <div className="mb-3 col-12">
                             <DidaskoZoom.Button href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Join</DidaskoZoom.Button>
+                            <DidaskoZoom.Button href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Edit</DidaskoZoom.Button>
                             </div>
                         </div>
                         
