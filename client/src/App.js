@@ -6,6 +6,7 @@ import DashboardPage from './pages/dashboard_page';
 import LoginPage from './pages/login_page';
 import ProfilePage from './pages/profile_page';
 import AssignPage from './pages/assign_page';
+import CreateCourses from './pages/create_courses';
 import LogoutPage from './pages/logout_page';
 import ZoomPage from './pages/zoom_page';
 import ZoomStuPage from './pages/zoom_student_page';
@@ -37,6 +38,7 @@ function App() {
           <Route path="/logout" exact component={LogoutPage} />
           <Route path="/verify/:id" component={UserVerificationPage} />
           <Route path="/assign" exact component={AssignPage} />
+          <Route path="/createCourses" exact component={CreateCourses} />
           <Route path="/zoom" exact component={ZoomPage} />
           <Route path="/zoomStu" exact component={ZoomStuPage} />
         </Router>
