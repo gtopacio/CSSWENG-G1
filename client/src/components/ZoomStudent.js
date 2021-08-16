@@ -24,8 +24,8 @@ export default function Zoom() {
                             </div>
                             <p>Professor: Professor Ballsack</p>
                             <div className="mb-3 col-12">
-                            <DidaskoZoomStu.Button href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" disabled>Join</DidaskoZoomStu.Button>
-                            <DidaskoZoomStu.Button href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Register</DidaskoZoomStu.Button>
+                            <DidaskoZoomStu.Button style={{marginRight:'1vh'}} href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" disabled>Join</DidaskoZoomStu.Button>
+                            <DidaskoZoomStu.Button style={{marginLeft:'1vh'}} href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Register</DidaskoZoomStu.Button>
                             </div>
                         </div>
                     </div>

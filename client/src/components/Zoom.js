@@ -30,8 +30,8 @@ export default function Zoom() {
                             </div>
                             <p>Professor: Professor Ballsack</p>
                             <div className="mb-3 col-12">
-                            <DidaskoZoom.Button href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Join</DidaskoZoom.Button>
-                            <DidaskoZoom.Button href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Edit</DidaskoZoom.Button>
+                            <DidaskoZoom.Button style={{marginRight:'1vh'}} href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Join</DidaskoZoom.Button>
+                            <DidaskoZoom.Button style={{marginLeft:'1vh'}} href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Edit</DidaskoZoom.Button>
                             </div>
                         </div>
                         
@@ -57,7 +57,7 @@ export default function Zoom() {
                                 <option>Professor</option>
                                 <option value="1">BALLSACK, Ligma</option>
                                 <option value="2">ROSIMA, Rayvhen</option>
-                                <option value="3">ILLAGAN, Vincent</option>
+                                <option value="3">ILAGAN, Vincent</option>
                                 <option value="4">TOPACIO, Geoff</option>
                                 </DidaskoZoom.Form.Select>
                             </DidaskoZoom.InputGroup>                                         
