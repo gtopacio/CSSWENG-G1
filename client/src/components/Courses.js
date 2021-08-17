@@ -92,7 +92,10 @@ export default function Courses() {
                                     <Link to="#" style={{color: 'black',textDecoration:'none'}}><DidaskoCard.Card.Title>Introduction to Biochemistry</DidaskoCard.Card.Title></Link>
                                             <div className="courseButtonElements">
                                                 <DidaskoCard.Button variant="outline-dark">
-                                                        Continue
+                                                        Continue Teaching
+                                                </DidaskoCard.Button>
+                                                <DidaskoCard.Button variant="outline-dark">
+                                                        Edit Modules
                                                 </DidaskoCard.Button>
                                             </div>
                                     </DidaskoCard.Card.Body>
