@@ -1,13 +1,12 @@
 import React from 'react'
-import AllCourses from '../components/AllCourses'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer';
+import Courses from '../components/Courses'
+import Sidebar from '../components/Sidebar';
 
-export default function CoursesPage() {
+export default function courses_page() {
     return (
         <div>
-            <Navbar />
-            <AllCourses />
+            <Sidebar />
+            <Courses />
         </div>
     )
 }

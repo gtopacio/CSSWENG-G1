@@ -24,7 +24,7 @@ export default function Navbar() {
                         <Link to="/" style={{textDecoration:'none'}}>
                         <DidaskoNav.Nav.Link href="#Home">Home</DidaskoNav.Nav.Link>
                         </Link>
-                        <Link to="/courses" style={{textDecoration:'none'}}>
+                        <Link to="/AllCourses" style={{textDecoration:'none'}}>
                         <DidaskoNav.Nav.Link href="#AllCourses">All Courses</DidaskoNav.Nav.Link>
                         </Link>
                         <Link to="/about" style={{textDecoration:'none'}}>
