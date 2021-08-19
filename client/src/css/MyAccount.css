@@ -1,0 +1,29 @@
+#profilePanel
+{
+    padding: 20px;
+
+}
+#coursesPanel
+{
+
+}
+#textHeader
+{
+    display: flex;
+    justify-content: left;
+}
+.profileGroup
+{
+    display: flex;
+    flex-direction: row;
+}
+.textGroup
+{
+    display: flex;
+    text-align: left;
+    padding-left: 10px;
+}
+.space
+{
+    height: 20px;
+}
