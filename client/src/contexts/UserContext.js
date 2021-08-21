@@ -4,12 +4,7 @@ export const UserContext = createContext();
 
 export const UserProvider = (props) => {
     const [user, setUser] = useState({
-        userName: "",
-        email: "",
-        firstName: "",
-        lastName: "",
-        admin: false,
-        token: "",
+        validated: false,
         refreshSent: true
     });
 

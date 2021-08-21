@@ -12,18 +12,6 @@ const validations = require('../lib/validators');
 
 const router = express.Router();
 
-const defaultCookieOptions = {
-    maxAge: 31*24*60*60*100, 
-    httpOnly: true, 
-    secure: process.env.NODE_ENV == 'production',
-    sameSite: true
-};
-
-require('dotenv').config();
-const DB_URL = process.env.MONGO_URL;
-mongoose.connect(DB_URL, {useNewUrlParser: true, useUnifiedTopology: true});
-mongoose.connection.on('connected', () => console.log("MongoDB successfully connected"));
-
 router.post("/login", validations.loginValidator, async(req, res) => {
 
     let err = validationResult(req);
@@ -47,12 +35,11 @@ router.post("/login", validations.loginValidator, async(req, res) => {
 
         let same = await bcrypt.compare(password, foundUser.password);
         if(same){
-            let token = authLib.generateTokens(foundUser);
-            res.cookie('refreshToken', token.refreshToken, defaultCookieOptions);
-            return res.send({
-                success: true, 
-                token:token.accessToken
-            });
+            req.session.user = foundUser;
+            req.session.save();
+            
+            let user = (({firstName, lastName, userName, email, admin, profilePicture}) => {return {firstName, lastName, userName, email, admin, profilePicture}})(foundUser);
+            return res.send({success: true, user});
         }
 
         res.send({success:false, errors: ["Wrong Username or Password"]});
@@ -95,35 +82,16 @@ router.post("/signup", upload.single('profilePicture'), validations.signupValida
 });
 
 router.post("/logout", (req, res) => {
-    res.cookie('refreshToken', "", {maxAge: 0});
+    req.session.destroy();
     res.send({success:true});
 });
 
 router.get("/refresh", (req, res) => {
-    let rToken = req.cookies.refreshToken;
-    let tokens = authLib.refreshToken(rToken);
-    if(tokens.success){
-        res.cookie('refreshToken', tokens.refreshToken, defaultCookieOptions);
-        return res.send({
-            success: true, 
-            token:tokens.accessToken
-        });
+    if(!req.session.user){
+        return res.status(403).send({success:false});
     }
-    return res.send({
-        success: false, 
-        message: tokens.message
-    });
-});
 
-router.post("/sendMail", async(req, res) => {
-    let { to, message } = req.body;
-    try{
-        let rs = await googleLib.sendEmail({to, message});
-        res.send(rs);
-    } 
-    catch (e){
-        res.send({success: false, errors: [e.message]});
-    }
+    res.send({success: true, user: req.session.user});
 });
 
 router.post('/verify', validations.verificationValidator, async(req, res) => {

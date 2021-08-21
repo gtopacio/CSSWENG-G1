@@ -45,7 +45,7 @@ async function uploadToDrive(file, options){
         //Create DB Document
         if(res.status === 200) {
             let newFile = new File({
-                uploader: options.userID,
+                uploader: options.userID || 'none',
                 fileID: res.data.id,
                 fileName: name,
                 mimeType: file.mimetype

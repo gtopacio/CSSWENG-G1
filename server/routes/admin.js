@@ -10,30 +10,46 @@ const upload = require('multer')({ dest: './uploads' });
 
 const router = express.Router();
 
-router.use(authLib.authenticateTokens);
+router.use(authLib.checkSession);
 
 router.use((req, res, next) => {
-    if(!req.user.admin){
+    if(!req.session.user.admin){
         return res.status(403).send({success:false});
     }
     next();
 });
 
-//Handles creation of new webinars
-router.post("/webinar", validators.webinarRegistration, async(req, res) => {
+router.post("/webinar", upload.single('banner'), validators.webinarRegistration, async(req, res) => {
     let err = validationResult(req);
     if(!err.isEmpty()){
+
+        if(req.file){
+            fs.unlink(path.join(appDir, "uploads", req.file.filename), ()=>{return;});
+        }
+
         return res.status(400).send({
             success: false,
             errors: err.array.reduce((acc, val) => {acc[val.param] = val.message; return acc}, {})
         });
     }
 
-    let newWebinar = new Webinar({
+    let webinarInfo = {
         name: req.body.name,
         teachers: {},
         lastUpdate: Date.now()
-    });
+    };
+
+    let fileID = '';
+    if(req.file){
+        fileID = await uploadToDrive(req.file, {parent: ['1OaiYeweiYIS36lmLzwX_bnFsmflsZiQ0'], userID: req.session.user._id});
+    }
+
+    if(fileID !== ''){
+        webinarInfo.bannerID = fileID;
+        webinarInfo.bannerLink = `https://drive.google.com/uc?id=${fileID}`
+    }
+
+    let newWebinar = new Webinar(webinarInfo);
 
     await newWebinar.save();
 
@@ -144,16 +160,17 @@ router.post("/student", validators.studentRegistration, async(req, res) => {
     res.status(200).send({success:true});
 });
 
-//Gets the list of webinars
 router.get("/webinars", async(req, res) => {
-    let { conditions } = req.body;
-    conditions = !conditions ? {} : conditions;
-    res.send(await Webinar.find(conditions, 'name creationDate teachers students'));
+    let { name } = req.query;
+    name = name ? {name:new RegExp(name, "i")} : {};
+    res.send(await Webinar.find(name, 'name creationDate teachers students bannerLink'));
 });
 
-// Gets the list of users
 router.get("/users", async(req, res) => {
-    let { conditions } = req.body;
+    let conditions = Object.keys(req.query).reduce((prev, curr) => {
+        prev[curr] = new RegExp(req.query[curr], "i");
+        return prev;
+    }, {});
     conditions = !conditions ? {admin:false} : {...conditions, admin:false};
     res.send(await User.find(conditions, 'userName firstName lastName email'));
 });

@@ -14,7 +14,7 @@ export default function DashboardPage(props) {
 
     return (
         user.refreshSent ? <h1> Loading </h1> :
-        !user || !user.token || user.token.trim() === "" && !user.refreshSent ? <Redirect to="/login" /> :
+        !user.validated && !user.refreshSent ? <Redirect to="/login" /> :
         <div>
             {sideBar}
             <MyAccount user={user}/>

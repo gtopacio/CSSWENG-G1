@@ -1,4 +1,3 @@
-const jwt = require("jsonwebtoken");
 const mongoose = require('mongoose');
 const Verification = require('../schemas/verification');
 const User = require('../schemas/user');
@@ -10,22 +9,11 @@ const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
 const DB_URL = process.env.MONGO_URL;
 mongoose.connect(DB_URL, {useNewUrlParser: true, useUnifiedTopology: true});
 
-function authenticateTokens(req, res, next){
-    let {authorization} = req.headers;
-
-    if(!authorization){
-        return res.sendStatus(400);
+function checkSession(req, res, next){
+    if(!req.session.user){
+        return res.sendStatus(403);
     }
-
-    let token = authorization.split(" ")[1];
-    try{
-        let decoded = jwt.verify(token, ACCESS_TOKEN_SECRET);
-        req.user = decoded;
-        next();
-    }
-    catch(e){
-        res.sendStatus(403);
-    }
+    next();
 }
 
 function generateTokens(user){
@@ -89,4 +77,4 @@ async function verifyUser(uid){
     }
 }
 
-module.exports = {authenticateTokens, generateTokens, refreshToken, generateVerificationURL, verifyUser};
+module.exports = {checkSession, generateTokens, refreshToken, generateVerificationURL, verifyUser};

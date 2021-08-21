@@ -1,6 +1,7 @@
-import {useState} from 'react';
+import { useState, useEffect } from 'react';
 import defaultdp from "../images/defaultdp.jpg";
 import CourseBlock from './CourseBlock';
+import axios from 'axios';
 
 import '../css/MyAccount.css';
 import * as DidaskoAccount from 'react-bootstrap';
@@ -8,10 +9,40 @@ export default function MyAccount(props) {
 
     const [loading, setLoading] = useState(true);
 
-    const [studentCourses, setStudentCourses] = useState({});
-    const [teachingCourses, setTeachingCourses] = useState({});
+    const [studentWebinars, setStudentWebinars] = useState([]);
+    const [teacherWebinars, setTeacherWebinars] = useState([]);
 
-    
+    useEffect(() => {
+        async function sendRequest() {
+            let { data } = await axios.get("/api/accounts/courses");
+            console.log(data);
+            setStudentWebinars(data.studentWebinars);
+            setTeacherWebinars(data.teacherWebinars);
+            setLoading(false);
+        }
+
+        sendRequest();
+    }, []);
+
+    let renderedStudent = studentWebinars.length > 0 ? 
+        studentWebinars.map(s => {
+            return (<DidaskoAccount.Col key={s._id}>
+                <CourseBlock webinarTitle={s.name}/>                                   
+            </DidaskoAccount.Col>)
+        }) :
+        <DidaskoAccount.Col>
+            <h1>Empty</h1>                                   
+        </DidaskoAccount.Col>;
+
+    let renderedTeacher = teacherWebinars.length > 0 ? 
+    teacherWebinars.map(s => {
+        return (<DidaskoAccount.Col>
+            <CourseBlock webinarTitle={s.name}/>                                   
+        </DidaskoAccount.Col>)
+    }) :
+    <DidaskoAccount.Col>
+            <h1>Empty</h1>                                   
+    </DidaskoAccount.Col>;
 
     return (
         <section style={{height:'83vh'}}>
@@ -36,15 +67,14 @@ export default function MyAccount(props) {
                         </div>
                         <hr></hr>
                         <div>
+
                         <DidaskoAccount.Row>
-                            {loading ? <h1>Loading</h1> : 
-                            <DidaskoAccount.Col>
-                                  <CourseBlock webinarTitle="Intermediate Math Course"/>                                   
-                            </DidaskoAccount.Col>}
+                            {loading ? <h1>Loading</h1> : renderedStudent}
                         </DidaskoAccount.Row>
-                          
                         </div>
                     </div>
+                    
+                    
                 </div>
             </div>
         </section>

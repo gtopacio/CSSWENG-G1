@@ -4,7 +4,6 @@ import { useState, useContext} from 'react';
 import { UserContext } from '../contexts/UserContext';
 import { Redirect } from 'react-router';
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
 import { ErrorContext } from '../contexts/ErrorContext';
 import SignupForm from './login_page/SignupForm';
 
@@ -19,7 +18,7 @@ export default function Login(props) {
     const [errors, setErrors] = useContext(ErrorContext);
     const [touched, setTouched] = useState({userName: false, password: false});
 
-    if(user && user.token && user.token.trim() !== ""){
+    if(user.validated){
         return <Redirect to="/dashboard" />
     }
 
@@ -39,9 +38,8 @@ export default function Login(props) {
         try{
             let { data } = await axios.post("/api/login", loginInputs);
             if(data.success){
-                let payload = jwt_decode(data.token);
-                payload.token = data.token;
-                setUser(payload);
+                let newUser = {... data.user, refreshSent: false, validated: true}
+                setUser(newUser);
                 props.history.push("/dashboard");
             }
             else{
