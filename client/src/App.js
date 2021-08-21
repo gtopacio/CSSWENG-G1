@@ -31,7 +31,7 @@ function App() {
         <TokenHandler />
         <Router>
           <Route path="/" exact component={HomePage} />
-          <Route path="/allCourses" exact component={AllCoursesPage} />
+          <Route path="/courses/available" exact component={AllCoursesPage} />
           <Route path="/Courses" exact component={CoursesPage} />
           <Route path="/about" exact component={AboutPage} />
           <Route path="/dashboard" exact component={DashboardPage} />
