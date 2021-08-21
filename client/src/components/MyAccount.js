@@ -15,7 +15,6 @@ export default function MyAccount(props) {
     useEffect(() => {
         async function sendRequest() {
             let { data } = await axios.get("/api/accounts/courses");
-            console.log(data);
             setStudentWebinars(data.studentWebinars);
             setTeacherWebinars(data.teacherWebinars);
             setLoading(false);

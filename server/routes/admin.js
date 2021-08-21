@@ -36,7 +36,8 @@ router.post("/webinar", upload.single('banner'), validators.webinarRegistration,
     let webinarInfo = {
         name: req.body.name,
         teachers: {},
-        lastUpdate: Date.now()
+        lastUpdate: Date.now(),
+        price: req.body.price ? parseFloat(req.body.price) : 0
     };
 
     let fileID = '';
@@ -167,11 +168,12 @@ router.get("/webinars", async(req, res) => {
 });
 
 router.get("/users", async(req, res) => {
-    let conditions = Object.keys(req.query).reduce((prev, curr) => {
-        prev[curr] = new RegExp(req.query[curr], "i");
-        return prev;
-    }, {});
-    conditions = !conditions ? {admin:false} : {...conditions, admin:false};
+    let conditions = Object.keys(req.query).map((item) => {
+        let query = {admin: false};
+        query[item] = new RegExp(req.query[item], "i");
+        return query;
+    });
+    conditions = !conditions ? {admin:false} : {$or:conditions};
     res.send(await User.find(conditions, 'userName firstName lastName email'));
 });
 

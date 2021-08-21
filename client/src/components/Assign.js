@@ -8,6 +8,7 @@ export default function Assign() {
 
     const [searchInputs, setSearchInputs] = useState({});
     const [searchResults, setSearchResults] = useState([]);
+    const [attempted, setAttempted] = useState(false);
 
     const handleSearch = async() => {
         try{
@@ -16,6 +17,9 @@ export default function Assign() {
         }
         catch(e){
             setSearchResults([]);
+        }
+        finally{
+            setAttempted(true);
         }
     }
 
@@ -35,7 +39,7 @@ export default function Assign() {
                         </FloatingLabel>
                         <Button variant="light" size="sm" onClick = {handleSearch}>Search</Button>
                             {searchResults.length > 0 ? searchResults.map((res) => {return <AssignBlock webinar={res}/>}) : 
-                            <></>}
+                            attempted ? <h1>No Results</h1>: <></>}
                         </Col>
                     </Row>
                 </Container>

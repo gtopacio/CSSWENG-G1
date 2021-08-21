@@ -48,6 +48,7 @@ const verificationValidator = [
 
 const webinarRegistration = [
     body("name").notEmpty().trim().escape(),
+    body("price", "Price is not a number").isDecimal()
 ]
 
 const teacherRegistration = [
