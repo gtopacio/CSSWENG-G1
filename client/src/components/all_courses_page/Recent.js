@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import axios from 'axios';
 
-export default function Recent() {
+export default function Recent({user}) {
 
     const [webinars, setWebinars] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -28,8 +28,8 @@ export default function Recent() {
             <Row>
                 {loading ? <h1>Loading</h1>:
                     webinars.map(x => {
-                        return (<Col xs = {3} className="mb-3">
-                                <CourseCard webinar={x} />
+                        return (<Col className="mb-3 col-3">
+                                <CourseCard webinar={x} user={user} />
                                 </Col>);
                     })
                 }
