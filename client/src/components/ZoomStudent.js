@@ -1,12 +1,9 @@
-import React from 'react'
 import * as DidaskoZoomStu from 'react-bootstrap';
-import { useState, useContext } from 'react';
-import { UserContext } from '../contexts/UserContext';
+import { useState } from 'react';
 
 export default function Zoom() {
-    const [user, setUser] = useContext(UserContext);
-    const [show, setShow] = useState(false);
 
+    const [show, setShow] = useState(false);
 
     const signUpClose = () => setShow(false);
     const signUpShow = () => setShow(true);

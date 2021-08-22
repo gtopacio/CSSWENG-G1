@@ -3,50 +3,11 @@ const Verification = require('../schemas/verification');
 const User = require('../schemas/user');
 const { v4: uuidv4 } = require('uuid');
 
-require("dotenv").config();
-const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
-const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
-const DB_URL = process.env.MONGO_URL;
-mongoose.connect(DB_URL, {useNewUrlParser: true, useUnifiedTopology: true});
-
 function checkSession(req, res, next){
     if(!req.session.user){
         return res.sendStatus(403);
     }
     next();
-}
-
-function generateTokens(user){
-    let { userName, email, firstName, lastName, admin, profilePicture } = user;
-    try{
-        let payload = {firstName, lastName, userName, email, admin, profilePicture};
-        let token = {
-            accessToken: jwt.sign(payload, ACCESS_TOKEN_SECRET, {expiresIn: '3h'}),
-            refreshToken: jwt.sign(payload, REFRESH_TOKEN_SECRET, {expiresIn: '31d'})
-        };
-        return token;
-    }
-    catch(e){
-        throw e;    
-    }
-}
-
-function refreshToken(rToken){
-    let res = {
-        success: false,
-        accessToken: "",
-        refreshToken: ""
-    };
-    try{
-        let {exp, iat, ...decoded} = jwt.verify(rToken, REFRESH_TOKEN_SECRET);
-        let res = generateTokens(decoded);
-        res.success = true;
-        return res;
-    }
-    catch(e){
-        res.message = e.message;
-        return res;
-    }
 }
 
 function generateVerificationURL(user){
@@ -77,4 +38,23 @@ async function verifyUser(uid){
     }
 }
 
-module.exports = {checkSession, generateTokens, refreshToken, generateVerificationURL, verifyUser};
+function trimUserInfo(user){
+    const fields = [
+        "_id",
+        "userName",
+        "firstName",
+        "lastName",
+        "verified",
+        "admin",
+        "profilePicture",
+        "email",
+        "webinars",
+        "webinarsTaught"
+    ];
+
+    let keys = Object.keys(user);
+
+    return fields.reduce((prev, curr) => { if(keys.includes(curr)) prev[curr] = user[curr]; return prev}, {});
+}
+
+module.exports = {checkSession, trimUserInfo, generateVerificationURL, verifyUser};

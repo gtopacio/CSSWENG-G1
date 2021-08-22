@@ -3,6 +3,7 @@ const router = express.Router();
 const { checkSession }= require('../lib/authentication');
 const mongoose = require('mongoose');
 const Webinar = require('../schemas/webinar');
+const EnrollmentVerification = require('../schemas/enrollment_verification');
 
 router.use(checkSession);
 
@@ -46,6 +47,11 @@ router.get("/courses", async(req, res) => {
         studentWebinars,
         teacherWebinars
     });
+});
+
+router.get('/verifications', async(req, res) => {
+    let verif = await EnrollmentVerification.findOne({webinarID: req.query.webinarID, userID: req.session.user._id});
+    res.send({success: true, requestSent: verif ? true : false});
 });
 
 

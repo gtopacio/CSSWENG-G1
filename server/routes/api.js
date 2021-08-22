@@ -24,7 +24,7 @@ router.post("/login", validations.loginValidator, async(req, res) => {
 
     try{
         let {userName, password} = req.body;
-        let foundUser = await User.findOne({userName});
+        let foundUser = await User.findOne({userName}).lean();
         if(!foundUser){
             return res.send({success:false, errors: ["Wrong Username or Password"]});
         }
@@ -38,7 +38,7 @@ router.post("/login", validations.loginValidator, async(req, res) => {
             req.session.user = foundUser;
             req.session.save();
             
-            let user = (({firstName, lastName, userName, email, admin, profilePicture}) => {return {firstName, lastName, userName, email, admin, profilePicture}})(foundUser);
+            let user = authLib.trimUserInfo(foundUser);
             return res.send({success: true, user});
         }
 
@@ -90,8 +90,7 @@ router.get("/refresh", (req, res) => {
     if(!req.session.user){
         return res.status(403).send({success:false});
     }
-
-    res.send({success: true, user: req.session.user});
+    res.send({success: true, user: authLib.trimUserInfo(req.session.user)});
 });
 
 router.post('/verify', validations.verificationValidator, async(req, res) => {

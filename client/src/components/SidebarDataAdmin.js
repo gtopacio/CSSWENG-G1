@@ -30,6 +30,12 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
+    title: 'Enrollment Requests',
+    path: '/enrollment/requests',
+    icon: <AiIcons.AiOutlineCheckSquare />,
+    cName: 'nav-text'
+  },
+  {
     title: 'Log Out',
     path: '/logout',
     icon: <CgIcons.CgLogOut />,

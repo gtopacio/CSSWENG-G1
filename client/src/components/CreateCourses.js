@@ -21,6 +21,7 @@ export default function CreateCourses() {
     }
 
     const checkError = () => {
+        const FILE_TYPES = ["image/jpg", "image/jpeg", "image/png"];
         let errors = {};
         if(!inputs.name || inputs.name.trim() === ""){
             errors.name = "Webinar Name should not be empty";
@@ -29,10 +30,13 @@ export default function CreateCourses() {
         if(inputs.price <= 0 && !priceShow){
             errors.price = "Price should be greater than 0";
         }
-
         
         if(isNaN(inputs.price)){
             errors.price = "Price is not a Number";
+        }
+
+        if(inputs.banner && !FILE_TYPES.includes(inputs.banner.type)){
+            errors.banner = "Invalid file type";
         }
 
         setFormErrors(errors);
@@ -120,10 +124,14 @@ export default function CreateCourses() {
                             type="file"
                             accept=".jpg, .jpeg, .png"
                             name="banner"
+                            isInvalid={touched && formErrors.banner}
                             onChange = {(e) => {
                                 setInputs({...inputs, banner: e.target.files[0]})
                             }}
                         />
+                        <Form.Control.Feedback type="invalid">
+                            {formErrors.banner}
+                        </Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group>
                         <Form.Check

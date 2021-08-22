@@ -38,7 +38,7 @@ export default function Login(props) {
         try{
             let { data } = await axios.post("/api/login", loginInputs);
             if(data.success){
-                let newUser = {... data.user, refreshSent: false, validated: true}
+                let newUser = {...data.user, refreshSent: false, validated: true}
                 setUser(newUser);
                 props.history.push("/dashboard");
             }

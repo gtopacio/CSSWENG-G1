@@ -52,7 +52,7 @@ export default function MyAccount(props) {
                 <div className="row align-items-start mt-6 mb-1">
                     <div className="col-3" id="profilePanel">
                         <div className="profileGroup">
-                            <img src={props.user.profilePicture ? `https://drive.google.com/uc?id=${props.user.profilePicture}` : defaultdp} width = "100px" height="100px"></img>
+                            <img src={props.user.profilePicture ? `https://drive.google.com/uc?id=${props.user.profilePicture}` : defaultdp} width = "100px" height="100px" alt="Profile Picture"></img>
                             <div className="textGroup">
                                 <p to="#" style={{color: 'black',fontSize:'30px', textDecorationLine:"underline"}}>{props.user.firstName} {props.user.lastName}</p>
                             </div>

@@ -3,7 +3,7 @@ import { Form, FormControl, InputGroup, Button } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
-import Signup_success from '../Signup_success';
+import SignupSuccess from '../Signup_success';
 import { ErrorContext } from '../../contexts/ErrorContext';
 
 export default function SignupForm() {
@@ -55,7 +55,7 @@ export default function SignupForm() {
     };
 
     return (
-      signUpSuccess ? <Signup_success /> :
+      signUpSuccess ? <SignupSuccess /> :
       <Formik
         validationSchema={schema}
         onSubmit={signupHandler}

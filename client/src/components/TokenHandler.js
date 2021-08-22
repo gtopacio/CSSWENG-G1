@@ -11,7 +11,7 @@ export default function TokenHandler() {
             try{
                 let { data } = await axios.get("/api/refresh");
                 if(data.success){
-                    let user = {... data.user, refreshSent: false, validated: true}
+                    let user = {...data.user, refreshSent: false, validated: true}
                     setUser(user);
                 }
                 else{

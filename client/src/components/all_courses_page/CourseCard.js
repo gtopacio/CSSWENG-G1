@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import Card from 'react-bootstrap/Card';
 import image10 from '../../images/image10.jpg';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../contexts/UserContext';
 
-export default function CourseCard({webinar, user}) {
+export default function CourseCard({webinar, showButton=true}) {
+
+    const [user, setUser] = useContext(UserContext);
 
     let {webinars = {}, webinarsTaught = {}} = user;
 
@@ -22,7 +25,7 @@ export default function CourseCard({webinar, user}) {
         if(webinar.teachers){
             getTeacher();
         }
-    }, []);
+    }, [webinar.teachers]);
 
     return (
         <Card style={{ maxWidth: '18rem' }}>
@@ -40,10 +43,11 @@ export default function CourseCard({webinar, user}) {
                     {`Price: ${price}`}
                 </Card.Text>
             </Card.Body>
-            <Card.Footer>
-                {webinars[webinar._id] || webinarsTaught[webinar._id] ? <Button variant="secondary">Continue</Button> 
+            {showButton ? <Card.Footer>
+                {webinars[webinar._id] || webinarsTaught[webinar._id] ? <Link to={`/webinar?id=${webinar._id}`}><Button variant="secondary">Continue</Button></Link> 
                 : <Link to={`/courses/enroll?webinarID=${webinar._id}`}><Button variant="secondary">Enroll</Button></Link>}
-            </Card.Footer>
+            </Card.Footer> :
+            <></>}
         </Card>
     )
 }

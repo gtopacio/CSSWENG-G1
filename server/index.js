@@ -38,5 +38,6 @@ app.use('/api', require('./routes/api.js'));
 app.use('/api/admin', require('./routes/admin.js'));
 app.use('/api/accounts', require('./routes/accounts.js'));
 app.use('/api/public', require('./routes/public.js'));
+app.use('/api/webinar', require('./routes/webinars.js'));
 
 app.listen(PORT, () => console.log(`Listening at Port: ${PORT}`));

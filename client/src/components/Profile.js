@@ -4,7 +4,6 @@ import '../css/Profile.css' ;
 import * as DidaskoProfile from 'react-bootstrap';
 import { useState, useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
-import { Redirect } from 'react-router';
 
 export default function Profile(props) {
 

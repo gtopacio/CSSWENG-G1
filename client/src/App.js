@@ -17,10 +17,12 @@ import {UserProvider} from "./contexts/UserContext";
 import {ErrorProvider} from "./contexts/ErrorContext";
 import ErrorPopup from "./components/ErrorPopup";
 import EnrollWebinar from './pages/enroll_webinar_page';
+import EnrollmentRequestPage from './pages/enrollment_requests';
 import {
   BrowserRouter as Router,
   Route,
 } from "react-router-dom";
+import WebinarPage from './pages/webinar_page';
 
 
 function App() {
@@ -35,6 +37,8 @@ function App() {
           <Route path="/courses/available" exact component={AllCoursesPage} />
           <Route path="/courses" exact component={CoursesPage} />
           <Route path="/courses/enroll" exact component={EnrollWebinar} />
+          <Route path="/webinar" exact component={WebinarPage} />
+          <Route path="/enrollment/requests" exact component={EnrollmentRequestPage} />
           <Route path="/about" exact component={AboutPage} />
           <Route path="/dashboard" exact component={DashboardPage} />
           <Route path="/login" exact component={LoginPage} />

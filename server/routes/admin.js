@@ -5,6 +5,7 @@ const authLib = require('../lib/authentication');
 const validators = require("../lib/validators");
 const Webinar = require("../schemas/webinar");
 const User = require("../schemas/user");
+const EnrollmentVerification = require("../schemas/enrollment_verification");
 const { uploadToDrive } = require('../lib/google_api');
 const upload = require('multer')({ dest: './uploads' });
 
@@ -119,19 +120,21 @@ router.post("/student", validators.studentRegistration, async(req, res) => {
         });
     }
 
-    let {webinarID, studentID} = req.body;
+    let {webinarID, studentID, requestID} = req.body;
 
-    let [webinar, student] = await Promise.all([
+    let [webinar, student, request] = await Promise.all([
         Webinar.findById(webinarID, 'students'), 
-        User.findById(studentID, 'webinarsTaught webinars')
+        User.findById(studentID, 'webinarsTaught webinars'),
+        EnrollmentVerification.findOne({uid: requestID})
     ]);
 
-    if(!webinar || !student){
+    if(!webinar || !student || !request){
         return res.status(400).send({
             success:false,
             errors: {
                 webinarID: !webinar ? "Webinar not found" : null,
-                studentID: !student ? "Student not found" : null
+                studentID: !student ? "Student not found" : null,
+                requestID: !request ? "Request not found" : null
             }
         });
     }
@@ -155,7 +158,8 @@ router.post("/student", validators.studentRegistration, async(req, res) => {
 
     await Promise.all([
         Webinar.updateOne({_id: webinarID}, {$set: {students: webinar.students}}),
-        User.updateOne({_id: studentID}, {$set: {webinars: student.webinars}})
+        User.updateOne({_id: studentID}, {$set: {webinars: student.webinars}}),
+        EnrollmentVerification.updateOne({uid: requestID}, {accepted: true, acceptedDate: Date.now()})
     ]);
 
     res.status(200).send({success:true});
@@ -175,6 +179,27 @@ router.get("/users", async(req, res) => {
     });
     conditions = !conditions ? {admin:false} : {$or:conditions};
     res.send(await User.find(conditions, 'userName firstName lastName email'));
+});
+
+router.post("/enroll/accept", async(req, res) => {
+    
+    let enrollmentRequest = await EnrollmentVerification.findOne({uid: req.body.requestID});
+
+    if(!enrollmentRequest){
+        return res.status(404).send({
+            success:false,
+            errors: {requestID: "Request not found, check your ID"}
+        });
+    }
+
+    EnrollmentVerification.updateOne({uid: req.body.requestID}, {accepted: true, acceptanceDate: Date.now()})
+
+    res.send({success: true});
+});
+
+router.get("/enrollment/requests", async(req, res) => {
+    let requests = await EnrollmentVerification.find({accepted: false});
+    res.send({success: true, requests});
 });
 
 module.exports = router;

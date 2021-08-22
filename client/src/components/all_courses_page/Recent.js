@@ -28,7 +28,7 @@ export default function Recent({user}) {
             <Row>
                 {loading ? <h1>Loading</h1>:
                     webinars.map(x => {
-                        return (<Col className="mb-3 col-3">
+                        return (<Col className="mb-3 col-3" key={x._id}>
                                 <CourseCard webinar={x} user={user} />
                                 </Col>);
                     })
