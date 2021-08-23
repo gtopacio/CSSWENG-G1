@@ -3,6 +3,7 @@ import { Modal, FormControl, Form, Button, InputGroup, Col} from 'react-bootstra
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
+import ScheduleSetter from './create_course_page/ScheduleSetter';
 
 
 export default function CreateCourses() {
@@ -28,17 +29,20 @@ export default function CreateCourses() {
         meetingID: yup.string().required("Enter meeting ID"),
         meetingPassword: yup.string().required("Enter meeting password"),
         price: yup.number().test("Valid Input", "Enter a valid price", (value) => {return freeCheckbox.current.checked ? true : value !== undefined}).test("Valid Price", "Price must be greater than 0", (value) => { return freeCheckbox.current.checked ? true : value > 0}),
-        banner: yup.mixed().test("fileType", "Invalid file Type", (value) => {return value.type ? FILE_TYPES.includes(value.type) : true})
+        banner: yup.mixed().test("fileType", "Invalid file Type", (value) => {return value.type ? FILE_TYPES.includes(value.type) : true}),
+        schedule: yup.array().required().min(1, "At least 1 webinar meeting needed")
     });
 
 
     const submitHandler = async(inputs, {setSubmitting, setErrors}) => {
         setSubmitting(true);
         let formData = new FormData();  
-        for(let key in inputs){
-            if(inputs.hasOwnProperty(key)){
-                formData.append(key, inputs[key]);
+        for(let key of Object.keys(inputs)){
+            if(key === "schedule"){
+                formData.append(key, JSON.stringify(inputs[key]));
+                continue;
             }
+            formData.append(key, inputs[key]);
         }
         try{
             let { data } = await axios.post("/api/admin/webinar", formData);
@@ -84,7 +88,8 @@ export default function CreateCourses() {
                             meetingPassword: '',
                             banner: {},
                             price: 0,
-                            free: false
+                            free: false,
+                            schedule: []
                         }}
                     >
                         {({
@@ -207,6 +212,16 @@ export default function CreateCourses() {
                                     </Form.Control.Feedback>
                                 </InputGroup>
                                         : <></>}
+                            <InputGroup>
+                            <InputGroup hasValidation>
+                                <ScheduleSetter setInputSchedules = {(sched) => {
+                                    values.schedule = sched;
+                                    validateField("schedule")
+                                }}
+                                errors={errors.schedule}
+                                />
+                            </InputGroup>
+                            </InputGroup>
                             <InputGroup className="mt-3">
                                 <Col sm = {{auto:true, offset: 8}}>
                                     <Button 
@@ -219,11 +234,11 @@ export default function CreateCourses() {
                                     <Button variant="primary" type="submit">Confirm</Button>
                                 </Col>
                             </InputGroup>
-                            <pre>
+                            {/* <pre>
                                 {JSON.stringify(values, null, 2)}
                                 <br></br>
                                 {JSON.stringify(errors, null, 2)}
-                            </pre>
+                            </pre> */}
                         </Form>
                         )}
                     </Formik>

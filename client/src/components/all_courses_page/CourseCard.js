@@ -51,6 +51,10 @@ export default function CourseCard({webinar, showButton=true}) {
                 <Card.Text>
                     {`Price: ${price}`}
                 </Card.Text>
+                <Card.Text>
+                    {`Schedule:`}<br />
+                    {webinar.schedule.map(x => { return <p>{new Date(x).toString()}</p>})}
+                </Card.Text>
             </Card.Body>
             {showButton ? <Card.Footer>
                 {webinars[webinar._id] || webinarsTaught[webinar._id] ? <Link to={`/webinar?id=${webinar._id}`}><Button variant="secondary">Continue</Button></Link> 

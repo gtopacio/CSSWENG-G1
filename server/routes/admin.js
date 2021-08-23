@@ -34,6 +34,8 @@ router.post("/webinar", upload.single('banner'), validators.webinarRegistration,
         });
     }
 
+    req.body.schedule = JSON.parse(req.body.schedule);
+
     let webinarInfo = {
         name: req.body.name,
         teachers: {},
@@ -41,7 +43,8 @@ router.post("/webinar", upload.single('banner'), validators.webinarRegistration,
         price: !req.body.free ? parseFloat(req.body.price) : 0,
         meetingID: req.body.meetingID,
         meetingLink: req.body.meetingLink,
-        meetingPassword: req.body.meetingPassword
+        meetingPassword: req.body.meetingPassword,
+        schedule: req.body.schedule.map(x => {return new Date(x)}).sort((da, db) => { return da < db ? -1 : da > db ? 1 : 0})
     };
 
     let fileID = '';
