@@ -14,18 +14,25 @@ export default function CourseCard({webinar, showButton=true}) {
 
     let {bannerLink, name="Webinar Name", price = "0"} = webinar;
 
-    const [teacher, setTeacher] = useState("None");
+    const [teacher, setTeacher] = useState([]);
 
     useEffect(() => {
         async function getTeacher(){
-            let { data } = await axios.get("/api/public/user", {params:{_id: Object.keys(webinar.teachers)[0]}});
-            setTeacher(`${data.user.firstName} ${data.user.lastName}`);
+            let teacherIDs = Object.keys(webinar.teachers);
+            let promises = [];
+            for(let teacherID of teacherIDs){
+                promises.push(axios.get("/api/public/user", {params:{_id: teacherID}}));
+            }
+
+            let teacherNames = await Promise.all(promises);
+            teacherNames = teacherNames.map((res) => {return `${res.data.user.firstName} ${res.data.user.lastName}`});
+            setTeacher(teacherNames);
         }
 
         if(webinar.teachers){
             getTeacher();
         }
-    }, [webinar.teachers]);
+    }, []);
 
     return (
         <Card style={{ maxWidth: '18rem' }}>
@@ -37,7 +44,9 @@ export default function CourseCard({webinar, showButton=true}) {
             </Card.Header>
             <Card.Body>
                 <Card.Text>
-                {`Teacher: ${teacher}`}
+                Teacher:<br />
+                {teacher.length <= 0 ? "None" : 
+                teacher.map(x => { return <p>{x}</p>})}
                 </Card.Text>
                 <Card.Text>
                     {`Price: ${price}`}

@@ -76,14 +76,6 @@ export default function AssignBlock({ webinar }) {
                         onChange={(e) => {setSearchInputs({...searchInputs, lastName: e.target.value})}}
                         />
                     </InputGroup>
-                    <InputGroup className="mb-3">
-                        <FormControl
-                        placeholder="Username"
-                        aria-label="Username"
-                        aria-describedby="basic-addon1"
-                        onChange={(e) => {setSearchInputs({...searchInputs, userName: e.target.value})}}
-                        />
-                    </InputGroup>
                     <InputGroup className="mb-3 align-items-center justify-content-md-center">
                     <Button variant="primary" onClick = {handleSearch}>Filter</Button>
                     </InputGroup>

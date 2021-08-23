@@ -1,6 +1,7 @@
-import { useState } from 'react'
-import {Modal, FormControl, Form, Button, InputGroup} from 'react-bootstrap';
-
+import { useState, useRef } from 'react'
+import { Modal, FormControl, Form, Button, InputGroup, Col} from 'react-bootstrap';
+import { Formik } from 'formik';
+import * as yup from 'yup';
 import axios from 'axios';
 
 
@@ -8,11 +9,8 @@ export default function CreateCourses() {
 
     const [show, setShow] = useState(true);
     const [success, setSuccess] = useState(false);
-    const [touched, setTouched] = useState(false);
     const [submitAttempt, setAttempt] = useState(false);
-    const [inputs, setInputs] = useState({price: 0});
     const [priceShow, setPriceShow] = useState(false);
-    const [formErrors, setFormErrors] = useState({});
     
     const cancelHandler = async() => {
         setAttempt(true);
@@ -20,39 +18,22 @@ export default function CreateCourses() {
         setShow(false);
     }
 
-    const checkError = () => {
-        const FILE_TYPES = ["image/jpg", "image/jpeg", "image/png"];
-        let errors = {};
-        if(!inputs.name || inputs.name.trim() === ""){
-            errors.name = "Webinar Name should not be empty";
-        }
+    const freeCheckbox = useRef(null);
 
-        if(inputs.price <= 0 && !priceShow){
-            errors.price = "Price should be greater than 0";
-        }
-        
-        if(isNaN(inputs.price)){
-            errors.price = "Price is not a Number";
-        }
+    const FILE_TYPES = ["image/jpg", "image/jpeg", "image/png"];
 
-        if(inputs.banner && !FILE_TYPES.includes(inputs.banner.type)){
-            errors.banner = "Invalid file type";
-        }
+    const schema = yup.object().shape({
+        name: yup.string().required("Enter webinar name"),
+        meetingLink: yup.string().required("Enter meeting link"),
+        meetingID: yup.string().required("Enter meeting ID"),
+        meetingPassword: yup.string().required("Enter meeting password"),
+        price: yup.number().test("Valid Input", "Enter a valid price", (value) => {return freeCheckbox.current.checked ? true : value !== undefined}).test("Valid Price", "Price must be greater than 0", (value) => { return freeCheckbox.current.checked ? true : value > 0}),
+        banner: yup.mixed().test("fileType", "Invalid file Type", (value) => {return value.type ? FILE_TYPES.includes(value.type) : true})
+    });
 
-        setFormErrors(errors);
-        return errors;
-    }
 
-    const submitHandler = async(e) => {
-        e.preventDefault();
-        if(Object.keys(checkError()).length > 0){
-            e.stopPropagation();
-            setTouched(true);
-            return;
-        }
-
-        console.log(inputs);
-
+    const submitHandler = async(inputs, {setSubmitting, setErrors}) => {
+        setSubmitting(true);
         let formData = new FormData();  
         for(let key in inputs){
             if(inputs.hasOwnProperty(key)){
@@ -61,12 +42,7 @@ export default function CreateCourses() {
         }
         try{
             let { data } = await axios.post("/api/admin/webinar", formData);
-            if(data.success){
-                setSuccess(true);
-            }
-            else{
-                setSuccess(false);
-            }
+            setSuccess(data.success);
             setAttempt(true);
             setShow(false);
         }
@@ -74,7 +50,10 @@ export default function CreateCourses() {
             setSuccess(false);
             setAttempt(true);
             setShow(false);
-            console.log(e.response.data.errors);
+            setErrors(e.response.data.errors)
+        }
+        finally{
+            setSubmitting(false);
         }
     }
 
@@ -95,77 +74,160 @@ export default function CreateCourses() {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <InputGroup
-                        hasValidation
-                        className="mb-3"
-                        controlId="createCoursesName"
-                        >
-                        <FormControl   
-                            placeholder="Course Name" 
-                            aria-label="fName"
-                            name="name"
-                            aria-describedby="basic-addon1"
-                            isInvalid = {touched && formErrors.name}
-                            onChange = {(e) => {
-                                setInputs({...inputs, name:e.target.value})
-                            }}
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            {formErrors.name}
-                        </Form.Control.Feedback>
-                    </InputGroup>
-                    <Form.Group
-                            className="mb-3"
-                            controlId="createCoursesUploadCoverPhoto"
-                        >
-                        <Form.Label>Cover Photo</Form.Label>
-                        <FormControl
-                            placeholder="Cover Photo"
-                            type="file"
-                            accept=".jpg, .jpeg, .png"
-                            name="banner"
-                            isInvalid={touched && formErrors.banner}
-                            onChange = {(e) => {
-                                setInputs({...inputs, banner: e.target.files[0]})
-                            }}
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            {formErrors.banner}
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Check
-                            type="switch"
-                            label="Free"
-                            onClick={(e) => {
-                                setPriceShow(e.target.checked);
-                                if(e.target.checked)
-                                    setInputs({...inputs, price:0})}}>
-                        </Form.Check>
-                    </Form.Group>
-                    {!priceShow ? 
-                        <InputGroup hasValidation>
-                            <Form.Control
-                            type="number"
-                            defaultValue={0}
-                            name="price"
-                            isInvalid={touched && formErrors.price}
-                            onChange = {(e) => setInputs({...inputs, price:parseFloat(e.target.value)})}>
-                            </Form.Control>
-                            <Form.Control.Feedback type="invalid">
-                                {formErrors.price}
-                            </Form.Control.Feedback>
-                        </InputGroup>
-                             : <></>}
+                    <Formik
+                        validationSchema={schema}
+                        onSubmit={submitHandler}
+                        initialValues={{
+                            name: '',
+                            meetingLink: '',
+                            meetingID: '',
+                            meetingPassword: '',
+                            banner: {},
+                            price: 0,
+                            free: false
+                        }}
+                    >
+                        {({
+                        handleSubmit,
+                        handleChange,
+                        validateField,
+                        values,
+                        touched,
+                        errors,
+                        }) => (
+                        <Form noValidate onSubmit={handleSubmit}>
+                            <InputGroup
+                                hasValidation
+                                className="mb-3"
+                                controlId="createCoursesName"
+                                >
+                                <FormControl   
+                                    placeholder="Course Name" 
+                                    aria-label="fName"
+                                    name="name"
+                                    aria-describedby="basic-addon1"
+                                    isValid = {touched.name && !errors.name}
+                                    isInvalid = {touched.name && errors.name}
+                                    onChange = {handleChange}
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.name}
+                                </Form.Control.Feedback>
+                            </InputGroup>
+                            <InputGroup className="mb-3">
+                                <FormControl
+                                placeholder="Zoom Link (e.g. https://zoom.us/j/2400983088?pwd=TDVXQWRkSTU5K1ZQMzJwQzRnL3VlQT09)"
+                                aria-label="ZoomLink"
+                                aria-describedby="basic-addon1"
+                                name="meetingLink"
+                                isValid = {touched.meetingLink && !errors.meetingLink}
+                                isInvalid = {touched.meetingLink && errors.meetingLink}
+                                onChange = {handleChange}
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.meetingLink}
+                                </Form.Control.Feedback>
+                            </InputGroup>
+                            <InputGroup className="mb-3">
+                                <FormControl
+                                placeholder="Meeting ID"
+                                aria-label="ZoomID"
+                                aria-describedby="basic-addon1"
+                                name="meetingID"
+                                isValid = {touched.meetingID && !errors.meetingID}
+                                isInvalid = {touched.meetingID && errors.meetingID}
+                                onChange = {handleChange}
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.meetingID}
+                                </Form.Control.Feedback>
+                            </InputGroup>
+                            <InputGroup className="mb-3">
+                                <FormControl
+                                placeholder="Zoom Password"
+                                aria-label="ZoomPW"
+                                aria-describedby="basic-addon1"
+                                name="meetingPassword"
+                                isValid = {touched.meetingPassword && !errors.meetingPassword}
+                                isInvalid = {touched.meetingPassword && errors.meetingPassword}
+                                onChange = {handleChange}
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.meetingPassword}
+                                </Form.Control.Feedback>
+                            </InputGroup>
+                            <Form.Group
+                                    className="mb-3"
+                                    controlId="createCoursesUploadCoverPhoto"
+                                >
+                                <Form.Label>Cover Photo</Form.Label>
+                                <FormControl
+                                    placeholder="Cover Photo"
+                                    type="file"
+                                    accept=".jpg, .jpeg, .png"
+                                    name="banner"
+                                    isValid={touched.banner && !errors.banner}
+                                    isInvalid={touched.banner && errors.banner}
+                                    onChange = {(e) => {
+                                        values.banner = e.target.files[0];
+                                        validateField("banner");
+                                    }}
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.banner}
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Check
+                                    type="switch"
+                                    label="Free"
+                                    name="free"
+                                    isChecked = {values.free}
+                                    ref={freeCheckbox}
+                                    onClick={(e) => {
+                                        values.free = e.target.checked;
+                                        values.price = 0;
+                                        validateField("price");
+                                        setPriceShow(e.target.checked);
+                                    }}>
+                                </Form.Check>
+                            </Form.Group>
+                            {!priceShow ? 
+                                <InputGroup hasValidation>
+                                    <Form.Control
+                                    type="number"
+                                    defaultValue={0}
+                                    name="price"
+                                    isValid={touched.price && !errors.price}
+                                    isInvalid={touched.price && errors.price}
+                                    onChange = {handleChange}>
+                                    </Form.Control>
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.price}
+                                    </Form.Control.Feedback>
+                                </InputGroup>
+                                        : <></>}
+                            <InputGroup className="mt-3">
+                                <Col sm = {{auto:true, offset: 8}}>
+                                    <Button 
+                                        variant="secondary"
+                                        onClick={cancelHandler}>
+                                        Cancel
+                                    </Button>
+                                </Col>
+                                <Col sm = {{auto:true, offset: 12}}>
+                                    <Button variant="primary" type="submit">Confirm</Button>
+                                </Col>
+                            </InputGroup>
+                            <pre>
+                                {JSON.stringify(values, null, 2)}
+                                <br></br>
+                                {JSON.stringify(errors, null, 2)}
+                            </pre>
+                        </Form>
+                        )}
+                    </Formik>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button 
-                        variant="secondary"
-                        onClick={cancelHandler}>
-                        Cancel
-                    </Button>
-                    <Button variant="primary" onClick={submitHandler}>Confirm</Button>
-                </Modal.Footer>
             </Modal>
         </div>
     )

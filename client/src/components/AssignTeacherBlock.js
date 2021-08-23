@@ -26,7 +26,7 @@ export default function AssignTeacherBlock({teacher, webinarID, setShow}) {
                 <p>{`${teacher.firstName} ${teacher.lastName}`}</p>
             </Col>
             <Col className="col-sm">
-                <Button enabled = {success} variant="primary" onClick = {handleAssign}>{success ? "Success" : 'Assign'}</Button>
+                <Button isDisabled = {success} variant="primary" onClick = {handleAssign}>{success ? "Success" : 'Assign'}</Button>
             </Col>
         </Row>
     )

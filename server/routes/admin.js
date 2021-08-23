@@ -38,7 +38,10 @@ router.post("/webinar", upload.single('banner'), validators.webinarRegistration,
         name: req.body.name,
         teachers: {},
         lastUpdate: Date.now(),
-        price: req.body.price ? parseFloat(req.body.price) : 0
+        price: !req.body.free ? parseFloat(req.body.price) : 0,
+        meetingID: req.body.meetingID,
+        meetingLink: req.body.meetingLink,
+        meetingPassword: req.body.meetingPassword
     };
 
     let fileID = '';

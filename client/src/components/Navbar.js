@@ -1,12 +1,16 @@
-import React from 'react'
+import { useContext } from 'react'
 import '../css/Navbar.css' ;
 import didaskologo from '../images/didaskologotrim.png'
 import LoginButton from '../images/LoginButton.png'
 import * as DidaskoNav from 'react-bootstrap';
-import{ Link } from 'react-router-dom'
+import{ Link } from 'react-router-dom';
+import { UserContext } from '../contexts/UserContext';
 
 
 export default function Navbar() {
+
+    const [user, setUser] = useContext(UserContext);
+
     return (
         <DidaskoNav.Navbar bg="light" expand="lg">
             <DidaskoNav.Container>
@@ -36,7 +40,7 @@ export default function Navbar() {
                     </DidaskoNav.Nav>
                     <DidaskoNav.Nav className="justify-content-end">
                         <DidaskoNav.Navbar.Text>
-                            <Link to="/login" style={{textDecoration:'none'}}>
+                            {!user.validated ? <Link to="/login" style={{textDecoration:'none'}}>
                             <a href="#login">
                                 <img src={LoginButton}
                                 width="150px"
@@ -44,7 +48,7 @@ export default function Navbar() {
                                 alt="Login"
                                 />
                             </a>
-                            </Link>
+                            </Link> : <></>}
                         </DidaskoNav.Navbar.Text>
                     </DidaskoNav.Nav>
                 </DidaskoNav.Navbar.Collapse>

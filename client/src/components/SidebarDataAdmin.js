@@ -12,19 +12,19 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
-    title: 'Assign',
+    title: 'Assign Teacher',
     path: '/assign',
     icon: <MdIcons.MdAssignmentInd />,
     cName: 'nav-text'
   },
   {
-    title: 'Create Courses',
-    path: '/createCourses',
+    title: 'Create Webinar',
+    path: '/courses/create',
     icon: <MdIcons.MdAssignmentReturned />,
     cName: 'nav-text'
   },
   {
-    title: 'Zoom',
+    title: 'Modify Webinars',
     path: '/zoom',
     icon: <SiIcons.SiZoom />,
     cName: 'nav-text'

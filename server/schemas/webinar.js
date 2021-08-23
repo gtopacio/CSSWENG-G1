@@ -8,7 +8,11 @@ const webinarSchema = new mongoose.Schema({
     "creationDate": {type: Date, default: Date.now, required: true},
     "bannerLink": {type: String},
     "bannerID": {type: String},
-    "price": {type: Number, default: 0}
+    "price": {type: Number, default: 0},
+    "meetingID": {type: String, required: true},
+    "meetingLink": {type: String, required: true},
+    "meetingPassword": {type: String, required: true},
+    "schedule": {type: Array}
 });
 
 module.exports = mongoose.model('webinars', webinarSchema);

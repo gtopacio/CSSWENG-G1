@@ -46,8 +46,8 @@ function App() {
           <Route path="/logout" exact component={LogoutPage} />
           <Route path="/verify/:id" component={UserVerificationPage} />
           <Route path="/assign" exact component={AssignPage} />
-          <Route path="/createCourses" exact component={CreateCourses} />
-          <Route path="/zoom" exact component={ZoomPage} />
+          <Route path="/courses/create" exact component={CreateCourses} />
+          <Route path="/courses/modify" exact component={ZoomPage} />
           <Route path="/zoomStu" exact component={ZoomStuPage} />
         </Router>
       </UserProvider>
