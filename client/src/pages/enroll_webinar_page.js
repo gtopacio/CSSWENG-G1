@@ -7,6 +7,9 @@ import CourseCard from '../components/all_courses_page/CourseCard';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import gcashQR from '../images/gcashQR.jpg';
+import paymayaQR from '../images/paymayaQR.jpg';
+import { Container, Row, Col } from 'react-bootstrap';
 
 export default function EnrollWebinar() {
 
@@ -36,7 +39,7 @@ export default function EnrollWebinar() {
         }
     }, []);
 
-    if(!user.validated){
+    if(!user.refreshSent && !user.validated){
         return <Redirect to="/login" />
     }
 
@@ -62,11 +65,25 @@ export default function EnrollWebinar() {
     return (
         <div>
             {loading ? <h1>Loading</h1> :
-            requestSent ? <><Navbar /><h1>You have already sent a request, please pay the amount if needed and wait for the approval.</h1></> :
-            success ? <><Navbar /><h1>Successfull sent a request! Please wait pay for the amount if needed and wait for the approval. Request ID: {requestID}</h1></> :
+            requestSent ? 
             <>
                 <Navbar />
-                <CourseCard webinar={webinar} showButton={false} />
+                <h1>You have already sent a request, please pay the amount if needed and wait for the approval.</h1>
+                <img src={gcashQR} alt = "GCash QR Code"/>
+                <img src={paymayaQR} alt="Paymaya QR Code" />
+            </> :
+            success ? 
+            <>
+                <Navbar />
+                <h1>Successfull sent a request! Please pay for the amount if needed and wait for the approval. Request ID: {requestID}</h1>
+                <img src={gcashQR} alt = "GCash QR Code"/>
+                <img src={paymayaQR} alt="Paymaya QR Code" />
+            </>:
+            <>
+                <Navbar />
+                <div style={{display: 'flex', justifyContent: 'center' }} className="mt-3">
+                    <CourseCard webinar={webinar} showButton={false} />
+                </div>
                 <h1>Are you sure you want to enroll in this webinar?</h1>
                 <Button variant="primary" disabled={disabled} onClick={sendEnrollmentRequest}>Yes</Button>
                 <Link to="/courses/available"><Button disabled={disabled} variant="secondary">No</Button></Link>
