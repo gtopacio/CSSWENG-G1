@@ -13,12 +13,12 @@ router.get("/webinar/recent", async(req, res) => {
 router.get("/webinar", async(req, res) => {
 
     if(req.query.webinarID){
-        let webinar = await Webinar.findById(req.query.webinarID, 'name teacher price bannerLink')
+        let webinar = await Webinar.findById(req.query.webinarID, 'name teacher price bannerLink schedule')
         return res.send({success:true, webinar});
     }
 
     let regExp = new RegExp(req.query.name, "i");
-    let recentWebinars = await Webinar.find({name: regExp}, 'name teacher price bannerLink').sort({creationDate: -1});
+    let recentWebinars = await Webinar.find({name: regExp}, 'name teacher price bannerLink schedule').sort({creationDate: -1});
     res.send({success:true, webinars: recentWebinars});
 });
 
