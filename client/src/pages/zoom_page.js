@@ -5,7 +5,7 @@ import Sidebar from '../components/SidebarAdmin'
 export default function ZoomPage() {
     return (
         <div>
-            <Sidebar />
+            {Sidebar}
             <Zoom />
         </div>
     )
