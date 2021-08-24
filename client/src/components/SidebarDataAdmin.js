@@ -25,7 +25,7 @@ export const SidebarData = [
   },
   {
     title: 'Modify Webinars',
-    path: '/zoom',
+    path: '/courses/modify',
     icon: <SiIcons.SiZoom />,
     cName: 'nav-text'
   },

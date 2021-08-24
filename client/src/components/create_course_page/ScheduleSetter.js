@@ -41,7 +41,7 @@ export default function ScheduleSetter({ setInputSchedules, errors }) {
             </Card>
             <Row hidden={showPicker} className="mt-2">
                 <Col xs={{offset: 8}} auto>
-                    <Button variant="primary" onClick={(e) => {setShow(true)}}>AddSchedule</Button>
+                    <Button variant="primary" onClick={(e) => {setShow(true)}}>Add Schedule</Button>
                 </Col>
             </Row>
             <Row hidden={!showPicker}>
