@@ -174,7 +174,7 @@ export default function CreateCourses() {
                                     isValid={touched.banner && !errors.banner}
                                     isInvalid={touched.banner && errors.banner}
                                     onChange = {(e) => {
-                                        values.banner = e.target.files[0];
+                                        values.banner = e.target.files[0] ? e.target.files[0] : {};
                                         validateField("banner");
                                     }}
                                 />
@@ -234,11 +234,6 @@ export default function CreateCourses() {
                                     <Button variant="primary" type="submit">Confirm</Button>
                                 </Col>
                             </InputGroup>
-                            {/* <pre>
-                                {JSON.stringify(values, null, 2)}
-                                <br></br>
-                                {JSON.stringify(errors, null, 2)}
-                            </pre> */}
                         </Form>
                         )}
                     </Formik>

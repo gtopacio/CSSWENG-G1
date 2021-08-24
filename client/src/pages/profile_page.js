@@ -1,5 +1,4 @@
-import {useContext, useState, useEffect} from 'react'
-import Footer from '../components/Footer';
+import { useContext } from 'react';
 import Sidebar from '../components/Sidebar';
 import Profile from '../components/Profile';
 import { UserContext } from "../contexts/UserContext";
@@ -11,7 +10,7 @@ export default function ProfilePage() {
 
     return (
         user.refreshSent ? <h1> Loading </h1> :
-        !user || !user.token || user.token.trim() === "" && !user.refreshSent ? <Redirect to="/login" /> :
+        !user || !user.validated ? <Redirect to="/login" /> :
         <div>
             <Sidebar/>
             <Profile user={user}/>
