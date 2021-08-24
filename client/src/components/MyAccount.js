@@ -48,7 +48,7 @@ export default function MyAccount(props) {
             <div className="space">
 
             </div>
-            <div className="container">
+            <div className="container" style={{zIndex:-1,position:'relative'}}>
                 <div className="row align-items-start mt-6 mb-1">
                     <div className="col-3" id="profilePanel">
                         <div className="profileGroup">

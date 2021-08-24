@@ -9,10 +9,11 @@ export default function Zoom() {
     const signUpShow = () => setShow(true);
 
     return (
+        <div className="container">
         <section className="custom-section" style={{minHeight:'90vh'}}>
             <div className="mb-3">
             </div>
-            <div className="container pt-4" style={{maxWidth:'1320px',minHeight:'100px'}}>
+            <div className="container pt-4" style={{maxWidth:'1320px',minHeight:'100px',zIndex:-1,position:'relative'}}>
                 <div className="row">
                     <div className="card mb-3 mx-auto" style={{paddingRight:'0'}}>
                         <div className="row g-2" style={{minHeight:'inherit',display:'flex'}}>
@@ -74,5 +75,6 @@ export default function Zoom() {
                         </DidaskoZoomStu.Modal.Footer>    
                 </DidaskoZoomStu.Modal>
         </section>
+        </div>
     )
 }

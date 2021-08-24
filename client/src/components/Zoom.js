@@ -21,7 +21,7 @@ export default function Zoom() {
             >
                 Create Webinar
             </DidaskoZoom.Button>
-            <div className="container pt-4" style={{maxWidth:'1320px',minHeight:'100px'}}>
+            <div className="container pt-4" style={{maxWidth:'1320px',minHeight:'100px',zIndex:-1,position:'relative'}}>
                 <div className="row">
                     <div className="card mb-3 mx-auto" style={{paddingRight:'0'}}>
                         <div className="row g-2" style={{minHeight:'inherit',display:'flex'}}>

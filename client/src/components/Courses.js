@@ -27,7 +27,7 @@ export default function Courses() {
         <section className="custom-section" style={{minHeight:'90vh'}}>
             <div className="mb-5"></div>
                 <div>
-                    <DidaskoCard.Container style={{minHeight:'90vh'}}>
+                    <DidaskoCard.Container style={{minHeight:'90vh',zIndex:-1,position:'relative'}}>
                         <div className="col-12" id="coursesPanel">
                             <div id="textHeader">
                                 <h1 style={{fontSize:'24px'}}>
