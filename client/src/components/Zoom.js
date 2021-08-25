@@ -2,6 +2,7 @@ import React from 'react'
 import * as DidaskoZoom from 'react-bootstrap';
 import { useState, useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
+import '../css/Zoom.css';
 
 export default function Zoom() {
     const [user, setUser] = useContext(UserContext);
@@ -15,12 +16,26 @@ export default function Zoom() {
         <section className="custom-section" style={{minHeight:'90vh'}}>
             <div className="mb-3">
             </div>
-            <DidaskoZoom.Button
-            variant="outline-dark"
-            onClick={signUpShow}
-            >
-                Create Webinar
-            </DidaskoZoom.Button>
+            <div id="searchGroup">
+                <DidaskoZoom.Row>
+                    <DidaskoZoom.Col xs={9}>
+                        <DidaskoZoom.FormControl
+                                type="search"
+                                placeholder="Search"
+                                className="mr-2"
+                                aria-label="Search"
+                                >
+                        </DidaskoZoom.FormControl>
+                    </DidaskoZoom.Col>
+                    <DidaskoZoom.Col xs={3}>
+                        <DidaskoZoom.Button 
+                                    variant="outline-dark"
+                                    >
+                                    Search
+                        </DidaskoZoom.Button>
+                    </DidaskoZoom.Col>
+                </DidaskoZoom.Row>
+            </div>
             <div className="container pt-4" style={{maxWidth:'1320px',minHeight:'100px',zIndex:-1,position:'relative'}}>
                 <div className="row">
                     <div className="card mb-3 mx-auto" style={{paddingRight:'0'}}>
