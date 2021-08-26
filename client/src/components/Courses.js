@@ -12,14 +12,14 @@ export default function Courses() {
     const [teacherWebinars, setTeacherWebinars] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        async function sendRequest() {
-            let { data } = await axios.get("/api/accounts/courses");
-            setStudentWebinars(data.studentWebinars);
-            setTeacherWebinars(data.teacherWebinars);
-            setLoading(false);
-        }
+    async function sendRequest() {
+        let { data } = await axios.get("/api/accounts/courses");
+        setStudentWebinars(data.studentWebinars);
+        setTeacherWebinars(data.teacherWebinars);
+        setLoading(false);
+    }
 
+    useEffect(() => {
         sendRequest();
     }, []);
 
@@ -27,6 +27,7 @@ export default function Courses() {
         <section className="custom-section" style={{minHeight:'90vh'}}>
             <div className="mb-5"></div>
                 <div>
+                    {/* <DidaskoCard.Button onClick={(e) => {sendRequest()}}>Refresh</DidaskoCard.Button> */}
                     <DidaskoCard.Container style={{minHeight:'90vh',zIndex:-1,position:'relative'}}>
                         <div className="col-12" id="coursesPanel">
                             <div id="textHeader">

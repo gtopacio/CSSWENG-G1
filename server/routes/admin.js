@@ -35,6 +35,7 @@ router.post("/webinar", upload.single('banner'), validators.webinarRegistration,
     }
 
     req.body.schedule = JSON.parse(req.body.schedule);
+    req.body.free = JSON.parse(req.body.free);
 
     let webinarInfo = {
         name: req.body.name,
