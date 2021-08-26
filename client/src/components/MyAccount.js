@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import defaultdp from "../images/defaultdp.jpg";
+import nocourseimg from "../images/npy.png";
 import CourseBlock from './CourseBlock';
 import axios from 'axios';
 
@@ -25,12 +26,15 @@ export default function MyAccount(props) {
 
     let renderedStudent = studentWebinars.length > 0 ? 
         studentWebinars.map(s => {
-            return (<DidaskoAccount.Col key={s._id}>
+            return (
+            <DidaskoAccount.Col key={s._id}>
                 <CourseBlock webinarTitle={s.name}/>                                   
             </DidaskoAccount.Col>)
         }) :
         <DidaskoAccount.Col>
-            <h1>Empty</h1>                                   
+            <div>
+                <img src={nocourseimg} style={{width:'100%'}}></img>
+            </div>                       
         </DidaskoAccount.Col>;
 
     let renderedTeacher = teacherWebinars.length > 0 ? 
