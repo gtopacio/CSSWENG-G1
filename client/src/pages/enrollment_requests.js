@@ -3,7 +3,8 @@ import axios from 'axios';
 import { UserContext } from '../contexts/UserContext';
 import { Redirect } from 'react-router';
 import { Container, Col, Row, Button } from 'react-bootstrap';
-import Navbar from '../components/Navbar';
+import SidebarAdmin from '../components/SidebarAdmin';
+import Sidebar from '../components/Sidebar';
 import RequestRow from '../components/enrollment_requests/RequestRow';
 
 export default function EnrollmentRequests() {
@@ -40,7 +41,7 @@ export default function EnrollmentRequests() {
                 loading ? <h1>Loading</h1> : 
                 user.admin ? 
                 <>
-                    <Navbar />
+                    <SidebarAdmin />
                     <Row>
                         <Col>Request ID</Col>
                         <Col>Username</Col>
@@ -58,7 +59,7 @@ export default function EnrollmentRequests() {
                 </>
                 :
                 <>
-                    <Navbar />
+                    <Sidebar />
                     <Row>
                         <Col>Request ID</Col>
                         <Col>Webinar Name</Col>
