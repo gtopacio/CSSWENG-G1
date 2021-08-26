@@ -54,5 +54,10 @@ router.get('/verifications', async(req, res) => {
     res.send({success: true, requestSent: verif ? true : false});
 });
 
+router.get("/enrollment/requests", async(req, res) => {
+    let verif = await EnrollmentVerification.find({userID: req.session.user._id}, 'uid webinarName accepted acceptedDate issued');
+    res.send({success: true, requests: verif});
+});
+
 
 module.exports = router;

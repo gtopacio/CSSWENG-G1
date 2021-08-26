@@ -75,7 +75,7 @@ export default function EnrollWebinar() {
             success ? 
             <>
                 <Navbar />
-                <h1>Successfull sent a request! Please pay for the amount if needed and wait for the approval. Request ID: {requestID}</h1>
+                <h1>Successfully sent a request! Please pay for the amount if needed and wait for the approval. Request ID: {requestID}</h1>
                 <img src={gcashQR} alt = "GCash QR Code"/>
                 <img src={paymayaQR} alt="Paymaya QR Code" />
             </>:

@@ -8,7 +8,7 @@ export default function CoursesPage() {
 
     const [user, setUser] = useContext(UserContext);
 
-    if(!user.validated){
+    if(!user.validated && !user.refreshSent){
         return <Redirect to="/courses/available" />
     }
 

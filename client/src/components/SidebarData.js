@@ -38,6 +38,12 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
+    title: 'Enrollment Requests',
+    path: '/enrollment/requests',
+    icon: <FaIcons.FaFileInvoice />,
+    cName: 'nav-text'
+  },
+  {
     title: 'Notifications',
     path: '/messages',
     icon: <FaIcons.FaEnvelopeOpenText />,
