@@ -68,16 +68,24 @@ export default function EnrollWebinar() {
             requestSent ? 
             <>
                 <Navbar />
-                <h1>You have already sent a request, please pay the amount if needed and wait for the approval.</h1>
-                <img src={gcashQR} alt = "GCash QR Code"/>
-                <img src={paymayaQR} alt="Paymaya QR Code" />
+                {webinar.price <= 0 ? <><h1>You have already sent a request! Please wait for an approval. Request ID: {requestID}</h1></> :
+                <>
+                    <h1>You have already sent a request, please pay the amount if needed and wait for the approval.</h1>
+                    <img src={gcashQR} alt = "GCash QR Code"/>
+                    <img src={paymayaQR} alt="Paymaya QR Code" />
+                </>
+                }
             </> :
             success ? 
             <>
                 <Navbar />
-                <h1>Successfully sent a request! Please pay for the amount if needed and wait for the approval. Request ID: {requestID}</h1>
-                <img src={gcashQR} alt = "GCash QR Code"/>
-                <img src={paymayaQR} alt="Paymaya QR Code" />
+                {webinar.price <= 0 ? <><h1>Successfully sent a request! Please wait for the approval of your request. Request ID: {requestID}</h1></> :
+                <>
+                    <h1>Successfully sent a request! Please pay the amount if needed and wait for the approval. Request ID: {requestID}</h1>
+                    <img src={gcashQR} alt = "GCash QR Code"/>
+                    <img src={paymayaQR} alt="Paymaya QR Code" />
+                </>
+                }
             </>:
             <>
                 <Navbar />
