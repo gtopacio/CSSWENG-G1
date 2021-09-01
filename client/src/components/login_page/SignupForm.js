@@ -1,5 +1,5 @@
 import { useState, useContext} from 'react';
-import { Form, FormControl, InputGroup, Button } from 'react-bootstrap';
+import { Form, FormControl, InputGroup, Button, Modal } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
@@ -78,7 +78,8 @@ export default function SignupForm() {
           errors,
         }) => (
           <Form noValidate onSubmit={handleSubmit}>
-              <InputGroup className="mb-3">
+            <h5>First Name</h5>
+              <InputGroup className="mb-1">
                   <FormControl
                   required
                   placeholder="First Name"
@@ -94,7 +95,8 @@ export default function SignupForm() {
                     {errors.firstName}
                   </Form.Control.Feedback>
               </InputGroup>
-              <InputGroup className="mb-3">
+              <h5>Last Name</h5>
+              <InputGroup className="mb-1">
                   <FormControl
                   required
                   placeholder="Last Name"
@@ -109,8 +111,9 @@ export default function SignupForm() {
                   <Form.Control.Feedback type="invalid">
                     {errors.lastName}
                   </Form.Control.Feedback>
-              </InputGroup>                                                
-              <InputGroup className="mb-3">
+              </InputGroup>
+              <h5>Username</h5>                                                
+              <InputGroup className="mb-1">
                   <FormControl
                   required
                   placeholder="Username"
@@ -126,6 +129,7 @@ export default function SignupForm() {
                     {errors.userName}
                   </Form.Control.Feedback>
               </InputGroup>
+              <h5>Password</h5>
               <InputGroup className="mb-3">
                   <FormControl
                   required
@@ -143,7 +147,7 @@ export default function SignupForm() {
                     {errors.password}
                   </Form.Control.Feedback>
               </InputGroup>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-1">
                   <FormControl
                   placeholder="Re-Enter Password"
                   aria-label="Password"
@@ -159,7 +163,8 @@ export default function SignupForm() {
                     {errors.confirmPassword}
                   </Form.Control.Feedback>
               </Form.Group>
-              <InputGroup className="mb-3">
+              <h5>Email</h5>
+              <InputGroup className="mb-1">
                   <FormControl
                   required
                   placeholder="Email"
@@ -176,6 +181,7 @@ export default function SignupForm() {
                     {errors.email}
                   </Form.Control.Feedback>
               </InputGroup>
+              <h5>Avatar</h5>
               <InputGroup className="mb-3">
                   <FormControl
                   required
@@ -196,7 +202,9 @@ export default function SignupForm() {
                     {errors.profilePicture}
                   </Form.Control.Feedback>
               </InputGroup>
+              <Modal.Footer>
               <Button variant="primary" type="submit">Create Account</Button>
+              </Modal.Footer>
           </Form>
         )}
       </Formik>
