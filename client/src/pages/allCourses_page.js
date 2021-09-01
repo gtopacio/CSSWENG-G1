@@ -6,6 +6,7 @@ import SearchBar from '../components/all_courses_page/SearchBar';
 import SearchResults from "../components/all_courses_page/SearchResults";
 import Recent from "../components/all_courses_page/Recent";
 import axios from 'axios';
+import '../css/Global.css';
 
 export default function AllCoursesPage() {
 

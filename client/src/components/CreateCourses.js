@@ -101,9 +101,10 @@ export default function CreateCourses() {
                         errors,
                         }) => (
                         <Form noValidate onSubmit={handleSubmit}>
+                            <Form.Label>Course Name</Form.Label>
                             <InputGroup
                                 hasValidation
-                                className="mb-3"
+                                className="mb-1"
                                 controlId="createCoursesName"
                                 >
                                 <FormControl   
@@ -119,7 +120,8 @@ export default function CreateCourses() {
                                     {errors.name}
                                 </Form.Control.Feedback>
                             </InputGroup>
-                            <InputGroup className="mb-3">
+                            <Form.Label>Zoom Link</Form.Label>
+                            <InputGroup className="mb-1">
                                 <FormControl
                                 placeholder="Zoom Link (e.g. https://zoom.us/j/2400983088?pwd=TDVXQWRkSTU5K1ZQMzJwQzRnL3VlQT09)"
                                 aria-label="ZoomLink"
@@ -133,7 +135,8 @@ export default function CreateCourses() {
                                     {errors.meetingLink}
                                 </Form.Control.Feedback>
                             </InputGroup>
-                            <InputGroup className="mb-3">
+                            <Form.Label>Meeting ID</Form.Label>
+                            <InputGroup className="mb-1">
                                 <FormControl
                                 placeholder="Meeting ID"
                                 aria-label="ZoomID"
@@ -147,7 +150,8 @@ export default function CreateCourses() {
                                     {errors.meetingID}
                                 </Form.Control.Feedback>
                             </InputGroup>
-                            <InputGroup className="mb-3">
+                            <Form.Label>Zoom Password</Form.Label>
+                            <InputGroup className="mb-1">
                                 <FormControl
                                 placeholder="Zoom Password"
                                 aria-label="ZoomPW"
@@ -161,8 +165,9 @@ export default function CreateCourses() {
                                     {errors.meetingPassword}
                                 </Form.Control.Feedback>
                             </InputGroup>
+                            
                             <Form.Group
-                                    className="mb-3"
+                                    className="mb-1"
                                     controlId="createCoursesUploadCoverPhoto"
                                 >
                                 <Form.Label>Cover Photo</Form.Label>
@@ -182,6 +187,14 @@ export default function CreateCourses() {
                                     {errors.banner}
                                 </Form.Control.Feedback>
                             </Form.Group>
+                            <Form.Label>Pricing</Form.Label>
+                            <InputGroup className="mb-1">
+                                <InputGroup.Radio aria-describedby="basic-addon1" aria-label="free"></InputGroup.Radio>
+                                <FormControl aria-describedby="basic-addon1" placeholder="Free" readOnly></FormControl>
+
+                                <InputGroup.Radio aria-label="free"></InputGroup.Radio>
+                                <FormControl placeholder="Price (in PHP)" ></FormControl>
+                            </InputGroup>
                             <Form.Group>
                                 <Form.Check
                                     type="switch"
