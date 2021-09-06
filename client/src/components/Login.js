@@ -1,5 +1,7 @@
 import { Card, Form, FormControl, Button, Modal, InputGroup} from 'react-bootstrap';
 import '../css/Login.css' ;
+import '../css/Global.css' ;
+import '../css/Buttons.css' ;
 import { useState, useContext} from 'react';
 import { UserContext } from '../contexts/UserContext';
 import { Redirect } from 'react-router';
@@ -53,8 +55,8 @@ export default function Login(props) {
 
     return (
         <section className = "bg-container" style={{height:'83vh'}}>
-            <Card className="card shadow top-50 start-50 translate-middle" style={{maxWidth:'30em',borderRadius:'15px'}}>
-                <Card.Header style={{fontSize:"30px"}}>Login</Card.Header>
+            <Card className="card shadow top-50 start-50 translate-middle" style={{maxWidth:'30em'}}>
+                <Card.Header style={{fontSize:"30px",backgroundColor: "#181a46"}}>Login</Card.Header>
                 <Card.Body>
                     <Form noValidate onSubmit={loginHandler}>
                         <InputGroup hasValidation className="mb-3">
@@ -90,7 +92,9 @@ export default function Login(props) {
                                 Please input your password.
                             </Form.Control.Feedback>
                         </InputGroup>
-                        <Button variant="primary" type="submit">Login</Button>
+                        <Button type="primary" type="submit">
+                            Login
+                        </Button>
                     </Form>
                 </Card.Body>
                 <Card.Footer className="text-muted">

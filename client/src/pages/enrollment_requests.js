@@ -91,6 +91,28 @@ export default function EnrollmentRequests() {
                     :
                     <>
                         <Sidebar />
+                        <div className="mb-5"></div>
+                        <Table id="requests" striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>Request ID</th>
+                                    <th>Webinar Name</th>
+                                    <th>Request Date</th>
+                                    <th>Status</th>
+                                    <th>Accepted Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>*Insert ID here*</td>
+                                    <td>*Insert Webinar Name here*</td>
+                                    <td>*Insert Request Date here*</td>
+                                    <td>*Insert Status here*</td>
+                                    <td>*Insert Accepted Date here*</td>
+                                </tr>
+                            </tbody>
+
+                        </Table>
                         <Row>
                             <Col>Request ID</Col>
                             <Col>Webinar Name</Col>
