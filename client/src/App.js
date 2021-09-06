@@ -1,6 +1,7 @@
 import './App.css';
 import HomePage from "./pages/home_page";
 import AllCoursesPage from './pages/allCourses_page';
+import ChatPage from './pages/chat_page';
 import CoursesPage from './pages/courses_page';
 import AboutPage from "./pages/about_page";
 import DashboardPage from './pages/dashboard_page';
@@ -34,6 +35,7 @@ function App() {
         <TokenHandler />
         <Router>
           <Route path="/" exact component={HomePage} />
+          <Route path="/chat" exact component={ChatPage} />
           <Route path="/courses/available" exact component={AllCoursesPage} />
           <Route path="/courses" exact component={CoursesPage} />
           <Route path="/courses/enroll" exact component={EnrollWebinar} />

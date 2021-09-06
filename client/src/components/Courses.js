@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import TeachingBlock from './courses_page/TeachingBlock';
 import StudentBlock from './courses_page/StudentBlock';
 import axios from 'axios';
+import '../css/Global.css' ;
 
 export default function Courses() {
 

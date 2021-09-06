@@ -1,8 +1,17 @@
 .card-header {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    background-color: #181a46;
+    font-family: 'DM Sans', sans-serif;
+    background-color: #181a46 !important;
     color: white;
     padding-top: 12px;
     padding-bottom: 12px;
+    border: 2px solid #ddd;
+}
+
+.card-body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: #181a46 !important;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
     border: 2px solid #ddd;
 }

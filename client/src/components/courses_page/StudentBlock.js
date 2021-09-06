@@ -3,6 +3,7 @@ import { Col, Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import image10 from "../../images/image10.jpg";
 
+
 export default function StudentBlock({ webinar }) {
     return (
         <Col>
@@ -11,9 +12,9 @@ export default function StudentBlock({ webinar }) {
                     style={{background: 'linear-gradient(180deg, rgba(17, 17, 17, 0.4) 0%, rgba(17, 17, 17, 0.72) 93.75%);', maxHeight: "18vh", objectFit: "cover", objectPosition: "100% 0"}}
                 />
                 <Card.Body>
-                    <Link to="#" style={{color: 'black',textDecoration:'none'}}><Card.Title>{webinar.name}</Card.Title></Link>
+                    <Link to="#" style={{color: 'light',textDecoration:'none'}}><Card.Title>{webinar.name}</Card.Title></Link>
                     <div className="courseButtonElements">
-                        <Button variant="outline-dark">
+                        <Button variant="outline-light">
                                 Continue
                         </Button>
                     </div>

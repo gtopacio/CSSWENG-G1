@@ -57,7 +57,7 @@ export default function Login(props) {
         <section className = "bg-container" style={{height:'83vh'}}>
             <Card className="card shadow top-50 start-50 translate-middle" style={{maxWidth:'30em'}}>
                 <Card.Header style={{fontSize:"30px",backgroundColor: "#181a46"}}>Login</Card.Header>
-                <Card.Body>
+                <Card.Body style={{fontSize:"30px",backgroundColor: "#181a46"}}>
                     <Form noValidate onSubmit={loginHandler}>
                         <InputGroup hasValidation className="mb-3">
                             <FormControl
