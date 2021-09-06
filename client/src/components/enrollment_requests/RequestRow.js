@@ -24,12 +24,12 @@ export default function RequestRow({request}) {
     }
 
     return (
-        <Row>
-            <Col>{request.uid}</Col>
-            <Col>{request.userName}</Col>
-            <Col>{request.webinarName}</Col>
-            <Col>{request.issued}</Col>
-            <Col><Button variant="primary" onClick={approve} disabled={disabledButtons}>{successful ? "Successful" : "Approve"}</Button></Col>
-        </Row>
+            <tr>
+                <td>{request.uid}</td>
+                <td>{request.userName}</td>
+                <td>{request.webinarName}</td>
+                <td>{request.issued}</td>
+                <td><Button variant="primary" onClick={approve} disabled={disabledButtons}>{successful ? "Successful" : "Approve"}</Button></td>
+            </tr>
     )
 }
