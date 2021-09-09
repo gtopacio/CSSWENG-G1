@@ -9,6 +9,9 @@ export default function LogoutPage() {
     const [user, setUser] = useContext(UserContext);
 
     useEffect(() => {
+        if(user.socket){
+            user.socket.close()
+        }
         setUser({
             userName: "",
             email: "",
@@ -23,6 +26,7 @@ export default function LogoutPage() {
                 setLoggingOut(false);
             }
         }
+
         logout();
     }, []);
 

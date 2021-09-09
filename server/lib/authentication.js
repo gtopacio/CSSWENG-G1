@@ -47,6 +47,7 @@ function trimUserInfo(user){
         "verified",
         "admin",
         "profilePicture",
+        "profilePictureLink",
         "email",
         "webinars",
         "webinarsTaught"

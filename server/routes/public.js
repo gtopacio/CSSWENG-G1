@@ -23,7 +23,13 @@ router.get("/webinar", async(req, res) => {
 });
 
 router.get("/user", async(req, res) => {
-    res.send({success:true, user: await User.findById(req.query._id, 'userName firstName lastName')});
+    res.send({success:true, user: await User.findById(req.query._id, 'userName firstName lastName profilePicture profilePictureLink')});
+});
+
+router.get("/user/name", async(req, res) => {
+    let regExp = new RegExp(req.query.name, "i");
+    let users = await User.find({$or: [{firstName: regExp}, {lastName: regExp}]}, 'firstName lastName profilePicture profilePictureLink');
+    res.send({success:true, users});
 });
 
 module.exports = router;

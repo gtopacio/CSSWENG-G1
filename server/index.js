@@ -10,6 +10,8 @@ mongoose.connection.on('connected', () => console.log("MongoDB successfully conn
 mongoose.connection.on('error', () => console.log("Error in connecting to MongoDB"));
 
 const app = express();
+const httpServer = require("http").createServer(app);
+require("./lib/chat_handler.js").init(httpServer)
 
 const sessionStore = require('connect-mongo').create({
     mongoUrl: process.env.MONGO_URL,
@@ -39,5 +41,6 @@ app.use('/api/admin', require('./routes/admin.js'));
 app.use('/api/accounts', require('./routes/accounts.js'));
 app.use('/api/public', require('./routes/public.js'));
 app.use('/api/webinar', require('./routes/webinars.js'));
+app.use('/api/chat', require('./routes/chat.js'));
 
-app.listen(PORT, () => console.log(`Listening at Port: ${PORT}`));
+httpServer.listen(PORT, () => console.log(`Listening at Port: ${PORT}`));

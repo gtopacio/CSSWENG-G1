@@ -28,7 +28,7 @@ export default function Sidebar() {
                 </div>
             </div>
             <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-            <ul className='nav-menu-items' onClick={showSidebar}>
+            <ul className='nav-menu-items' onClick={showSidebar} style={{zIndex: 9999, position: "relative"}}>
                 <li className='navbar-toggle'>
                 <Link to='#' className='menu-bars'>
                     <AiIcons.AiOutlineClose />

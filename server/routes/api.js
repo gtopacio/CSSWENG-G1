@@ -63,6 +63,7 @@ router.post("/signup", upload.single('profilePicture'), validations.signupValida
             userID: newUser._id
         });
         newUser.profilePicture = fileID;
+        newUser.profilePictureLink = `https://drive.google.com/uc?id=${fileID}`;
         newUser = await newUser.save();
         let verificationLink = authLib.generateVerificationURL(newUser);
         let messageData = {

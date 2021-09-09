@@ -3,7 +3,9 @@ const router = express.Router();
 const { checkSession }= require('../lib/authentication');
 const mongoose = require('mongoose');
 const Webinar = require('../schemas/webinar');
+const User = require("../schemas/user");
 const EnrollmentVerification = require('../schemas/enrollment_verification');
+const ChatThread = require("../schemas/chat_thread");
 
 router.use(checkSession);
 
@@ -59,5 +61,29 @@ router.get("/enrollment/requests", async(req, res) => {
     res.send({success: true, requests: verif});
 });
 
+router.get("/chat/recent", async(req, res) => {
+    let threads = await ChatThread.find({participants: req.session.user._id}).limit(20).sort({lastUpdated: -1});
+    res.send({success: true, threads});
+});
+
+router.get("/chat/thread", async(req, res) => {
+    let [thread, user] = await Promise.all([ChatThread.findOne({ participants: {$all: [req.session.user._id, req.query.id]}}).lean(), User.findById(req.query.id, "userName firstName lastName profilePicture profilePictureLink")]);
+    if(thread){
+        thread.otherUser = user;
+        res.send({success: true, thread});
+        return;
+    }
+    let newThread = ChatThread({
+        participants: [req.session.user._id, req.query.id],
+        lastUpdated: new Date(),
+        numMessage: 0
+    });
+
+    thread = await newThread.save();
+    thread = JSON.stringify(thread);
+    thread = JSON.parse(thread);
+    thread.otherUser = user;
+    res.send({success: true, thread});
+});
 
 module.exports = router;

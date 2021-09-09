@@ -6,6 +6,7 @@ import { useState, useContext} from 'react';
 import { UserContext } from '../contexts/UserContext';
 import { Redirect } from 'react-router';
 import axios from 'axios';
+import {io} from 'socket.io-client';
 import { ErrorContext } from '../contexts/ErrorContext';
 import SignupForm from './login_page/SignupForm';
 
@@ -41,7 +42,9 @@ export default function Login(props) {
             let { data } = await axios.post("/api/login", loginInputs);
             if(data.success){
                 let newUser = {...data.user, refreshSent: false, validated: true}
-                setUser(newUser);
+                newUser.socket = io();
+                newUser.socket.emit("join room", newUser._id);
+                setUser(newUser);   
                 props.history.push("/dashboard");
             }
             else{
@@ -49,6 +52,7 @@ export default function Login(props) {
             }
         }
         catch(e){
+            console.log(e);
             setErrors({show: true, msg:e.response.data.errors, title:"Errors"});
         }
     };

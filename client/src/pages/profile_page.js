@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 
 export default function ProfilePage() {
 
-    const [user, setUser] = useContext(UserContext);
+    const [user] = useContext(UserContext);
 
     return (
         user.refreshSent ? <h1> Loading </h1> :

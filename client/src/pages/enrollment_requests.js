@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { UserContext } from '../contexts/UserContext';
 import { Redirect } from 'react-router';
-import { Container, Col, Row, Button, Table } from 'react-bootstrap';
+import { Container, Table } from 'react-bootstrap';
 import SidebarAdmin from '../components/SidebarAdmin';
 import Sidebar from '../components/Sidebar';
 import RequestRow from '../components/enrollment_requests/RequestRow';
@@ -10,7 +10,7 @@ import '../css/EnrollmentRequests.css';
 
 export default function EnrollmentRequests() {
 
-    const [user, setUser] = useContext(UserContext);
+    const [user] = useContext(UserContext);
     const [requests, setRequests] = useState({});
     const [loading, setLoading] = useState(true);
 
