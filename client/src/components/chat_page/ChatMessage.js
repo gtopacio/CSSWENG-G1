@@ -20,7 +20,7 @@ export default function ChatMessage({msg}) {
     }, []);
 
     return loading ? <></> : user._id !== msg.sender ? (
-        <div className="d-flex justify-content-start mb-4">
+        <div className="d-flex justify-content-start mb-4" >
             <div className="img_cont_msg">
                 <img src={otherUser.profilePictureLink ? otherUser.profilePictureLink : defaultdp} className="rounded-circle user_img_msg" alt="xd"/>
             </div>
@@ -31,7 +31,7 @@ export default function ChatMessage({msg}) {
         </div>
     ) :
     (
-        <div className="d-flex justify-content-end mb-4">
+        <div className="d-flex justify-content-end mb-4" >
             <div className="msg_cotainer_send">
                 {msg.textMessage}
                 <span className="msg_time_send">{moment(msg.dateSent).fromNow()}</span>

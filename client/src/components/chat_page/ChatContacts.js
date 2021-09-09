@@ -60,14 +60,14 @@ export default function ChatContacts({ user, requestThread }) {
     }, [requestThread, recent]);
 
     return (
-        <div className="col-md-4 col-xl-3 chat">
-            <div className="card mb-sm-3 mb-md-0 contacts_card">
-					<div className="card-header chat-bg-additional">
+        <div className="col-md-4 col-xl-2 chat" >
+            <div className="card mb-sm-3 mb-md-0 contacts_card" >
+					<div className="card-header chat-bg-additional" style={{backgroundColor:"#181a46"}}>
                         <Form.Group className="input-group" >
                         <Form.Control type="text" placeholder="Search" value={input} onChange={(e) => setInput(e.target.value)} />
                         </Form.Group>
 					</div>
-					<div className="card-body contacts_body">
+					<div className="card-body contacts_body" >
 						<ul className="contacts">
                             {searching ? <SearchList user={user} results={results} onClick={requestThread} resetSearch={resetSearch} /> 
                             : <ContactList threads={recent} requestThread={requestThread} user={user} />}

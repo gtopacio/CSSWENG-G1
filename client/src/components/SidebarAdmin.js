@@ -13,7 +13,7 @@ export default function Sidebar() {
 
     const showSidebar = () => setSidebar(!sidebar);
     return (
-        <IconContext.Provider value={{ color: '#000000' }}>
+        <IconContext.Provider value={{ color: '#000000' }} >
             <div className='navbar d-flex flex-row justify-content-start'>
                 <div className="p-1">
             <Link to='#' className='menu-bars'>

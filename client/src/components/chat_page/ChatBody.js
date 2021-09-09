@@ -44,7 +44,7 @@ export default function ChatBody({ thread, user }) {
     }, [thread]);
 
     return (
-        <div className="card-body chat-bg-additional msg_card_body">
+        <div className="card-body chat-bg-additional msg_card_body" >
             
             {!loading && messages.length > 0 ? messages.map((x) => {
                 return <ChatMessage key={x._id} msg={x}/>

@@ -28,7 +28,7 @@ export default function ChatHeader({ thread, user }) {
     }, [user, otherUser]);
 
     return (
-        <div className="card-header chat-bg-additional msg_head">
+        <div className="card-header chat-bg-additional msg_head" style={{backgroundColor:"#181a46"}}>
             <div className="d-flex bd-highlight">
                 <div className="img_cont">
                     <img src={otherUser.profilePictureLink ? otherUser.profilePictureLink : defaultdp} className="rounded-circle user_img" alt="xd"/>

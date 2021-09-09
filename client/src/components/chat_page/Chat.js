@@ -24,11 +24,11 @@ export default function Chat() {
 	}
 
     return (
-		<div className="container-fluid h-100" style={{minHeight:'90vh'}}>
+		<div className="container-fluid h-100" >
             <div className="mb-3"></div>
-			<div className="row justify-content-center h-100">
+			<div className="row justify-content-center h-100" >
 				<ChatContacts user = {user} requestThread = {requestThread}/>
-				<div className="col-md-8 col-xl-6 chat">
+				<div className="col-md-8 col-xl-6 chat" style={{zIndex:0,position:'relative'}}>
 					<ChatMessagePane user={user} thread = {focusedThread}/>
 				</div>
 			</div>
