@@ -44,7 +44,7 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
-    title: 'Notifications',
+    title: 'Notifications (1)',
     path: '/messages',
     icon: <FaIcons.FaEnvelopeOpenText />,
     cName: 'nav-text'

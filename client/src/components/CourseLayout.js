@@ -1,5 +1,5 @@
 import React from 'react'
-import { Nav, Navbar} from 'react-bootstrap';
+import { Nav, Navbar, Button, FormControl} from 'react-bootstrap';
 import "../css/CourseLayout.css";
 
 export default function CourseLayout() {
@@ -146,22 +146,31 @@ export default function CourseLayout() {
     return (
         <div className="container" style={{maxWidth:"1050px",margin:"0 auto",display:'flex'}}>
             <main style={{textAlign:'left',borderRadius:'8px',padding:'16px',marginLeft:'8px'}}>
-                <h1 id="course name">Course Name</h1> 
-                <h2 id="initial-header">Initial header</h2>
-                <p>{DummyText}</p>
-                <h2 id="second-header">Second header</h2>
-                <p>{DummyText}</p>
-                <h3 id="third-header">Third header</h3>
-                <p>{DummyText}</p>
-                <p>{DummyText}</p>
-                <h2 id="fourth-header">Fourth header</h2>
-                <p>{DummyText}</p>
-                <p>{DummyText}</p>
-                <p>{DummyText}</p>
-                <p>{DummyText}</p>
-                <h3 id="fifth-header">Fifth header</h3>
-                <p>{DummyText}</p>
-                <p>{DummyText}</p>
+                <h1 id="course name">Insert Course Here</h1> 
+                <h2 id="initial-header">Schedule</h2>
+                <p>Insert Schedule Here</p>
+                <h2 id="second-header">Professor</h2>
+                <p>Insert Professor Here</p>
+                <h2 id="fourth-header">Zoom Link</h2>
+                <p>Insert Zoom Link</p>
+                <FormControl
+                  required
+                  placeholder="Profile Picture"
+                  aria-label="dPicture"
+                  aria-describedby="basic-addon1"
+                  type="file"
+                  name="profilePicture"
+                  accept=".pdf, .img, .jpeg, .png"
+                  />
+                  <Button>Upload</Button>
+                <div>
+                <h3>Recent Uploads</h3>  
+                <a href="https://www.youtube.com/watch?v=9ywnLQywz74">Something</a>
+                <p>Something</p>
+                <p>Something</p>
+                <p>Something</p>
+                </div>  
+
             </main>
             <TableOfContents />
         </div>
