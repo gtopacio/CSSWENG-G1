@@ -13,7 +13,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 export default function EnrollWebinar() {
 
-    const [user, setUser] = useContext(UserContext);
+    const [user] = useContext(UserContext);
     const [loading, setLoading] = useState(true);
     const [webinar, setWebinar] = useState({});
     const [disabled, setDisabled] = useState(false);

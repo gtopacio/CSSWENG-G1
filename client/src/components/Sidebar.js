@@ -1,15 +1,29 @@
-import React, {useState} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { SidebarData } from './SidebarData';
+import { SidebarDataUser } from './SidebarData';
+import { SidebarDataAdmin } from './SidebarDataAdmin';
 import { IconContext } from 'react-icons';
 import '../css/Sidebar.css';
+import { UserContext } from '../contexts/UserContext';
 
 import didaskologo from '../images/didaskologotrim.png'
 
 export default function Sidebar() {
+
     const [sidebar, setSidebar] = useState(false);
+    const [SidebarData, setData] = useState([]);
+    const [user] = useContext(UserContext);
+
+    useEffect(() => {
+        if(user.validated){
+            setData(user.admin ? SidebarDataAdmin : SidebarDataUser);
+        }
+        return () => {
+            setData([])
+        }
+    }, [user])
 
     const showSidebar = () => setSidebar(!sidebar);
     return (

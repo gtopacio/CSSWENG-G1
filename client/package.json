@@ -9,6 +9,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
     "formik": "^2.2.9",
+    "http-proxy-middleware": "^2.0.1",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.1",
     "qs": "^6.10.1",
@@ -46,6 +47,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "http://localhost:8000"
+  }
 }

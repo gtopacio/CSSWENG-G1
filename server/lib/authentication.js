@@ -3,6 +3,10 @@ const Verification = require('../schemas/verification');
 const User = require('../schemas/user');
 const { v4: uuidv4 } = require('uuid');
 
+require("dotenv").config();
+
+const hostName = process.env.HOSTNAME || "localhost:3000";
+
 function checkSession(req, res, next){
     if(!req.session.user){
         return res.sendStatus(403);
@@ -21,7 +25,7 @@ function generateVerificationURL(user){
     };
     let newVerification = new Verification(verificationInfo);
     newVerification.save();
-    return `http://localhost:3000/verify/${verificationInfo.uid}`;
+    return `http://${hostName}/verify/${verificationInfo.uid}`;
 }
 
 async function verifyUser(uid){

@@ -4,7 +4,11 @@ const mongoose = require('mongoose');
 const { v4: uuidv4 } = require('uuid');
 const Webinar = require("../schemas/webinar");
 const EnrollmentVerification = require("../schemas/enrollment_verification");
+const File = require("../schemas/file");
 const { checkSession } = require('../lib/authentication');
+const multer = require("multer");
+const upload = multer({ dest: './uploads' });
+const googleLib = require("../lib/google_api");
 
 router.use(checkSession);
 
@@ -47,5 +51,37 @@ router.post("/enroll", async(req, res) => {
 
     res.send({success: true, requestID: uid});
 });
+
+router.get("/", async(req, res) => {
+
+    if(req.query.webinarID){
+        let webinar = await Webinar.findById(req.query.webinarID);
+        return res.send({success:true, webinar});
+    }
+
+    res.send({success:false})
+});
+
+router.get("/files", async(req, res) => {
+    if(req.query.webinarID){
+        let files = await File.find({webinarID: req.query.webinarID});
+        return res.send({success:true, files});
+    }
+    res.send({success:false})
+});
+
+router.post("/files", upload.single("file"), async(req, res) => {
+    let webinar = await Webinar.findById(req.body.webinarID, 'folderID');
+    let id = await googleLib.uploadToDrive(req.file, {
+        parent: [webinar.folderID],
+        userID: req.session.user._id,
+        webinarID: webinar._id
+    });
+
+    let files = await File.find({webinarID: webinar._id}).sort({uploadDate: 1});
+    res.send({success: true, files});
+});
+
+router.get("/file", googleLib.downloadFile);
 
 module.exports = router;

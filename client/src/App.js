@@ -36,23 +36,23 @@ function App() {
         <TokenHandler />
         <Router>
           <Route path="/" exact component={HomePage} />
-          <Route path="/chat" exact component={ChatPage} />
-          <Route path="/courses/available" exact component={AllCoursesPage} />
-          <Route path="/courses" exact component={CoursesPage} />
-          <Route path="/course" exact component={CourseLayout} />
-          <Route path="/courses/enroll" exact component={EnrollWebinar} />
-          <Route path="/webinar" exact component={WebinarPage} />
-          <Route path="/enrollment/requests" exact component={EnrollmentRequestPage} />
-          <Route path="/about" exact component={AboutPage} />
           <Route path="/dashboard" exact component={DashboardPage} />
           <Route path="/login" exact component={LoginPage} />
-          <Route path="/profile" exact component={ProfilePage} />
           <Route path="/logout" exact component={LogoutPage} />
-          <Route path="/verify/:id" component={UserVerificationPage} />
-          <Route path="/assign" exact component={AssignPage} />
+          <Route path="/chat" exact component={ChatPage} />
+          <Route path="/courses" exact component={CourseLayout} />
+          <Route path="/courses/available" exact component={AllCoursesPage} />
           <Route path="/courses/create" exact component={CreateCourses} />
           <Route path="/courses/modify" exact component={ZoomPage} />
-          <Route path="/zoomStu" exact component={ZoomStuPage} />
+          <Route path="/courses/enroll" exact component={EnrollWebinar} />
+          <Route path="/profile" exact component={ProfilePage} />
+          <Route path="/profile/courses" exact component={CoursesPage} />
+          <Route path="/webinar" exact component={WebinarPage} />
+          <Route path="/enrollment/requests" exact component={EnrollmentRequestPage} />
+          <Route path="/verify/:id" component={UserVerificationPage} />
+          <Route path="/assign" exact component={AssignPage} />
+          <Route path="/about" exact component={AboutPage} />
+          {/* <Route path="/zoomStu" exact component={ZoomStuPage} /> */}
         </Router>
       </UserProvider>
       </ErrorProvider>

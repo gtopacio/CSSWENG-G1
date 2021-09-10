@@ -10,13 +10,11 @@ export default function DashboardPage(props) {
 
     const [user, setUser] = useContext(UserContext);
 
-    let sideBar = user.admin ? <SidebarAdmin/> : <Sidebar/>;
-
     return (
         user.refreshSent ? <h1> Loading </h1> :
         !user.validated && !user.refreshSent ? <Redirect to="/login" /> :
         <div>
-            {sideBar}
+            <Sidebar/>
             <MyAccount user={user}/>
             <Footer />
         </div>

@@ -1,8 +1,5 @@
-import { useContext } from 'react';
-import Navbar from '../components/Navbar';
 import ActualCourse from "../components/CourseLayout";
-import Sidebar from '../components/Sidebar'
-import { UserContext } from '../contexts/UserContext';
+import Sidebar from '../components/Sidebar';
 
 export default function LoginPage() {
 

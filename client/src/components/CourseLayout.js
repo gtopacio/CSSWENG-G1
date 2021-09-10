@@ -1,8 +1,42 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Nav, Navbar, Button, FormControl} from 'react-bootstrap';
 import "../css/CourseLayout.css";
+import WebinarFile from './webinar/WebinarFile';
 
-export default function CourseLayout() {
+export default function CourseLayout({ webinar, user }) {
+
+  const [fileToBeUploaded, setFile] = useState(null);
+  const [files, setFiles] = useState([]);
+
+  const uploadFile = async(e) => {
+    if(fileToBeUploaded){
+      e.preventDefault()
+      let formData = new FormData();
+      formData.append("file", fileToBeUploaded);
+      formData.append("webinarID", webinar._id);
+      formData.append("userID", user._id);
+      let { data } = await axios.post("/api/webinar/files", formData);
+      if(data.success){
+        setFiles(data.files);
+      }
+    }
+  }
+
+  useEffect(() => {
+    async function getFiles(){
+      let { data } = await axios.get("/api/webinar/files", {params: {webinarID: webinar._id}});
+      if(data.success){
+        console.log(data);
+        setFiles(data.files);
+      }
+    }
+
+    if(webinar._id){
+      getFiles();
+    }
+  }, [webinar]);
+
     const Headings = ({ headings, activeId }) => (
         <ul>
           {headings.map((heading) => (
@@ -146,7 +180,7 @@ export default function CourseLayout() {
     return (
         <div className="container" style={{maxWidth:"1050px",margin:"0 auto",display:'flex'}}>
             <main style={{textAlign:'left',borderRadius:'8px',padding:'16px',marginLeft:'8px'}}>
-                <h1 id="course name">Insert Course Here</h1> 
+                <h1 id="course name">{webinar.name}</h1> 
                 <h2 id="initial-header">Schedule</h2>
                 <p>Insert Schedule Here</p>
                 <h2 id="second-header">Professor</h2>
@@ -160,15 +194,15 @@ export default function CourseLayout() {
                   aria-describedby="basic-addon1"
                   type="file"
                   name="profilePicture"
-                  accept=".pdf, .img, .jpeg, .png"
+                  accept=".pdf, .jpg, .img, .jpeg, .png"
+                  onChange={(e) => {
+                    setFile(e.target.files ? e.target.files[0] : null)
+                  }}
                   />
-                  <Button>Upload</Button>
+                  <Button onClick={uploadFile}>Upload</Button>
                 <div>
                 <h3>Recent Uploads</h3>  
-                <a href="https://www.youtube.com/watch?v=9ywnLQywz74">Something</a>
-                <p>Something</p>
-                <p>Something</p>
-                <p>Something</p>
+                  {files.map((x) => {return <WebinarFile file={x} />})}
                 </div>  
 
             </main>

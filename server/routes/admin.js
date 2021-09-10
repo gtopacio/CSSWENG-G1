@@ -6,8 +6,9 @@ const validators = require("../lib/validators");
 const Webinar = require("../schemas/webinar");
 const User = require("../schemas/user");
 const EnrollmentVerification = require("../schemas/enrollment_verification");
-const { uploadToDrive } = require('../lib/google_api');
+const { uploadToDrive, createFolder } = require('../lib/google_api');
 const upload = require('multer')({ dest: './uploads' });
+const { v4: uuidv4 } = require('uuid');
 
 const router = express.Router();
 
@@ -45,7 +46,8 @@ router.post("/webinar", upload.single('banner'), validators.webinarRegistration,
         meetingID: req.body.meetingID,
         meetingLink: req.body.meetingLink,
         meetingPassword: req.body.meetingPassword,
-        schedule: req.body.schedule.map(x => {return new Date(x)}).sort((da, db) => { return da < db ? -1 : da > db ? 1 : 0})
+        schedule: req.body.schedule.map(x => {return new Date(x)}).sort((da, db) => { return da < db ? -1 : da > db ? 1 : 0}),
+        folderName: uuidv4()
     };
 
     let fileID = '';
@@ -57,6 +59,8 @@ router.post("/webinar", upload.single('banner'), validators.webinarRegistration,
         webinarInfo.bannerID = fileID;
         webinarInfo.bannerLink = `https://drive.google.com/uc?id=${fileID}`
     }
+
+    webinarInfo.folderID = await createFolder(webinarInfo.folderName);
 
     let newWebinar = new Webinar(webinarInfo);
 

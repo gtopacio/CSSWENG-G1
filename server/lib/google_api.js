@@ -48,7 +48,9 @@ async function uploadToDrive(file, options){
                 uploader: options.userID || 'none',
                 fileID: res.data.id,
                 fileName: name,
-                mimeType: file.mimetype
+                mimeType: file.mimetype,
+                webinarID: options.webinarID,
+                uploadDate: new Date()
             });
             await newFile.save();
         }
@@ -58,6 +60,31 @@ async function uploadToDrive(file, options){
     catch(e){
         throw e;
     }
+}
+
+async function downloadFile(req, res){
+    let fileID = req.query.fileID;
+    let file = await File.findById(req.query.fileDocumentID);
+    const drive = new google.drive({version: 'v3', auth: oAuth2Client});
+    let f = await drive.files.get({ fileId: fileID, alt: 'media'}, {responseType: 'stream'});
+    res.attachment(file.filename);
+    f.data.on('end', () => res.end());
+    f.data.on('error', (err) => console.error(err));
+    f.data.pipe(res);
+}
+
+async function createFolder(folderName){
+    let drive = new google.drive({version: 'v3', auth: oAuth2Client});
+    let fileMetadata = {
+        'name': folderName,
+        'mimeType': 'application/vnd.google-apps.folder',
+        parents: ["17wlgDo6fYqQN3_fSjBSHZwo5Cv-KNQbC"]
+      };
+      let res = await drive.files.create({
+        resource: fileMetadata,
+        fields: 'id'
+      });
+      return res.data.id;
 }
 
 async function getContentLink(fileId){
@@ -111,4 +138,4 @@ async function sendEmail({to, message = "Default Message", subject = "Default Su
     }
 };
 
-module.exports = {uploadToDrive, getContentLink, sendEmail};
+module.exports = {uploadToDrive, getContentLink, sendEmail, createFolder, downloadFile};

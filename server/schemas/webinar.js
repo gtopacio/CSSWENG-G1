@@ -8,6 +8,8 @@ const webinarSchema = new mongoose.Schema({
     "creationDate": {type: Date, default: Date.now, required: true},
     "bannerLink": {type: String},
     "bannerID": {type: String},
+    "folderName": {type: String, required: true},
+    "folderID": {type: String, required: true},
     "price": {type: Number, default: 0},
     "meetingID": {type: String, required: true},
     "meetingLink": {type: String, required: true},

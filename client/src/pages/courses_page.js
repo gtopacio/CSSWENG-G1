@@ -7,7 +7,7 @@ import '../css/Global.css' ;
 
 export default function CoursesPage() {
 
-    const [user, setUser] = useContext(UserContext);
+    const [user] = useContext(UserContext);
 
     if(!user.validated && !user.refreshSent){
         return <Redirect to="/courses/available" />
