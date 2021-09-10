@@ -6,6 +6,7 @@ import CoursesPage from './pages/courses_page';
 import AboutPage from "./pages/about_page";
 import DashboardPage from './pages/dashboard_page';
 import LoginPage from './pages/login_page';
+import CourseLayout from './pages/actual_course_page';
 import ProfilePage from './pages/profile_page';
 import AssignPage from './pages/assign_page';
 import CreateCourses from './pages/create_courses';
@@ -38,6 +39,7 @@ function App() {
           <Route path="/chat" exact component={ChatPage} />
           <Route path="/courses/available" exact component={AllCoursesPage} />
           <Route path="/courses" exact component={CoursesPage} />
+          <Route path="/course" exact component={CourseLayout} />
           <Route path="/courses/enroll" exact component={EnrollWebinar} />
           <Route path="/webinar" exact component={WebinarPage} />
           <Route path="/enrollment/requests" exact component={EnrollmentRequestPage} />
