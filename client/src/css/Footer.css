@@ -1,6 +1,6 @@
 footer{
     width: 100%;
-    background: #00A3FF;
+    background: #1F2233;
     border-top: 15px solid #D9534F;
     display: flex;
     flex-direction: column;
@@ -16,7 +16,7 @@ footer{
     font-weight: bold;
     font-size: 36px;
     line-height: 43px;
-    color: #000000;
+    color: #FFFFFF;
     padding-bottom: 2%;
 }
 

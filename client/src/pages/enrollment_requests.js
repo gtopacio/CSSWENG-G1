@@ -3,7 +3,6 @@ import axios from 'axios';
 import { UserContext } from '../contexts/UserContext';
 import { Redirect } from 'react-router';
 import { Container, Table } from 'react-bootstrap';
-import SidebarAdmin from '../components/SidebarAdmin';
 import Sidebar from '../components/Sidebar';
 import RequestRow from '../components/enrollment_requests/RequestRow';
 import '../css/EnrollmentRequests.css';
@@ -34,18 +33,13 @@ export default function EnrollmentRequests() {
         <Redirect to="/"></Redirect>
     }
 
-    
-
     return (
-        
             <Container fluid>
-            
-            
                 {
                     loading ? <h1>Loading</h1> : 
                     user.admin ? 
                     <>
-                        <SidebarAdmin />
+                        <Sidebar />
                         <div className="mb-5"></div>
                         <Table id="requests" striped bordered hover>
                             <thead>

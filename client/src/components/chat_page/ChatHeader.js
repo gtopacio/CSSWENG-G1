@@ -35,7 +35,7 @@ export default function ChatHeader({ thread, user }) {
                     <span className={online ? "online_icon" : "online_icon offline"}></span>
                 </div>
                 <div className="user_info">
-                    <span>{`${otherUser.firstName} ${otherUser.lastName}`}</span>
+                    <span style={{fontWeight:'bold'}}>{`${otherUser.firstName} ${otherUser.lastName}`}</span>
                     <p>{online ? "Online" : "Offline"}</p>
                 </div>
             </div>

@@ -1,0 +1,43 @@
+
+
+  
+
+  
+  .nav-extra {
+    width: 220px;
+    min-width: 220px;
+    padding: 16px;
+    margin: 8px;
+    align-self: flex-start;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 48px;
+    max-height: calc(100vh - 70px);
+    overflow: auto;
+    text-decoration: none;
+  }
+  
+  @media screen and (max-width: 900px) {
+    nav {
+      display: none;
+    }
+  }
+  
+  a {
+    color: black;
+    text-decoration: none;
+  }
+  
+  li.active > a {
+    color: black;
+  }
+  
+  li > a:hover {
+    color: black;
+  }
+  
+  /*  Gives a little bit of buffer when header is navigated to */
+  h1, h2, h3 {
+        padding-top: 16px;
+      margin-top: -16px;
+  }

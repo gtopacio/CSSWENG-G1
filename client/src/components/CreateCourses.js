@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { Modal, FormControl, Form, Button, InputGroup, Col} from 'react-bootstrap';
+import { Modal, FormControl, Form, Button, InputGroup, Col, ButtonGroup} from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
@@ -19,7 +19,7 @@ export default function CreateCourses() {
         setShow(false);
     }
 
-    const freeCheckbox = useRef(null);
+    let freeCheckbox = useRef(null);
 
     const FILE_TYPES = ["image/jpg", "image/jpeg", "image/png"];
 
@@ -188,14 +188,27 @@ export default function CreateCourses() {
                                 </Form.Control.Feedback>
                             </Form.Group>
                             <Form.Label>Pricing</Form.Label>
-                            <InputGroup className="mb-1">
-                                <InputGroup.Radio aria-describedby="basic-addon1" aria-label="free"></InputGroup.Radio>
+                            <InputGroup ref={freeCheckbox} className="mb-1">
+                                <InputGroup.Radio aria-describedby="basic-addon1" name="free" aria-label="free"
+                                    isChecked = {values.free}
+                                    onClick={(e) => {
+                                        values.free = e.target.checked;
+                                        values.price = 0;
+                                        validateField("price");
+                                    }}></InputGroup.Radio>
                                 <FormControl aria-describedby="basic-addon1" placeholder="Free" readOnly></FormControl>
 
-                                <InputGroup.Radio aria-label="free"></InputGroup.Radio>
-                                <FormControl placeholder="Price (in PHP)" ></FormControl>
+                                <InputGroup.Radio name = "free" aria-label="free" onClick={(e) => {
+                                    values.free = false;
+                                    values.price = 0;
+                                    validateField("price");
+                                }}></InputGroup.Radio>
+                                <FormControl disabled = {values.free} value={values.price} name="price" placeholder="Price (in PHP)" onChange={handleChange} ></FormControl>
+                                <Form.Control.Feedback type="invalid">
+                                        {errors.price}
+                                </Form.Control.Feedback>
                             </InputGroup>
-                            <Form.Group>
+                            {/* <Form.Group>
                                 <Form.Check
                                     type="switch"
                                     label="Free"
@@ -224,7 +237,7 @@ export default function CreateCourses() {
                                         {errors.price}
                                     </Form.Control.Feedback>
                                 </InputGroup>
-                                        : <></>}
+                                        : <></>} */}
                             <InputGroup>
                             <InputGroup hasValidation>
                                 <ScheduleSetter setInputSchedules = {(sched) => {
@@ -247,6 +260,9 @@ export default function CreateCourses() {
                                     <Button variant="primary" type="submit">Confirm</Button>
                                 </Col>
                             </InputGroup>
+                            <pre>
+                                {JSON.stringify(values, 2, null)}
+                            </pre>
                         </Form>
                         )}
                     </Formik>
