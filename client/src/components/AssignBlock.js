@@ -13,7 +13,8 @@ export default function AssignBlock({ webinar }) {
     const [searchInputs, setSearchInputs] = useState({});
     const [searchResults, setSearchResults] = useState([]);
     const [touched, setTouched] = useState(false);
-
+    const [professors, setProfessors] = useState({});
+    
     let { name } = webinar;
 
     const handleSearch = async() => {
@@ -30,7 +31,7 @@ export default function AssignBlock({ webinar }) {
 
     return (
         <div>
-            <Card style={{width: '26rem'}}>
+            <Card style={{width: '24rem',height: '14rem'}}>
                 <Card.Img variant="top" src={webinar.bannerLink ? webinar.bannerLink : image10}
                     style={{background: 'linear-gradient(180deg, rgba(17, 17, 17, 0.4) 0%, rgba(17, 17, 17, 0.72) 93.75%);'}}
                 />
@@ -40,12 +41,15 @@ export default function AssignBlock({ webinar }) {
                         <Container>
                             <Row  className="align-items-center justify-content-md-center">
                                 Professor:
+                                    {webinar.teachers.map((x)=> {
+                                        return(<p>webinar.teachers._id</p>);
+                                    })}
                             </Row>
                         </Container>
                     </Card.Text>
                     <div className="courseButtonElements">
                         <Button
-                        variant="outline-dark"
+                        variant="outline-light"
                         onClick={signUpShow}
                         >
                                 Assign

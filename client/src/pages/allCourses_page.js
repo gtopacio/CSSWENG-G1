@@ -31,10 +31,10 @@ export default function AllCoursesPage() {
     return (
         <Container fluid>
             <Row><Navbar /></Row>
-            <Row><SearchBar setInput = {setInput}/></Row>
+            <Row><SearchBar setInput = {setInput} assignTeacher={false}/></Row>
             <Row>{
-                input.trim() === "" ? <Recent/> :
-                <SearchResults webinars = {searchResults} loading = {loading}/>
+                input.trim() === "" ? <Recent assignTeacher={false}/> :
+                <SearchResults webinars = {searchResults} loading = {loading} assignTeacher={false}/>
                 }</Row>
         </Container>
     )

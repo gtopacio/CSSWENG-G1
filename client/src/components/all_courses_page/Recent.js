@@ -3,9 +3,10 @@ import CourseCard from './CourseCard';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
+import AssignBlock from '../AssignBlock';
 import axios from 'axios';
 
-export default function Recent({user}) {
+export default function Recent({user, assignTeacher}) {
 
     const [webinars, setWebinars] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -22,17 +23,36 @@ export default function Recent({user}) {
 
     return (
         <Container className="p-5">
-            <Row className="mb-2">
-                <h3 style={{textAlign: "left"}}>Recent Webinars</h3>
-            </Row>
+            {
+                assignTeacher ? 
+                    <div></div> :
+                    <Row className="mb-2">
+                        <h3 style={{textAlign: "left"}}>Recent Webinars</h3>
+                    </Row>
+            }
             <Row>
-                {loading ? <h1>Loading</h1>:
-                    webinars.length <= 0 ? <h1>Empty</h1> :
-                    webinars.map(x => {
-                        return (<Col className="mb-3 col-3" key={x._id}>
-                                <CourseCard webinar={x} user={user} />
-                                </Col>);
-                    })
+                {
+                    /*
+                        If an admin is assigning, load up all the Course Cards with Assign
+                    */
+                    assignTeacher ? 
+                    loading ? <h1>Loading</h1>:
+                        webinars.length <= 0 ? <h1>Empty</h1> :
+                        webinars.map(x => {
+                            return (<Col className="mb-3 col-3" key={x._id}>
+                                    <AssignBlock webinar={x}/>
+                                    </Col>);
+                        })
+                    
+                    :
+                    loading ? <h1>Loading</h1>:
+                        webinars.length <= 0 ? <h1>Empty</h1> :
+                        webinars.map(x => {
+                            return (<Col className="mb-3 col-3" key={x._id}>
+                                    <CourseCard webinar={x} user={user} />
+                                    </Col>);
+                        })
+                    
                 }
             </Row>
         </Container>

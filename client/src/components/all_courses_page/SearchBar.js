@@ -4,12 +4,16 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
-export default function SearchBar({setInput}) {
+export default function SearchBar({setInput, assignTeacher}) {
     return (
         <Container className="p-5" style={{backgroundColor: "#1A1846"}}>
             <Row style={{textAlign: "left"}}>
-                <h3 style={{color: "white"}}>Start your learning journey with Didasko!</h3>
-                <p style={{color: "white"}}>Search for a webinar.</p>
+                {   assignTeacher ? <p style={{color: "white"}}>Search for a webinar.</p> : 
+                    <div>
+                        <h3 style={{color: "white"}}>Start your learning journey with Didasko!</h3>
+                        <p style={{color: "white"}}>Search for a webinar.</p>
+                    </div>
+                }
             </Row>
             <Row>
                 <Col xs={10}>
