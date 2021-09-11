@@ -29,7 +29,7 @@ export default function Courses() {
             <div className="mb-5"></div>
                 <div>
                     {/* <DidaskoCard.Button onClick={(e) => {sendRequest()}}>Refresh</DidaskoCard.Button> */}
-                    <DidaskoCard.Container style={{minHeight:'90vh',zIndex:-1,position:'relative'}}>
+                    <DidaskoCard.Container style={{minHeight:'90vh'}}>
                         <div className="col-12" id="coursesPanel">
                             <div id="textHeader">
                                 <h1 style={{fontSize:'24px'}}>

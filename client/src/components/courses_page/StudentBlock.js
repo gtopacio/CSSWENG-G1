@@ -14,9 +14,9 @@ export default function StudentBlock({ webinar }) {
                 <Card.Body>
                     <Link to="#" style={{color: 'light',textDecoration:'none'}}><Card.Title>{webinar.name}</Card.Title></Link>
                     <div className="courseButtonElements">
-                        <Button variant="outline-light">
+                        <Link to={`/webinar?id=${webinar._id}`}><Button variant="outline-light">
                                 Continue
-                        </Button>
+                        </Button></Link>
                     </div>
                 </Card.Body>
             </Card>
