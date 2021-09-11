@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, Row, Container, Modal, InputGroup, FormControl, Button } from 'react-bootstrap';
 import image10 from "../images/image10.jpg";
 import AssignTeacherBlock from './AssignTeacherBlock';
@@ -13,9 +13,9 @@ export default function AssignBlock({ webinar }) {
     const [searchInputs, setSearchInputs] = useState({});
     const [searchResults, setSearchResults] = useState([]);
     const [touched, setTouched] = useState(false);
-    const [professors, setProfessors] = useState({});
+    const [professors, setProfessors] = useState([]);
     
-    let { name } = webinar;
+    let { name, teachers } = webinar;
 
     const handleSearch = async() => {
         try{
@@ -29,6 +29,21 @@ export default function AssignBlock({ webinar }) {
         }
     }
 
+    useEffect(() => {
+        async function getTeachers(){
+            let promises = [];
+            for(let x in teachers){
+                promises.push(axios.get("/api/public/user", {params: {_id: x}}));
+            }
+            promises = await Promise.all(promises);
+            setProfessors(promises.map((x) => {
+                let { data } = x;
+                return `${data.user.firstName} ${data.user.lastName}`;
+            }));
+        }
+        getTeachers();
+    }, [webinar]);
+
     return (
         <div>
             <Card style={{width: '24rem',height: '14rem'}}>
@@ -41,8 +56,8 @@ export default function AssignBlock({ webinar }) {
                         <Container>
                             <Row  className="align-items-center justify-content-md-center">
                                 Professor:
-                                    {webinar.teachers.map((x)=> {
-                                        return(<p>webinar.teachers._id</p>);
+                                    {professors.map((x)=> {
+                                        return(<p>{x}</p>);
                                     })}
                             </Row>
                         </Container>
