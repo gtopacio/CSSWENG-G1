@@ -13,7 +13,7 @@ export default function Sidebar() {
 
     const showSidebar = () => setSidebar(!sidebar);
     return (
-        <IconContext.Provider value={{ color: '#000000' }} >
+        <IconContext.Provider value={{ color: '#000000'}} >
             <div className='navbar d-flex flex-row justify-content-start'>
                 <div className="p-1">
             <Link to='#' className='menu-bars'>
@@ -27,7 +27,7 @@ export default function Sidebar() {
                     />
                 </div>
             </div>
-            <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
+            <nav className={sidebar ? 'nav-menu active' : 'nav-menu'} style={{zIndex:1}}>
             <ul className='nav-menu-items' onClick={showSidebar} style={{zIndex: 9999, position: "relative"}}>
                 <li className='navbar-toggle'>
                 <Link to='#' className='menu-bars'>
