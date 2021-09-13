@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { Modal, FormControl, Form, Button, InputGroup, Col, ButtonGroup} from 'react-bootstrap';
+import { Modal, FormControl, Form, Button, InputGroup, Col, ButtonGroup, Card} from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
@@ -11,15 +11,13 @@ export default function CreateCourses() {
     const [show, setShow] = useState(true);
     const [success, setSuccess] = useState(false);
     const [submitAttempt, setAttempt] = useState(false);
-    const [priceShow, setPriceShow] = useState(false);
+    const [free, setFree] = useState(false);
     
     const cancelHandler = async() => {
         setAttempt(true);
         setSuccess(false);
         setShow(false);
     }
-
-    let freeCheckbox = useRef(null);
 
     const FILE_TYPES = ["image/jpg", "image/jpeg", "image/png"];
 
@@ -28,7 +26,7 @@ export default function CreateCourses() {
         meetingLink: yup.string().required("Enter meeting link"),
         meetingID: yup.string().required("Enter meeting ID"),
         meetingPassword: yup.string().required("Enter meeting password"),
-        price: yup.number().test("Valid Input", "Enter a valid price", (value) => {return freeCheckbox.current.checked ? true : value !== undefined}).test("Valid Price", "Price must be greater than 0", (value) => { return freeCheckbox.current.checked ? true : value > 0}),
+        price: yup.number().test("Valid Input", "Enter a valid price", (value) => {return free ? true : value !== undefined}).test("Valid Price", "Price must be greater than 0", (value) => { return free ? true : value > 0}),
         banner: yup.mixed().test("fileType", "Invalid file Type", (value) => {return value.type ? FILE_TYPES.includes(value.type) : true}),
         schedule: yup.array().required().min(1, "At least 1 webinar meeting needed")
     });
@@ -188,25 +186,28 @@ export default function CreateCourses() {
                                 </Form.Control.Feedback>
                             </Form.Group>
                             <Form.Label>Pricing</Form.Label>
-                            <InputGroup ref={freeCheckbox} className="mb-1">
-                                <InputGroup.Radio aria-describedby="basic-addon1" name="free" aria-label="free"
-                                    isChecked = {values.free}
-                                    onClick={(e) => {
-                                        values.free = e.target.checked;
+                            <InputGroup className="mb-1">
+                                <ButtonGroup>
+                                    <InputGroup.Radio checked={free} aria-describedby="basic-addon1" name="free" aria-label="free"
+                                        onClick={(e) => {
+                                            setFree(true);
+                                            values.free = e.target.checked;
+                                            values.price = 0;
+                                            validateField("price");
+                                        }}></InputGroup.Radio>
+                                    <FormControl aria-describedby="basic-addon1" placeholder="Free" readOnly></FormControl>
+
+                                    <InputGroup.Radio checked={!free} name = "free" aria-label="free" onClick={(e) => {
+                                        setFree(false);
+                                        values.free = false;
                                         values.price = 0;
                                         validateField("price");
                                     }}></InputGroup.Radio>
-                                <FormControl aria-describedby="basic-addon1" placeholder="Free" readOnly></FormControl>
-
-                                <InputGroup.Radio name = "free" aria-label="free" onClick={(e) => {
-                                    values.free = false;
-                                    values.price = 0;
-                                    validateField("price");
-                                }}></InputGroup.Radio>
-                                <FormControl disabled = {values.free} value={values.price} name="price" placeholder="Price (in PHP)" onChange={handleChange} ></FormControl>
-                                <Form.Control.Feedback type="invalid">
-                                        {errors.price}
-                                </Form.Control.Feedback>
+                                    <FormControl disabled = {values.free} value={values.price} name="price" placeholder="Price (in PHP)" onChange={handleChange} />
+                                </ButtonGroup>
+                                <Card border="light" text="danger">
+                                    {errors.price}
+                                </Card>
                             </InputGroup>
                             {/* <Form.Group>
                                 <Form.Check
@@ -260,9 +261,6 @@ export default function CreateCourses() {
                                     <Button variant="primary" type="submit">Confirm</Button>
                                 </Col>
                             </InputGroup>
-                            <pre>
-                                {JSON.stringify(values, 2, null)}
-                            </pre>
                         </Form>
                         )}
                     </Formik>

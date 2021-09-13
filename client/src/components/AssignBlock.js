@@ -103,6 +103,10 @@ export default function AssignBlock({ webinar }) {
                             {!touched ? <></> :
                             searchResults.length <= 0 ? <h1>No Results Found</h1>:
                             searchResults.map(r => {
+                                if(teachers[r._id]){
+                                    return <></>;
+                                }
+
                                 return <AssignTeacherBlock 
                                     teacher={r}
                                     setShow = {setShow}

@@ -48,6 +48,7 @@ async function uploadToDrive(file, options){
                 uploader: options.userID || 'none',
                 fileID: res.data.id,
                 fileName: name,
+                originalName: file.originalname,
                 mimeType: file.mimetype,
                 webinarID: options.webinarID,
                 uploadDate: new Date()
@@ -67,7 +68,7 @@ async function downloadFile(req, res){
     let file = await File.findById(req.query.fileDocumentID);
     const drive = new google.drive({version: 'v3', auth: oAuth2Client});
     let f = await drive.files.get({ fileId: fileID, alt: 'media'}, {responseType: 'stream'});
-    res.attachment(file.filename);
+    res.attachment(file.originalName);
     f.data.on('end', () => res.end());
     f.data.on('error', (err) => console.error(err));
     f.data.pipe(res);

@@ -34,9 +34,11 @@ export default function Navbar() {
                         <Link to="/about" style={{textDecoration:'none'}}>
                         <DidaskoNav.Nav.Link href="#About">About</DidaskoNav.Nav.Link>
                         </Link>
-                        <Link to="/dashboard" style={{textDecoration:'none'}}>
-                        <DidaskoNav.Nav.Link href="#MyAccount">My Account</DidaskoNav.Nav.Link>
-                        </Link>
+                        {
+                            user.validated ? <Link to="/dashboard" style={{textDecoration:'none'}}>
+                            <DidaskoNav.Nav.Link href="#MyAccount">My Account</DidaskoNav.Nav.Link>
+                            </Link> : <></>
+                        }
                     </DidaskoNav.Nav>
                     <DidaskoNav.Nav className="justify-content-end">
                         <DidaskoNav.Navbar.Text>

@@ -71,8 +71,21 @@ router.get("/files", async(req, res) => {
 });
 
 router.post("/files", upload.single("file"), async(req, res) => {
+
+    let mimeTypes = ['application/pdf', 'image/jpg', 'image/jpeg', 'image/png'];
     let webinar = await Webinar.findById(req.body.webinarID, 'folderID');
-    let id = await googleLib.uploadToDrive(req.file, {
+
+    if(!webinar || !mimeTypes.includes(req.file.mimetype)){
+        res.status(403).send({success:false, errors: {
+            webinarID: !webinar ? "Webinar not found" : undefined,
+            file: !mimeTypes.includes(req.file.mimetype) ? "Invalid file type" : undefined
+        }});
+        let uploadPath = path.join(appDir, "uploads", req.file.filename);
+        fs.unlink(uploadPath, () => {return;});
+        return;
+    }
+
+    await googleLib.uploadToDrive(req.file, {
         parent: [webinar.folderID],
         userID: req.session.user._id,
         webinarID: webinar._id
