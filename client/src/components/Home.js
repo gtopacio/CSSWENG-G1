@@ -6,7 +6,7 @@ import '../css/Home.css';
 
 export default function Home() {
     return (
-        <div>
+        <div className="home_bg">
             <section className="home_section" id="first_section">
                 <div className="home_section_text">
                     <h3 className="sub_hero_text">Learning the Easy Way</h3>
