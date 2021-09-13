@@ -41,26 +41,8 @@ export default function About() {
                 </div>
             </section>
             <section className="home_section" id="first_section">
-                <div className="home_section_text">
-                    <h3 className="sub_hero_text">Contact Us</h3>
-                    <h2 className="sub_hero_text_h2">Office Address</h2>
-                    <p className="home_p">190 General Ordoñez St., Rancho Estate 4, Concepcion Dos, Marikina City, Phils. 1811
-                    </p>
-                    <p></p>
-                    <h2 className="sub_hero_text_h2">Mobile Number</h2>
-                    <p className="home_p">09392417407
-                    </p>
-                    <p></p>
-                    <h2 className="sub_hero_text_h2">Email Address</h2>
-                    <p className="home_p">admin@didasko.ph
-                    </p>
 
-
-                </div>
-                <img src = {AboutUs2} alt="xd"></img>
-            </section>
-            <section className="home_section" id="second_section">
-                <img src = {AboutUs4} alt="xd"/>
+                
                 <div className="home_section_text_adjusted">
                     <h3 className="sub_hero_text">Services</h3>
                     <h2 className="sub_hero_text_h2">Companion</h2>
@@ -79,6 +61,26 @@ export default function About() {
                     <p className="home_p">Your safe space to connect with other members of our learning channel.
                     </p>
                     <p></p>
+                </div>
+                <img src = {AboutUs4} alt="xd" style={{justifyContent: "flex-end"}}></img>
+            </section>
+            <section className="home_section" id="second_section">
+            <img src = {AboutUs2} alt="xd" style={{justifyContent: "flex-end"}}></img>
+                <div className="home_section_text">
+                    <h3 className="sub_hero_text">Contact Us</h3>
+                    <h2 className="sub_hero_text_h2">Office Address</h2>
+                    <p className="home_p">190 General Ordoñez St., Rancho Estate 4, Concepcion Dos, Marikina City, Phils. 1811
+                    </p>
+                    <p></p>
+                    <h2 className="sub_hero_text_h2">Mobile Number</h2>
+                    <p className="home_p">09392417407
+                    </p>
+                    <p></p>
+                    <h2 className="sub_hero_text_h2">Email Address</h2>
+                    <p className="home_p">admin@didasko.ph
+                    </p>
+
+
                 </div>
             </section>
         </div>

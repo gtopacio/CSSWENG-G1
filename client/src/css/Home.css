@@ -12,6 +12,7 @@
     flex-grow: 100;
     padding: 10px;
     max-width: 75ch;
+    color: #FFFFFF;
 }
 
 .home_h3{
@@ -19,6 +20,7 @@
     font-size: 3vw;
     width: 100%;
     text-align: left;
+    color: #FFFFFF;
 }
 
 .home_section>img{
@@ -29,7 +31,7 @@
 
 .sub_hero_text{
     font-weight: bold;
-    color: #000000;
+    color: #FFFFFF;
     width: 100%;
     text-align: left;
     font-size: 5vw;
@@ -42,26 +44,31 @@
     padding: 0px;
     width: 100%;
     font-size: 1vw;
+    color: #FFFFFF;
 }
 
 .text_section{
     width: 100%;
     margin-left: 10px;
     margin-bottom: 10px;
+    color: #FFFFFF;
 }
 
 .text_section > h3{
     font-size: 1.5vw;
     margin: 0px;
+    color: #FFFFFF;
 }
 
 .text_section > p {
     max-width: 45ch;
     margin: 0px;
+    color: #FFFFFF;
 }
 
 .p_bold{
     font-weight: bold;
+    color: #FFFFFF;
 }
 
 #third_section{
@@ -94,6 +101,7 @@
 #home_subjects{
     width: 100%;
     margin-top: 1rem;
+    color: #FFFFFF;
 }
 
 .home_subject{
@@ -101,6 +109,7 @@
     border-radius: 20px;
     padding-top: 5px;
     padding-bottom: 5px;
+    color: #FFFFFF;
 }
 
 .bg_red{
