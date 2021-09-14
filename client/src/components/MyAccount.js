@@ -10,7 +10,7 @@ import { UserContext } from '../contexts/UserContext';
 export default function MyAccount(props) {
 
     const [loading, setLoading] = useState(true);
-    const [user] = useContext(UserContext);
+    const [user, setUser] = useContext(UserContext);
 
     const [studentWebinars, setStudentWebinars] = useState([]);
     const [teacherWebinars, setTeacherWebinars] = useState([]);

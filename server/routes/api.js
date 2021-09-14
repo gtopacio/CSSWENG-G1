@@ -91,7 +91,10 @@ router.get("/refresh", (req, res) => {
     if(!req.session.user){
         return res.status(403).send({success:false});
     }
-    res.send({success: true, user: authLib.trimUserInfo(req.session.user)});
+    let user = await User.findById(req.session.user._id);
+    req.session.user = user;
+    req.session.save();
+    res.send({success: true, user: authLib.trimUserInfo(user)});
 });
 
 router.post('/verify', validations.verificationValidator, async(req, res) => {
