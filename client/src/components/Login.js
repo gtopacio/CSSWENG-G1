@@ -59,7 +59,7 @@ export default function Login(props) {
 
     return (
         <section className = "bg-container" style={{height:'93vh',backgroundSize:'cover',backgroundRepeat: 'no-repeat'}}>
-            <Card className="card add shadow top-50 start-50 translate-middle" style={{maxWidth:'30em',maxHeight:'30em'}}>
+            <Card className="card add shadow top-50 start-50 translate-middle" style={{maxWidth:'30em',maxHeight:'23em'}}>
                 <Card.Header style={{fontSize:"30px",color:"#181a46"}}>Login</Card.Header>
                 <Card.Body style={{fontSize:"30px",backgroundColor:'white'}}>
                     <Form noValidate onSubmit={loginHandler}>
@@ -110,7 +110,7 @@ export default function Login(props) {
                         <Button
                         variant="link"
                         onClick={signUpShow}
-                        style={{boxShadow: 'none',textDecoration:'none',padding:'0px',fontSize:'11pt'}}>Sign up here!</Button>
+                        style={{boxShadow: 'none',textDecoration:'none',padding:'0px',fontSize:'11pt'}}> Sign up here!</Button>
                     </p>
                 </div>  
                 </Card.Footer>
