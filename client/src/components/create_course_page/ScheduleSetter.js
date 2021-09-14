@@ -29,14 +29,14 @@ export default function ScheduleSetter({ setInputSchedules, errors }) {
 
     return (
         <Container fluid className="my-3">
-            <Card border={errors ? "danger" : "secondary"}>
+            <Card style={{height:'fit-content'}} border={errors ? "danger" : "secondary"}>
                 <Card.Body>
                     <Container>
                         {schedule.map((x, index) => {return <ScheduleBlock key={index} schedule={x} deleteComponent={deleteComponent} />})}
                     </Container>
                 </Card.Body>
             </Card>
-            <Card border="light" text="danger">
+            <Card style={{height:'fit-content'}} border="light" text="danger">
                 {errors}
             </Card>
             <Row hidden={showPicker} className="mt-2">

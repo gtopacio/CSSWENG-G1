@@ -205,7 +205,7 @@ export default function CreateCourses() {
                                     }}></InputGroup.Radio>
                                     <FormControl disabled = {values.free} value={values.price} name="price" placeholder="Price (in PHP)" onChange={handleChange} />
                                 </ButtonGroup>
-                                <Card border="light" text="danger">
+                                <Card style={{height:'fit-content'}} border="light" text="danger">
                                     {errors.price}
                                 </Card>
                             </InputGroup>

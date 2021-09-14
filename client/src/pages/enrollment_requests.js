@@ -56,7 +56,7 @@ export default function EnrollmentRequests() {
                                 requests.map((x) => { return (
                                     <RequestRow request={x} />
                                 )}) :
-                                <tr><td><h1 style={{color:'white'}}>Empty</h1></td></tr>}
+                                <></>}
                             </tbody>
 
                         </Table>

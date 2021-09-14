@@ -46,7 +46,7 @@ export default function AssignBlock({ webinar }) {
 
     return (
         <div>
-            <Card style={{maxWidth: '18rem'}}>
+            <Card style={{maxWidth: '18rem',height:'fit-content'}}>
                 <Card.Img variant="top" src={webinar.bannerLink ? webinar.bannerLink : image10}
                     style={{background: 'linear-gradient(180deg, rgba(17, 17, 17, 0.4) 0%, rgba(17, 17, 17, 0.72) 93.75%)'}}
                 />

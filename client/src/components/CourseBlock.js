@@ -15,7 +15,7 @@ export default function CourseBlock({
     _id
 }) {
     return (
-        <Card style={{width: '26rem'}}>
+        <Card style={{width: '26rem', height: 'fit-content'}}>
             <Card.Img variant="top" src={webinarPicture}
                 style={{background: 'linear-gradient(180deg, rgba(17, 17, 17, 0.4) 0%, rgba(17, 17, 17, 0.72) 93.75%);'}}
             />

@@ -41,12 +41,6 @@ export const SidebarDataUser = [
     cName: 'nav-text'
   },
   {
-    title: 'Notifications',
-    path: '/messages',
-    icon: <FaIcons.FaEnvelopeOpenText />,
-    cName: 'nav-text'
-  },
-  {
     title: 'Log Out',
     path: '/logout',
     icon: <CgIcons.CgLogOut />,
