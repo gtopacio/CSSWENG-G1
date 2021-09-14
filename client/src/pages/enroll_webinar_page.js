@@ -79,9 +79,9 @@ export default function EnrollWebinar() {
             success ? 
             <>
                 <Navbar />
-                {webinar.price <= 0 ? <><h1>Successfully sent a request! Please wait for the approval of your request. Request ID: {requestID}</h1></> :
+                {webinar.price <= 0 ? <><h1 style={{color:'white'}}>Successfully sent a request! Please wait for the approval of your request. Request ID: {requestID}</h1></> :
                 <>
-                    <h1>Successfully sent a request! Please pay the amount if needed and wait for the approval. Request ID: {requestID}</h1>
+                    <h1 style={{color:'white'}}>Successfully sent a request! Please pay the amount if needed and wait for the approval. Request ID: {requestID}</h1>
                     <img src={gcashQR} alt = "GCash QR Code"/>
                     <img src={paymayaQR} alt="Paymaya QR Code" />
                 </>
@@ -92,7 +92,7 @@ export default function EnrollWebinar() {
                 <div style={{display: 'flex', justifyContent: 'center' }} className="mt-3">
                     <CourseCard webinar={webinar} showButton={false} />
                 </div>
-                <h1>Are you sure you want to enroll in this webinar?</h1>
+                <h1 style={{color:'white'}}>Are you sure you want to enroll in this webinar?</h1>
                 <Button variant="primary" disabled={disabled} onClick={sendEnrollmentRequest}>Yes</Button>
                 <Link to="/courses/available"><Button disabled={disabled} variant="secondary">No</Button></Link>
             </>
