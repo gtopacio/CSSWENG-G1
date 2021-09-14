@@ -25,10 +25,10 @@ export default function RequestRow({request}) {
 
     return (
             <tr>
-                <td>{request.uid}</td>
-                <td>{request.userName}</td>
-                <td>{request.webinarName}</td>
-                <td>{request.issued}</td>
+                <td style={{color:'white'}}>{request.uid}</td>
+                <td style={{color:'white'}}>{request.userName}</td>
+                <td style={{color:'white'}}>{request.webinarName}</td>
+                <td style={{color:'white'}}>{request.issued}</td>
                 <td><Button variant="primary" onClick={approve} disabled={disabledButtons}>{successful ? "Successful" : "Approve" }</Button></td>
             </tr>
     )
