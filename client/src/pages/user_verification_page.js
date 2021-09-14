@@ -27,9 +27,9 @@ export default function UserVerificationPage(props) {
             success ? 
             <div>
                 <Navbar/>
-                <h1>Verification Successful, You can now login</h1>
+                <h1 style={{color: 'white'}}>Verification Successful, You can now login</h1>
             </div>
                  :
-            <h1>Verification Not Successful</h1>
+            <h1 style={{color: 'white'}}>Verification Not Successful</h1>
     )
 }
