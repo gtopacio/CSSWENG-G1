@@ -30,12 +30,6 @@ export const SidebarDataAdmin = [
     cName: 'nav-text'
   },
   {
-    title: 'Modify Webinars',
-    path: '/courses/modify',
-    icon: <SiIcons.SiZoom />,
-    cName: 'nav-text'
-  },
-  {
     title: 'Enrollment Requests',
     path: '/enrollment/requests',
     icon: <AiIcons.AiOutlineCheckSquare />,

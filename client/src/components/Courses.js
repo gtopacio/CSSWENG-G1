@@ -32,11 +32,11 @@ export default function Courses() {
                     <DidaskoCard.Container style={{minHeight:'90vh'}}>
                         <div className="col-12" id="coursesPanel">
                             <div id="textHeader">
-                                <h1 style={{fontSize:'24px'}}>
+                                <h1 className="fw-bold" style={{fontSize:'26px',color:'white'}}>
                                     Student Webinars
                                 </h1>
                             </div>
-                            <hr></hr>
+                            <hr style={{color:'white'}}></hr>
                             <div>
                             <DidaskoCard.Row>
                                 {loading ? <h1>Loading</h1> : 
@@ -50,11 +50,11 @@ export default function Courses() {
                         <div className="mb-5"></div>
                             <div className="col-12  " id="coursesPanel">
                                 <div id="textHeader">
-                                    <h1 style={{fontSize:'24px'}}>
+                                    <h1 className="fw-bold" style={{fontSize:'26px',color:'white'}}>
                                         Teaching Webinars
                                     </h1>
                                 </div>
-                                <hr></hr>
+                                <hr style={{color:'white'}}></hr>
                                 <div>
                                 <DidaskoCard.Row>
                                 {loading ? <h1>Loading</h1> : 
@@ -65,9 +65,6 @@ export default function Courses() {
                                 </div>
                             </div>
                     </DidaskoCard.Container>
-                    <div className="space">
-                    It seems you don't have any courses yet, <Link to="#" style={{color: 'black'}}>register?</Link>
-                    </div>           
             </div>
         </section>
     )

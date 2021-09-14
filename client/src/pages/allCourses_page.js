@@ -29,7 +29,7 @@ export default function AllCoursesPage() {
     }, [input]);
 
     return (
-        <Container fluid>
+        <Container fluid style={{backgroundColor:'white'}}>
             <Row><Navbar /></Row>
             <Row><SearchBar setInput = {setInput} assignTeacher={false}/></Row>
             <Row>{

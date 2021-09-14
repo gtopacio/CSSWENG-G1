@@ -1,23 +1,29 @@
 .card-header {
     font-family: 'DM Sans', sans-serif;
     color: white;
-    background-color: #181a46 ;
+    background-color: #2B2B2B ;
     padding-top: 12px;
     padding-bottom: 12px;
     border: 2px solid #ddd;
+    box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 .card-body {
     font-family: 'DM Sans', sans-serif;
-    background-color: #181a46 ;
+    background-color: #2B2B2B ;
     color: white;
     padding-top: 5px;
     padding-bottom: 5px;
     border: 2px solid #ddd;
+    box-shadow: 0 8px 17px 0 rgba(0,0,0,0), 0 6px 20px 0 rgba(0,0,0,0);
+}
+
+.card-footer{
+    box-shadow: 0 8px 20px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 .App{
-    background: #1F2233;
+    background-color: #1F2233;
     z-index: 0;
     position: relative;
 }

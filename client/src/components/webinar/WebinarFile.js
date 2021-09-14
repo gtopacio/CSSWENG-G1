@@ -6,7 +6,7 @@ export default function WebinarFile({ file }) {
         <div onClick={(e) => {
             window.open(`/api/webinar/file?fileID=${file.fileID}&fileDocumentID=${file._id}`);
         }}>
-            {JSON.stringify(file)}
+            <p style={{color:'white'}}>{file.fileName}</p>
         </div>
     )
 }

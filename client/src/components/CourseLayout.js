@@ -57,13 +57,13 @@ export default function CourseLayout({ webinar, user }) {
     return (
         <div className="container" style={{maxWidth:"1050px",margin:"0 auto",display:'flex'}}>
             <main style={{textAlign:'left',borderRadius:'8px',padding:'16px',marginLeft:'8px'}}>
-                <h1 id="course name">{webinar.name}</h1> 
-                <h2 id="initial-header">Schedule</h2>
-                <p>Insert Schedule Here</p>
-                <h2 id="second-header">Professor</h2>
-                <p>Insert Professor Here</p>
-                <h2 id="fourth-header">Zoom Link</h2>
-                <p>Insert Zoom Link</p>
+                <h1 style={{color:'white'}} id="course name">{webinar.name}</h1> 
+                <h2 style={{color:'white'}} id="initial-header">Schedule</h2>
+                <p style={{color:'white'}}>{webinar.schedule}</p>
+                <h2 style={{color:'white'}} id="second-header">Professor</h2>
+                <p style={{color:'white'}}>Teehee</p>
+                <h2 style={{color:'white'}} id="fourth-header">Zoom Link</h2>
+                <p style={{color:'white'}}>Insert Zoom Link</p>
                 {webinar.teachers && webinar.teachers[user._id] ? 
                 <InputGroup>
                   <FormControl
@@ -86,7 +86,7 @@ export default function CourseLayout({ webinar, user }) {
                 </InputGroup>
                   : <></> }
                 <div>
-                <h3>Recent Uploads</h3>  
+                <h3 style={{color:'white'}}>Recent Uploads</h3>  
                   {files.map((x) => {return <WebinarFile key={x._id} file={x} />})}
                 </div>  ``
             </main>

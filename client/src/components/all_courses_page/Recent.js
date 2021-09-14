@@ -27,7 +27,7 @@ export default function Recent({user, assignTeacher}) {
                 assignTeacher ? 
                     <div></div> :
                     <Row className="mb-2">
-                        <h3 style={{textAlign: "left"}}>Recent Webinars</h3>
+                        <h2 className="fw-bold" style={{textAlign: "left"}}>Recent Webinars</h2>
                     </Row>
             }
             <Row>

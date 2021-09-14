@@ -48,7 +48,6 @@ export default function WebinarPage() {
     return (
         <div>
             <Navbar />
-            <h1>{webinarID}</h1>
             <CourseLayout webinar = {webinar} user = {user}/>
         </div>
     )

@@ -22,16 +22,16 @@ export default function Profile(props) {
             <div className="container d-flex align-items-center justify-content-center" style={{minHeight:'inherit'}}> 
                 <div className="row">
                     <div className="col-12 mx-auto text-center">
-                        <img src={dp} className="mx-auto btn dropdown-toggle displayPicture text-center" id="displayPictureDropdown" title="displayPicture" alt="displayPicture" data-bs-toggle="dropdown" />
+                        <img src={dp} className="mx-auto btn dropdown-toggle displayPicture text-center" id="displayPictureDropdown" title="displayPicture" alt="displayPicture" data-bs-toggle="dropdown" style={{borderRadius:'200%'}} />
                     </div>
                     <div className="col d-flex justify-content-center">  
                     </div>
                     <div className="col-12 mx-auto pt-2">
-                        <p style={{textAlign:'center',fontSize:'30pt',fontWeight:'400', marginBottom:'-0.4em'}}>
+                        <p style={{textAlign:'center',fontSize:'30pt',fontWeight:'400', marginBottom:'-0.4em',color:'white'}}>
                             {`${user.firstName} ${user.lastName}`}
                         </p>
                         <p></p>
-                        <p style={{textAlign:'center',fontSize:'12pt',fontWeight:'400', marginBottom:'-0.4em'}}>
+                        <p style={{textAlign:'center',fontSize:'12pt',fontWeight:'400', marginBottom:'-0.4em',color:'white'}}>
                             Hi, this is sample text, good show
                         </p>
                         <p></p>

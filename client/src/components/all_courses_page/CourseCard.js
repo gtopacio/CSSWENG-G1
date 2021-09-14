@@ -37,7 +37,7 @@ export default function CourseCard({webinar, showButton=true}) {
     return (
         <Card style={{ maxWidth: '18rem'}}>
             <Card.Img src={bannerLink ? bannerLink : image10} style={{maxHeight: "18vh", objectFit: "cover", objectPosition: "100% 0"}}/>
-            <Card.Header style={{backgroundColor: "#181a46"}}>
+            <Card.Header style={{backgroundColor: "#2B2B2B"}}>
                 <Card.Title>
                     {name}
                 </Card.Title>

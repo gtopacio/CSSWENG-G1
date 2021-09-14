@@ -29,7 +29,7 @@ export default function RequestRow({request}) {
                 <td>{request.userName}</td>
                 <td>{request.webinarName}</td>
                 <td>{request.issued}</td>
-                <td><Button variant="primary" onClick={approve} disabled={disabledButtons}>{successful ? "Successful" : "Approve"}</Button></td>
+                <td><Button variant="primary" onClick={approve} disabled={disabledButtons}>{successful ? "Successful" : "Approve" }</Button></td>
             </tr>
     )
 }

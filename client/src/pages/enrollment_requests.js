@@ -78,14 +78,14 @@ export default function EnrollmentRequests() {
                                 {requests.length > 0 ? 
                                 requests.map((x) => { return (
                                     <tr>
-                                        <td>{x.uid}</td>
-                                        <td>{x.webinarName}</td>
-                                        <td>{new Date(x.issued).toString()}</td>
+                                        <td style={{color:'white'}}>{x.uid}</td>
+                                        <td style={{color:'white'}}>{x.webinarName}</td>
+                                        <td style={{color:'white'}}>{new Date(x.issued).toString()}</td>
                                         <td style={{color: x.accepted ? 'green' : '#ffd500'}}>{x.accepted ? "ACCEPTED" : "PENDING"}</td>
-                                        <td>{x.accepted ? new Date(x.acceptedDate).toString() : "N/A"}</td>
+                                        <td style={{color:'white'}}>{x.accepted ? new Date(x.acceptedDate).toString() : "N/A"}</td>
                                     </tr>
                                 )}) :
-                                <tr><td><h1>Empty</h1></td></tr>}
+                                <tr><td><h1 style={{color:'white'}}>Empty</h1></td></tr>}
                             </tbody>
 
                         </Table>
