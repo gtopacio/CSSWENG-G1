@@ -98,7 +98,7 @@ export default function AssignBlock({ webinar }) {
                     <InputGroup className="mb-3 align-items-center justify-content-md-center">
                     <Button variant="primary" onClick = {handleSearch}>Filter</Button>
                     </InputGroup>
-                    <Card>
+                    <Card style={{height:'fit-content'}}>
                         <ErrorProvider>
                             {!touched ? <></> :
                             searchResults.length <= 0 ? <h1>No Results Found</h1>:
