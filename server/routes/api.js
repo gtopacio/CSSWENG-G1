@@ -91,7 +91,7 @@ router.get("/refresh", async(req, res) => {
     if(!req.session.user){
         return res.status(403).send({success:false});
     }
-    let user = await User.findById(req.session.user._id);
+    let user = await User.findById(req.session.user._id).lean();
     req.session.user = user;
     req.session.save();
     res.send({success: true, user: authLib.trimUserInfo(user)});

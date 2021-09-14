@@ -49,6 +49,10 @@ export default function MyAccount(props) {
             <h1>Empty</h1>                                   
     </DidaskoAccount.Col>;
 
+    if(!user.validated && user.refreshSent){
+        return <h1>Loading</h1>
+    }
+
     return (
         <section style={{height:'83vh'}}>
             <div className="space">
