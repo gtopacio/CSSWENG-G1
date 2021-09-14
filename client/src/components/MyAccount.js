@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import defaultdp from "../images/defaultdp.jpg";
 import nocourseimg from "../images/npy.png";
 import CourseBlock from './CourseBlock';
@@ -6,9 +6,11 @@ import axios from 'axios';
 
 import '../css/MyAccount.css';
 import * as DidaskoAccount from 'react-bootstrap';
+import { UserContext } from '../contexts/UserContext';
 export default function MyAccount(props) {
 
     const [loading, setLoading] = useState(true);
+    const [user] = useContext(UserContext);
 
     const [studentWebinars, setStudentWebinars] = useState([]);
     const [teacherWebinars, setTeacherWebinars] = useState([]);
@@ -22,7 +24,7 @@ export default function MyAccount(props) {
         }
 
         sendRequest();
-    }, []);
+    }, [user]);
 
     let renderedStudent = studentWebinars.length > 0 ? 
         studentWebinars.map(s => {

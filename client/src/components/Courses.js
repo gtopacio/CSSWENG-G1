@@ -1,13 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import "../css/AllCourses.css";
 import * as DidaskoCard from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import TeachingBlock from './courses_page/TeachingBlock';
 import StudentBlock from './courses_page/StudentBlock';
 import axios from 'axios';
 import '../css/Global.css' ;
+import { UserContext } from '../contexts/UserContext';
 
 export default function Courses() {
+
+    const [user] = useContext(UserContext);
 
     const [studentWebinars, setStudentWebinars] = useState([]);
     const [teacherWebinars, setTeacherWebinars] = useState([]);
@@ -22,7 +24,7 @@ export default function Courses() {
 
     useEffect(() => {
         sendRequest();
-    }, []);
+    }, [user]);
 
     return (
         <section className="custom-section" style={{minHeight:'90vh'}}>

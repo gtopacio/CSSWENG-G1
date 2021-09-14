@@ -74,7 +74,7 @@ export default function CourseLayout({ webinar, user }) {
               <img style={{height:"500px"}}src={webinar.bannerLink}></img>
                 <h1 style={{color:'white'}} id="course name">{webinar.name}</h1> 
                 <h2 style={{color:'white'}} id="initial-header">Schedule</h2>
-                <p style={{color:'white'}}>{moment(webinar.schedule).format('MMMM Do YYYY, h:mm:ss a')}</p>
+                <p style={{color:'white'}}>{new Date(webinar.schedule).toLocaleString()}</p>
                 <h2 style={{color:'white'}} id="second-header">Professor</h2>
                 {professors.length > 0 ? professors.map((x) => { return <p style={{color:'white'}}>{x}</p>}) : "No Professors Yet"}
                 <h2 style={{color:'white'}} id="fourth-header">Zoom Link</h2>
