@@ -18,7 +18,8 @@
 
 .App{
     background: #1F2233;
-    background: -webkit-linear-gradient(to right, #003366, #1c7911, #00ffb6);
+    z-index: 0;
+    position: relative;
 }
 
 .card{

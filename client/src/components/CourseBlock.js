@@ -45,10 +45,10 @@ export default function CourseBlock({
                     </Container>
                 </Card.Text>
                 <div className="courseButtonElements">
-                    <Button variant="outline-dark">
+                    <Button variant="outline-light">
                             Continue
                     </Button>
-                    <Link to="#" style={{color: 'black'}}>More</Link>
+                    <Link to="#" style={{color: 'white'}}>More</Link>
                 </div>
             </Card.Body>
         </Card> 
