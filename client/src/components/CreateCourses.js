@@ -6,7 +6,7 @@ import axios from 'axios';
 import ScheduleSetter from './create_course_page/ScheduleSetter';
 
 
-export default function CreateCourses() {
+export default function CreateCourses({ history }) {
 
     const [show, setShow] = useState(true);
     const [success, setSuccess] = useState(false);
@@ -44,6 +44,7 @@ export default function CreateCourses() {
         }
         try{
             let { data } = await axios.post("/api/admin/webinar", formData);
+            history.push("/assign");
             setSuccess(data.success);
             setAttempt(true);
             setShow(false);

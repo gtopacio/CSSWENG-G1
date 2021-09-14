@@ -2,11 +2,11 @@ import React from 'react'
 import CreateCourse from '../components/CreateCourses'
 import Sidebar from '../components/SidebarAdmin'
 
-export default function CreateCourses() {
+export default function CreateCourses({ history }) {
     return (
         <div>
             <Sidebar />
-            <CreateCourse />
+            <CreateCourse history={history} />
         </div>
     )
 }
