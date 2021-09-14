@@ -68,9 +68,9 @@ export default function EnrollWebinar() {
             requestSent ? 
             <>
                 <Navbar />
-                {webinar.price <= 0 ? <><h1>You have already sent a request! Please wait for an approval. Request ID: {requestID}</h1></> :
+                {webinar.price <= 0 ? <><h1 style={{color:'white'}}>You have already sent a request! Please wait for an approval. Request ID: {requestID}</h1></> :
                 <>
-                    <h1>You have already sent a request, please pay the amount if needed and wait for the approval.</h1>
+                    <h1 style={{color:'white'}}>You have already sent a request, please pay the amount if needed and wait for the approval.</h1>
                     <img src={gcashQR} alt = "GCash QR Code"/>
                     <img src={paymayaQR} alt="Paymaya QR Code" />
                 </>
