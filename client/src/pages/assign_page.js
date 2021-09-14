@@ -7,6 +7,8 @@ import Recent from "../components/all_courses_page/Recent";
 import Sidebar from '../components/SidebarAdmin'
 import axios from 'axios';
 import '../css/Global.css';
+import '../css/AssignPage.css';
+
 
 export default function AssignPage() {
     const [input, setInput] = useState("");
@@ -30,14 +32,19 @@ export default function AssignPage() {
     return (
         <div>
             <Sidebar/>
-            <Container fluid>
-                <Row><SearchBar setInput = {setInput} assignTeacher={true}/></Row>
-                <Row>{
-                    input.trim() === "" ? <Recent assignTeacher={true}/> :
-                    <SearchResults webinars = {searchResults} loading = {loading} assignTeacher={true}/>
-                    }
-                </Row>
-            </Container>
+            <div className="columnDiv">
+                <div className="space"></div>
+                <div>
+                    <Container fluid>
+                        <Row><SearchBar setInput = {setInput} assignTeacher={true}/></Row>
+                        <Row>{
+                            input.trim() === "" ? <Recent assignTeacher={true}/> :
+                            <SearchResults webinars = {searchResults} loading = {loading} assignTeacher={true}/>
+                            }
+                        </Row>
+                    </Container>
+                </div>
+            </div>
         </div>
     )
 }

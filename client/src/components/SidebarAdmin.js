@@ -27,7 +27,7 @@ export default function Sidebar() {
                     />
                 </div>
             </div>
-            <nav className={sidebar ? 'nav-menu active' : 'nav-menu'} style={{zIndex:1}}>
+            <nav className={sidebar ? 'nav-menu active' : 'nav-menu'} style={{zIndex:2}}>
             <ul className='nav-menu-items' onClick={showSidebar} style={{zIndex: 9999, position: "relative"}}>
                 <li className='navbar-toggle'>
                 <Link to='#' className='menu-bars'>

@@ -1,0 +1,9 @@
+.columnDiv
+{
+    display: flex;
+    flex-direction: row;
+}
+.space
+{
+    width: 270px;
+}
