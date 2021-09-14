@@ -11,7 +11,8 @@ export default function CourseBlock({
     webinarTitle="Webinar Title", 
     videoLength = 30,
     numLessons = 12,
-    numTasks = 3 
+    numTasks = 3,
+    _id
 }) {
     return (
         <Card style={{width: '26rem'}}>
@@ -45,10 +46,12 @@ export default function CourseBlock({
                     </Container>
                 </Card.Text>
                 <div className="courseButtonElements">
-                    <Button variant="outline-light">
-                            Continue
-                    </Button>
-                    <Link to="#" style={{color: 'white'}}>More</Link>
+                    <Link to={`/webinar?id=${_id}`} style={{color: 'white'}}>
+                        <Button variant="outline-light">
+                                Continue
+                        </Button>
+                    </Link>
+                    <Link to={`/webinar?id=${_id}`} style={{color: 'white'}}>More</Link>
                 </div>
             </Card.Body>
         </Card> 

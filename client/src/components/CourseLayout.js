@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Button, FormControl, InputGroup, Form } from 'react-bootstrap';
 import "../css/CourseLayout.css";
 import WebinarFile from './webinar/WebinarFile';
+import moment from 'moment';
 
 export default function CourseLayout({ webinar, user }) {
 
@@ -10,6 +11,7 @@ export default function CourseLayout({ webinar, user }) {
   const [files, setFiles] = useState([]);
   const [errors, setErrors] = useState({});
   const [validTypes] = useState(['application/pdf', 'image/jpg', 'image/jpeg', 'image/png']);
+  const [professors, setProfessors] = useState([]);
 
   const setUploadFile = (file) => {
     setErrors({});
@@ -48,9 +50,21 @@ export default function CourseLayout({ webinar, user }) {
       }
     }
 
+    async function getProfessors(){
+      let teacherIDs = Object.keys(webinar.teachers);
+      let promises = [];
+      for(let teacherID of teacherIDs){
+          promises.push(axios.get("/api/public/user", {params:{_id: teacherID}}));
+      }
+      let teacherNames = await Promise.all(promises);
+      teacherNames = teacherNames.map((res) => {return `${res.data.user.firstName} ${res.data.user.lastName}`});
+      setProfessors(teacherNames);   
+    }
+
     console.log(webinar);
     if(webinar._id){
       getFiles();
+      getProfessors();
     }
   }, [webinar]);
 
@@ -59,11 +73,11 @@ export default function CourseLayout({ webinar, user }) {
             <main style={{textAlign:'left',borderRadius:'8px',padding:'16px',marginLeft:'8px'}}>
                 <h1 style={{color:'white'}} id="course name">{webinar.name}</h1> 
                 <h2 style={{color:'white'}} id="initial-header">Schedule</h2>
-                <p style={{color:'white'}}>{webinar.schedule}</p>
+                <p style={{color:'white'}}>{moment(webinar.schedule).format('MMMM Do YYYY, h:mm:ss a')}</p>
                 <h2 style={{color:'white'}} id="second-header">Professor</h2>
-                <p style={{color:'white'}}>Teehee</p>
+                {professors.length > 0 ? professors.map((x) => { return <p style={{color:'white'}}>{x}</p>}) : "No Professors Yet"}
                 <h2 style={{color:'white'}} id="fourth-header">Zoom Link</h2>
-                <p style={{color:'white'}}>Insert Zoom Link</p>
+                <p style={{color:'white'}}>{webinar.meetingLink}</p>
                 {webinar.teachers && webinar.teachers[user._id] ? 
                 <InputGroup>
                   <FormControl

@@ -28,7 +28,7 @@ export default function MyAccount(props) {
         studentWebinars.map(s => {
             return (
             <DidaskoAccount.Col key={s._id}>
-                <CourseBlock webinarTitle={s.name}/>                                   
+                <CourseBlock webinarTitle={s.name} _id={s._id}/>                                   
             </DidaskoAccount.Col>)
         }) :
         <DidaskoAccount.Col>
