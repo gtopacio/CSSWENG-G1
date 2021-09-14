@@ -39,8 +39,8 @@ export default function Courses() {
                             <hr style={{color:'white'}}></hr>
                             <div>
                             <DidaskoCard.Row>
-                                {loading ? <h1>Loading</h1> : 
-                                    studentWebinars.length <= 0 ? <h1>Empty</h1> :
+                                {loading ? <h1 style={{color: 'white'}}>Loading</h1> : 
+                                    studentWebinars.length <= 0 ? <h1 style={{color: 'white'}}>Empty</h1> :
                                     studentWebinars.map(r => {return <StudentBlock webinar={r} />})
                                 }
                             </DidaskoCard.Row>
@@ -57,8 +57,8 @@ export default function Courses() {
                                 <hr style={{color:'white'}}></hr>
                                 <div>
                                 <DidaskoCard.Row>
-                                {loading ? <h1>Loading</h1> : 
-                                    teacherWebinars.length <= 0 ? <h1>Empty</h1> :
+                                {loading ? <h1 style={{color: 'white'}}>Loading</h1> : 
+                                    teacherWebinars.length <= 0 ? <h1 style={{color: 'white'}}>Empty</h1> :
                                     teacherWebinars.map(r => {return <TeachingBlock webinar={r} />})
                                 }
                                 </DidaskoCard.Row>
