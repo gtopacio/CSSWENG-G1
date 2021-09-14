@@ -71,6 +71,7 @@ export default function CourseLayout({ webinar, user }) {
     return (
         <div className="container" style={{maxWidth:"1050px",margin:"0 auto",display:'flex'}}>
             <main style={{textAlign:'left',borderRadius:'8px',padding:'16px',marginLeft:'8px'}}>
+              <img style={{height:"500px"}}src={webinar.bannerLink}></img>
                 <h1 style={{color:'white'}} id="course name">{webinar.name}</h1> 
                 <h2 style={{color:'white'}} id="initial-header">Schedule</h2>
                 <p style={{color:'white'}}>{moment(webinar.schedule).format('MMMM Do YYYY, h:mm:ss a')}</p>
