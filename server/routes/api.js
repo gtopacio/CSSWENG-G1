@@ -87,7 +87,7 @@ router.post("/logout", (req, res) => {
     res.send({success:true});
 });
 
-router.get("/refresh", (req, res) => {
+router.get("/refresh", async(req, res) => {
     if(!req.session.user){
         return res.status(403).send({success:false});
     }
