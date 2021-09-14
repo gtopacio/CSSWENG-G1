@@ -1,6 +1,5 @@
 .columnDiv
 {
-    display: flex;
     flex-direction: row;
 }
 .space
