@@ -1,6 +1,7 @@
 const express = require("express");
 const session = require('express-session');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 require("dotenv").config();
 const PORT = process.env.PORT;
@@ -35,6 +36,7 @@ app.use(session({
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+app.use(cors());
 
 app.use('/api', require('./routes/api.js'));
 app.use('/api/admin', require('./routes/admin.js'));
