@@ -73,6 +73,10 @@ export default function EnrollWebinar() {
                     <h1 style={{color:'white'}}>You have already sent a request, please pay the amount if needed and wait for the approval.</h1>
                     <img src={gcashQR} alt = "GCash QR Code"/>
                     <img src={paymayaQR} alt="Paymaya QR Code" />
+                    <h2 style={{color:'white'}}>1. Pay Using Gcash or Paymaya</h2>
+                    <h2 style={{color:'white'}}>2. Screenshot Proof of Payment</h2>
+                    <h2 style={{color:'white'}}>3. Email the Proof of Payment at admin@didasko.ph</h2>
+                    <h2 style={{color:'white'}}>4. Wait for the Admin to Accept you in the Webinar</h2>
                 </>
                 }
             </> :
@@ -84,6 +88,10 @@ export default function EnrollWebinar() {
                     <h1 style={{color:'white'}}>Successfully sent a request! Please pay the amount if needed and wait for the approval.</h1>
                     <img src={gcashQR} alt = "GCash QR Code"/>
                     <img src={paymayaQR} alt="Paymaya QR Code" />
+                    <h2 style={{color:'white'}}>1. Pay Using Gcash or Paymaya</h2>
+                    <h2 style={{color:'white'}}>2. Screenshot Proof of Payment</h2>
+                    <h2 style={{color:'white'}}>3. Email the Proof of Payment at admin@didasko.ph</h2>
+                    <h2 style={{color:'white'}}>4. Wait for the Admin to Accept you in the Webinar</h2>
                 </>
                 }
             </>:
