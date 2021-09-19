@@ -79,6 +79,8 @@ export default function CourseLayout({ webinar, user }) {
                 {professors.length > 0 ? professors.map((x) => { return <p style={{color:'white'}}>{x}</p>}) : "No Professors Yet"}
                 <h2 style={{color:'white'}} id="fourth-header">Zoom Link</h2>
                 <p style={{color:'white'}}>{webinar.meetingLink}</p>
+                <h2 style={{color:'white'}}  id="fifth-header">Zoom Password</h2>
+                <p style={{color:'white'}}>{webinar.meetingPassword}</p>
                 {webinar.teachers && webinar.teachers[user._id] ? 
                 <InputGroup>
                   <FormControl

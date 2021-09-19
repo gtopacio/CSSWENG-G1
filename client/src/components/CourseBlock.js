@@ -21,37 +21,13 @@ export default function CourseBlock({
             />
             <Card.Body>
                 <Card.Title>{webinarTitle}</Card.Title>
-                <Card.Text>
-                    <Container>
-                        <Row>
-                            <Col>
-                                <div className="courseDetails">
-                                    <GoIcons.GoMortarBoard></GoIcons.GoMortarBoard>
-                                    <p>{`${numLessons} lessons`}</p>
-                                </div>
-                            </Col>
-                            <Col>
-                                <div className="courseDetails">
-                                    <BsIcons.BsPencil></BsIcons.BsPencil>
-                                    <p>{`${numTasks} tasks`}</p>
-                                </div>
-                            </Col>
-                            <Col>
-                                <div className="courseDetails">
-                                    <ImIcons.ImPlay></ImIcons.ImPlay>
-                                    <p>{`${videoLength} minutes`}</p>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Container>
-                </Card.Text>
                 <div className="courseButtonElements">
                     <Link to={`/webinar?id=${_id}`} style={{color: 'white'}}>
                         <Button variant="outline-light">
                                 Continue
                         </Button>
                     </Link>
-                    <Link to={`/webinar?id=${_id}`} style={{color: 'white'}}>More</Link>
+                    
                 </div>
             </Card.Body>
         </Card> 
